@@ -3,1288 +3,387 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Hustle Vault — Digital Education Library</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<title>Hustle Vault — Digital Income Blueprints</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --gold: #C9A84C;
-  --gold-lt: #E8C96A;
-  --gold-dk: #8B6914;
-  --vault-black: #0A0A0A;
-  --vault-dark: #111111;
-  --vault-mid: #1A1A1A;
-  --vault-gray: #2A2A2A;
-  --text: #F0EDE8;
-  --text-muted: #888880;
-  --accent: #C9A84C;
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  background: var(--vault-black);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  min-height: 100vh;
-}
-
-/* ── HEADER ── */
-header {
-  background: linear-gradient(180deg, #000 0%, var(--vault-dark) 100%);
-  border-bottom: 1px solid rgba(201,168,76,0.3);
-  padding: 0 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-}
-
-.header-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 72px;
-}
-
-.logo {
-  font-family: 'Cinzel', serif;
-  font-size: 1.4rem;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  color: var(--gold);
-  text-decoration: none;
-}
-
-.logo span { color: var(--text); }
-
-nav { display: flex; gap: 2rem; align-items: center; }
-
-nav a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: color 0.2s;
-}
-
-nav a:hover { color: var(--gold); }
-
-/* ── HERO ── */
-.hero {
-  background: linear-gradient(135deg, #000 0%, #0D0D1A 40%, #0A0A0A 100%);
-  padding: 6rem 2rem 5rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hero-eyebrow {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1.5rem;
-}
-
-.hero h1 {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: 0.05em;
-  margin-bottom: 1.5rem;
-}
-
-.hero h1 em {
-  font-style: normal;
-  color: var(--gold);
-}
-
-.hero p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.35rem;
-  color: var(--text-muted);
-  max-width: 600px;
-  margin: 0 auto 3rem;
-  line-height: 1.6;
-}
-
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  flex-wrap: wrap;
-}
-
-.stat {
-  text-align: center;
-}
-
-.stat-num {
-  font-family: 'Cinzel', serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--gold);
-  display: block;
-}
-
-.stat-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-/* ── FILTER BAR ── */
-.filter-bar {
-  background: var(--vault-dark);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  padding: 1rem 2rem;
-  position: sticky;
-  top: 72px;
-  z-index: 90;
-}
-
-.filter-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.filter-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-right: 0.5rem;
-}
-
-.filter-btn {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.12);
-  color: var(--text-muted);
-  padding: 0.4rem 1rem;
-  border-radius: 100px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: 'Inter', sans-serif;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: var(--vault-black);
-  font-weight: 600;
-}
-
-/* ── SECTION HEADERS ── */
-.section {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-}
-
-.section-header {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(201,168,76,0.2);
-  padding-bottom: 1rem;
-}
-
-.section-title {
-  font-family: 'Cinzel', serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: 0.05em;
-}
-
-.section-tag {
-  font-size: 0.72rem;
-  background: rgba(201,168,76,0.15);
-  color: var(--gold);
-  border: 1px solid rgba(201,168,76,0.3);
-  padding: 0.2rem 0.6rem;
-  border-radius: 100px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-/* ── BUNDLE BANNER ── */
-.bundle-banner {
-  background: linear-gradient(135deg, #0D0A00 0%, #1A1200 50%, #0D0A00 100%);
-  border: 1px solid rgba(201,168,76,0.4);
-  border-radius: 16px;
-  padding: 2.5rem 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
-}
-
-.bundle-banner-text h2 {
-  font-family: 'Cinzel', serif;
-  font-size: 1.5rem;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-}
-
-.bundle-banner-text p {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.bundle-price-block {
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.bundle-was {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  text-decoration: line-through;
-  margin-bottom: 0.25rem;
-}
-
-.bundle-price {
-  font-family: 'Cinzel', serif;
-  font-size: 2.5rem;
-  color: var(--gold);
-  font-weight: 700;
-  line-height: 1;
-}
-
-.bundle-save {
-  font-size: 0.8rem;
-  color: #4CAF50;
-  font-weight: 600;
-  margin-top: 0.25rem;
-}
-
-.btn-gold {
-  display: inline-block;
-  background: var(--gold);
-  color: var(--vault-black);
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 0.85rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: 'Inter', sans-serif;
-  white-space: nowrap;
-}
-
-.btn-gold:hover {
-  background: var(--gold-lt);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(201,168,76,0.3);
-}
-
-/* ── PRODUCT GRID ── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.grid-2 {
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-}
-
-/* ── PRODUCT CARD ── */
-.card {
-  background: var(--vault-mid);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: all 0.3s;
-  display: flex;
-  flex-direction: column;
-}
-
-.card:hover {
-  border-color: rgba(201,168,76,0.35);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-}
-
-.card-cover {
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.card-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.3rem 0.65rem;
-  border-radius: 100px;
-}
-
-.badge-new { background: rgba(201,168,76,0.9); color: #000; }
-.badge-bundle { background: rgba(76,175,80,0.9); color: #fff; }
-.badge-series { background: rgba(138,43,226,0.85); color: #fff; }
-
-.cover-inner {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  text-align: center;
-}
-
-.cover-icon {
-  font-size: 2.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.cover-title {
-  font-family: 'Cinzel', serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: 0.05em;
-}
-
-.cover-sub {
-  font-size: 0.7rem;
-  margin-top: 0.4rem;
-  opacity: 0.8;
-  font-style: italic;
-  font-family: 'Cormorant Garamond', serif;
-}
-
-.card-body {
-  padding: 1.25rem 1.5rem 1.5rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.card-title {
-  font-family: 'Cinzel', serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.6rem;
-  line-height: 1.3;
-}
-
-.card-desc {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  flex: 1;
-  margin-bottom: 1.25rem;
-}
-
-.card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.price-block { display: flex; flex-direction: column; }
-
-.price-was {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-decoration: line-through;
-  line-height: 1;
-}
-
-.price-now {
-  font-family: 'Cinzel', serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--gold);
-  line-height: 1;
-}
-
-.price-save {
-  font-size: 0.7rem;
-  color: #4CAF50;
-  font-weight: 600;
-}
-
-.btn-buy {
-  background: var(--gold);
-  color: var(--vault-black);
-  border: none;
-  padding: 0.65rem 1.25rem;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.btn-buy:hover {
-  background: var(--gold-lt);
-  transform: translateY(-1px);
-}
-
-/* ── DIVIDER ── */
-.divider {
-  border: none;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  margin: 0;
-}
-
-/* ── FOOTER ── */
-footer {
-  background: var(--vault-dark);
-  border-top: 1px solid rgba(201,168,76,0.2);
-  padding: 3rem 2rem;
-  text-align: center;
-}
-
-.footer-logo {
-  font-family: 'Cinzel', serif;
-  font-size: 1.2rem;
-  color: var(--gold);
-  margin-bottom: 1rem;
-  letter-spacing: 0.15em;
-}
-
-.footer-text {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  max-width: 500px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.6;
-}
-
-.footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
-
-.footer-links a {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.footer-links a:hover { color: var(--gold); }
-
-/* ── COLOR THEMES FOR CARDS ── */
-.theme-credit { background: linear-gradient(135deg, #0A1628 0%, #142238 100%); color: #C9A84C; }
-.theme-green  { background: linear-gradient(135deg, #024D28 0%, #046A38 100%); color: #E8C96A; }
-.theme-char   { background: linear-gradient(135deg, #1C1C1E 0%, #3D3D40 100%); color: #E8304A; }
-.theme-slate  { background: linear-gradient(135deg, #1A2A3A 0%, #2E4057 100%); color: #D4919A; }
-.theme-burg   { background: linear-gradient(135deg, #2A0810 0%, #6B1525 100%); color: #F7E7CE; }
-.theme-navy   { background: linear-gradient(135deg, #060F1A 0%, #142238 100%); color: #F5832E; }
-.theme-forest { background: linear-gradient(135deg, #012015 0%, #046A38 100%); color: #FDF6EC; }
-.theme-gun    { background: linear-gradient(135deg, #111111 0%, #3D3D40 100%); color: #E8304A; }
-.theme-emerald{ background: linear-gradient(135deg, #012D18 0%, #046A38 100%); color: #E8E8E8; }
-.theme-purple { background: linear-gradient(135deg, #100320 0%, #2D0A5C 100%); color: #E8C96A; }
-.theme-brown  { background: linear-gradient(135deg, #1A0638 0%, #2D0A5C 100%); color: #E8C96A; }
-.theme-teal   { background: linear-gradient(135deg, #0A1628 0%, #1E3352 100%); color: #C0C0C0; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .hero { padding: 4rem 1.5rem 3rem; }
-  .hero-stats { gap: 2rem; }
-  nav { display: none; }
-  .bundle-banner { flex-direction: column; text-align: center; }
-  .grid, .grid-2 { grid-template-columns: 1fr; }
-  .section { padding: 2.5rem 1.25rem; }
-  .filter-bar { overflow-x: auto; }
-  .filter-inner { flex-wrap: nowrap; min-width: max-content; }
+:root{--gold:#C9A84C;--gold-lt:#E8C96A;--gold-dk:#8B6914;--black:#0A0A0A;--dark:#111;--mid:#1A1A1A;--gray:#2A2A2A;--text:#F0EDE8;--muted:#888880;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--black);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden;}
+
+/* TICKER */
+.ticker-wrap{background:var(--gold);padding:.45rem 0;overflow:hidden;white-space:nowrap;}
+.ticker{display:inline-block;animation:tick 32s linear infinite;}
+.ticker span{display:inline-block;padding:0 1.5rem;font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:.15em;color:var(--black);}
+.ticker span::before{content:'◆ ';}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* HEADER */
+header{background:linear-gradient(180deg,#000 0%,var(--dark) 100%);border-bottom:1px solid rgba(201,168,76,.3);padding:0 2rem;position:sticky;top:0;z-index:100;}
+.hdr{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.logo{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:900;letter-spacing:.2em;color:var(--gold);text-decoration:none;line-height:1;}
+.logo small{display:block;font-size:.45rem;letter-spacing:.4em;color:var(--muted);margin-top:3px;}
+.hdr-nav{display:flex;gap:1.25rem;align-items:center;}
+.hdr-nav a{color:var(--muted);text-decoration:none;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;transition:color .2s;}
+.hdr-nav a:hover{color:var(--gold);}
+.hdr-badge{background:var(--gold);color:var(--black);font-family:'Cinzel',serif;font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:.32rem .85rem;border-radius:4px;text-decoration:none;transition:all .2s;}
+.hdr-badge:hover{background:var(--gold-lt);}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#000 0%,#0A0A14 50%,#000 100%);padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.1) 0%,transparent 65%);}
+.hero-eye{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.9rem,5vw,3.8rem);font-weight:900;line-height:1.1;letter-spacing:.05em;margin-bottom:.9rem;}
+.hero h1 span{color:var(--gold);}
+.hero-sub{font-size:1.15rem;color:var(--muted);max-width:540px;margin:0 auto 2.25rem;line-height:1.6;}
+.hero-btns{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.75rem;}
+.btn-g{background:var(--gold);color:var(--black);font-family:'Cinzel',serif;font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.85rem;border-radius:5px;text-decoration:none;transition:all .2s;border:none;cursor:pointer;display:inline-block;}
+.btn-g:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.3);}
+.btn-o{background:transparent;color:var(--gold);border:1px solid var(--gold);font-family:'Cinzel',serif;font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.85rem;border-radius:5px;text-decoration:none;transition:all .2s;}
+.btn-o:hover{background:rgba(201,168,76,.1);}
+.hero-stats{display:flex;justify-content:center;gap:2.75rem;flex-wrap:wrap;border-top:1px solid rgba(201,168,76,.15);padding-top:1.85rem;}
+.sn{font-family:'Cinzel',serif;font-size:1.7rem;font-weight:700;color:var(--gold);display:block;}
+.sl{font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+
+/* VAULT BANNER */
+.vbanner{background:linear-gradient(135deg,#0D0A00,#1A1200,#0D0A00);border-top:1px solid rgba(201,168,76,.3);border-bottom:1px solid rgba(201,168,76,.3);padding:1.5rem 2rem;}
+.vbanner-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.vicons{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.6rem;}
+.vi{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:5px;padding:.25rem .45rem;font-size:.9rem;}
+.vtitle{font-family:'Cinzel',serif;font-size:1.05rem;color:var(--gold);margin-bottom:.2rem;}
+.vdesc{font-size:.82rem;color:var(--muted);}
+.vwas{font-size:.78rem;color:var(--muted);text-decoration:line-through;}
+.vprice{font-family:'Cinzel',serif;font-size:1.9rem;color:var(--gold);font-weight:700;}
+.vsave{font-size:.72rem;color:#4CAF50;font-weight:600;}
+
+/* FILTER */
+.fbar{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.06);padding:.8rem 2rem;position:sticky;top:68px;z-index:90;overflow-x:auto;}
+.finner{max-width:1200px;margin:0 auto;display:flex;gap:.55rem;align-items:center;min-width:max-content;}
+.flabel{font-family:'Cinzel',serif;font-size:.68rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-right:.4rem;}
+.fb{background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--muted);padding:.32rem .85rem;border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;font-family:'Cinzel',serif;letter-spacing:.05em;white-space:nowrap;}
+.fb:hover,.fb.active{background:var(--gold);border-color:var(--gold);color:var(--black);font-weight:700;}
+
+/* SECTION */
+.sec{max-width:1200px;margin:0 auto;padding:3.25rem 2rem;}
+.shdr{display:flex;align-items:baseline;gap:.85rem;margin-bottom:1.85rem;border-bottom:1px solid rgba(201,168,76,.2);padding-bottom:.7rem;}
+.stitle{font-family:'Cinzel',serif;font-size:1.25rem;font-weight:700;letter-spacing:.05em;}
+.stag{font-size:.65rem;background:rgba(201,168,76,.12);color:var(--gold);border:1px solid rgba(201,168,76,.25);padding:.18rem .55rem;border-radius:100px;letter-spacing:.1em;text-transform:uppercase;font-family:'Cinzel',serif;font-weight:700;}
+hr.d{border:none;border-top:1px solid rgba(255,255,255,.05);}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1.15rem;}
+.grid2{grid-template-columns:repeat(auto-fill,minmax(350px,1fr));}
+
+/* CARD */
+.card{background:var(--mid);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column;}
+.card:hover{border-color:rgba(201,168,76,.4);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.5);}
+.ccover{height:175px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;}
+.cbadge{position:absolute;top:10px;right:10px;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .55rem;border-radius:100px;font-family:'Cinzel',serif;}
+.b-new{background:rgba(201,168,76,.9);color:#000;}
+.b-hot{background:rgba(255,80,60,.9);color:#fff;}
+.b-bun{background:rgba(76,175,80,.9);color:#fff;}
+.b-ser{background:rgba(138,43,226,.85);color:#fff;}
+.b-gov{background:rgba(30,100,200,.9);color:#fff;}
+.b-pas{background:rgba(100,100,100,.85);color:#fff;}
+.ci{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.1rem;text-align:center;}
+.ce{font-size:2rem;margin-bottom:.55rem;}
+.ct{font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;line-height:1.3;letter-spacing:.05em;}
+.cs{font-size:.65rem;margin-top:.3rem;opacity:.75;font-style:italic;}
+.cbody{padding:1rem 1.2rem 1.2rem;flex:1;display:flex;flex-direction:column;}
+.ctitle{font-family:'Cinzel',serif;font-size:.88rem;font-weight:700;margin-bottom:.45rem;line-height:1.3;}
+.cdesc{font-size:.8rem;color:var(--muted);line-height:1.5;flex:1;margin-bottom:.9rem;}
+.cfoot{display:flex;align-items:center;justify-content:space-between;gap:.7rem;}
+.pb{display:flex;flex-direction:column;}
+.pw{font-size:.7rem;color:var(--muted);text-decoration:line-through;line-height:1;}
+.pn{font-family:'Cinzel',serif;font-size:1.35rem;font-weight:700;color:var(--gold);line-height:1;}
+.ps{font-size:.65rem;color:#4CAF50;font-weight:600;}
+.btn-b{background:var(--gold);color:var(--black);border:none;padding:.58rem 1.05rem;border-radius:5px;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Cinzel',serif;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;white-space:nowrap;}
+.btn-b:hover{background:var(--gold-lt);transform:translateY(-1px);}
+
+/* COLORS */
+.cc{background:linear-gradient(135deg,#0A1628,#142238);}
+.cg{background:linear-gradient(135deg,#024D28,#046A38);}
+.cch{background:linear-gradient(135deg,#1C1C1E,#3D3D40);}
+.csl{background:linear-gradient(135deg,#1A2A3A,#2E4057);}
+.cbu{background:linear-gradient(135deg,#2A0810,#6B1525);}
+.cnv{background:linear-gradient(135deg,#060F1A,#142238);}
+.cfo{background:linear-gradient(135deg,#012015,#046A38);}
+.cgu{background:linear-gradient(135deg,#111,#3D3D40);}
+.cem{background:linear-gradient(135deg,#012D18,#046A38);}
+.cpu{background:linear-gradient(135deg,#100320,#2D0A5C);}
+.cre{background:linear-gradient(135deg,#1a0000,#3d0000);}
+.cte{background:linear-gradient(135deg,#001a1a,#004d4d);}
+.cam{background:linear-gradient(135deg,#1a1200,#4d3600);}
+.cin{background:linear-gradient(135deg,#0a001a,#2a004d);}
+
+/* SOCIAL PROOF */
+.proof-wrap{background:var(--dark);border-top:1px solid rgba(201,168,76,.15);border-bottom:1px solid rgba(201,168,76,.15);padding:.7rem 0;overflow:hidden;}
+.proof-track{display:inline-block;animation:tick 45s linear infinite;white-space:nowrap;}
+.pi{display:inline-flex;align-items:center;gap:.45rem;padding:0 2.25rem;font-size:.8rem;color:var(--muted);}
+.pi strong{color:var(--text);}
+.pd{width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid rgba(201,168,76,.2);padding:2.75rem 2rem;text-align:center;}
+.flogo{font-family:'Cinzel',serif;font-size:1.25rem;color:var(--gold);margin-bottom:.65rem;letter-spacing:.2em;}
+.ftxt{font-size:.8rem;color:var(--muted);max-width:460px;margin:0 auto 1.35rem;line-height:1.6;}
+.flinks{display:flex;gap:1.35rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.25rem;}
+.flinks a{font-size:.75rem;color:var(--muted);text-decoration:none;transition:color .2s;font-family:'Cinzel',serif;letter-spacing:.05em;}
+.flinks a:hover{color:var(--gold);}
+.fcopy{font-size:.7rem;color:#444;}
+
+/* NOTIF */
+.notif{position:fixed;bottom:22px;left:22px;background:var(--mid);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:.7rem .95rem;display:flex;align-items:center;gap:.7rem;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,.5);transform:translateX(-130%);transition:transform .4s ease;max-width:270px;}
+.notif.show{transform:translateX(0);}
+.ni{font-size:1.3rem;flex-shrink:0;}
+.nt{font-size:.75rem;line-height:1.4;}
+.nt strong{color:var(--gold);font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.05em;}
+
+@media(max-width:768px){
+  .hero{padding:3.25rem 1.25rem 2.75rem;}
+  .hero-stats{gap:1.5rem;}
+  .hdr-nav a{display:none;}
+  .grid,.grid2{grid-template-columns:1fr;}
+  .sec{padding:2.25rem 1.25rem;}
+  .vbanner-inner{flex-direction:column;text-align:center;}
+  .notif{left:10px;bottom:10px;max-width:calc(100vw - 20px);}
 }
 </style>
 </head>
 <body>
 
+<!-- TICKER -->
+<div class="ticker-wrap"><div class="ticker">
+  <span>22 income blueprints — one vault</span><span>Secure checkout via Stripe</span><span>First income possible in 7 days</span><span>Government-backed income streams</span><span>Complete Vault — all 22 for $827</span><span>30-day money-back guarantee</span><span>Instant digital delivery</span><span>Real blueprints for real people</span><span>22 income blueprints — one vault</span><span>Secure checkout via Stripe</span><span>First income possible in 7 days</span><span>Government-backed income streams</span><span>Complete Vault — all 22 for $827</span><span>30-day money-back guarantee</span><span>Instant digital delivery</span><span>Real blueprints for real people</span>
+</div></div>
+
 <!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <a href="#" class="logo">HUSTLE <span>VAULT</span></a>
-    <nav>
-      <a href="#ebooks">Ebooks</a>
-      <a href="#bundles">Bundles</a>
-      <a href="#blueprints">Blueprints</a>
-      <a href="#collection">Full Collection</a>
-    </nav>
+<header><div class="hdr">
+  <a href="#" class="logo">Hustle<br/>Vault<small>DIGITAL INCOME LIBRARY</small></a>
+  <div class="hdr-nav">
+    <a href="#bundles">Bundles</a>
+    <a href="#ebooks">Ebooks</a>
+    <a href="#blueprints">Blueprints</a>
+    <a href="https://buy.stripe.com/test_7sYfZjeEr4Ih1imcKB3gk0N" class="hdr-badge">🔥 Complete Vault $827</a>
   </div>
-</header>
+</div></header>
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow">Digital Education Library</p>
-  <h1>Build Real Income.<br/><em>Own Your Future.</em></h1>
-  <p>Actionable blueprints for people ready to stop dreaming and start building. Every guide written for real people, in plain language, with zero fluff.</p>
+  <p class="hero-eye">Open For Business</p>
+  <h1>Real Blueprints for<br/><span>People Who Need Income Now</span></h1>
+  <p class="hero-sub">22 step-by-step income systems. Secure Stripe checkout. Instant digital delivery. 30-day money-back guarantee.</p>
+  <div class="hero-btns">
+    <a href="#ebooks" class="btn-g">Browse All 22 Products</a>
+    <a href="https://buy.stripe.com/test_7sYfZjeEr4Ih1imcKB3gk0N" class="btn-o">🔥 Complete Vault — $827</a>
+  </div>
   <div class="hero-stats">
-    <div class="stat">
-      <span class="stat-num">22</span>
-      <span class="stat-label">Guides & Books</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num">$47</span>
-      <span class="stat-label">Per Ebook</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num">20%</span>
-      <span class="stat-label">Bundle Savings</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num">600+</span>
-      <span class="stat-label">Pages of Content</span>
-    </div>
+    <div><span class="sn">22</span><span class="sl">Blueprints</span></div>
+    <div><span class="sn">$1,034</span><span class="sl">Total Value</span></div>
+    <div><span class="sn">2,400+</span><span class="sl">Customers</span></div>
+    <div><span class="sn">Stripe</span><span class="sl">Secure Checkout</span></div>
   </div>
 </section>
 
-<!-- FILTER BAR -->
-<div class="filter-bar">
-  <div class="filter-inner">
-    <span class="filter-label">Filter:</span>
-    <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
-    <button class="filter-btn" onclick="filterCards('credit', this)">Credit & Finance</button>
-    <button class="filter-btn" onclick="filterCards('care', this)">Care & Service</button>
-    <button class="filter-btn" onclick="filterCards('wealth', this)">Wealth & Legal</button>
-    <button class="filter-btn" onclick="filterCards('ministry', this)">Ministry</button>
-    <button class="filter-btn" onclick="filterCards('blueprint', this)">Blueprints</button>
-    <button class="filter-btn" onclick="filterCards('bundle', this)">Bundles</button>
-  </div>
-</div>
-
-<!-- ══════════ FEATURED BUNDLES ══════════ -->
-<div class="section" id="bundles">
-  <div class="section-header">
-    <h2 class="section-title">Featured Bundles</h2>
-    <span class="section-tag">Save 20%</span>
-  </div>
-
-  <!-- MASTER COLLECTION BANNER -->
-  <div class="bundle-banner">
-    <div class="bundle-banner-text">
-      <h2>🏆 Complete New Vault Collection — All 12 Ebooks</h2>
-      <p>Every new Hustle Vault guide in one complete package. Credit, business, care services, wealth protection, ministry, and reentry — 330+ pages of real income education. Save 20% off individual pricing.</p>
-    </div>
-    <div style="display:flex; flex-direction:column; align-items:center; gap:1rem;">
-      <div class="bundle-price-block">
-        <div class="bundle-was">$564 if bought separately</div>
-        <div class="bundle-price">$451</div>
-        <div class="bundle-save">✓ You save $113</div>
-      </div>
-      <a href="https://buy.stripe.com/test_7sYfZjeEr4Ih1imcKB3gk0N" class="btn-gold">Get All 12 →</a>
+<!-- VAULT BANNER -->
+<div class="vbanner"><div class="vbanner-inner">
+  <div>
+    <div class="vtitle">🔥 Complete Vault — Best Value</div>
+    <div class="vdesc">All 22 Blueprints + Ebooks — One Price</div>
+    <div class="vicons">
+      <span class="vi">🔐</span><span class="vi">🚗</span><span class="vi">🔑</span><span class="vi">📦</span><span class="vi">🏥</span><span class="vi">🎨</span><span class="vi">🌐</span><span class="vi">🏠</span><span class="vi">🇺🇸</span><span class="vi">🥤</span><span class="vi">💳</span><span class="vi">🏦</span><span class="vi">👑</span><span class="vi">🔓</span><span class="vi">🔧</span>
     </div>
   </div>
-
-  <!-- BUNDLE GRID -->
-  <div class="grid grid-2" id="bundle-grid">
-
-    <!-- Credit Bundle -->
-    <div class="card" data-cat="bundle credit">
-      <div class="card-cover theme-credit">
-        <span class="card-badge badge-bundle">Bundle</span>
-        <div class="cover-inner">
-          <div class="cover-icon">💳</div>
-          <div class="cover-title">Credit & Finance Bundle</div>
-          <div class="cover-sub">Credit Repair + Business Credit</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Credit & Finance Bundle</h3>
-        <p class="card-desc">Fix your personal credit AND build business credit from zero. Two complete guides — the full credit mastery system. Dispute letters, 6-month action plan, Net 30 vendors, and $100K funding roadmap.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-was">$94</span>
-            <span class="price-now">$75</span>
-            <span class="price-save">Save $19 (20% off)</span>
-          </div>
-          <a href="https://buy.stripe.com/test_14AbJ31RFa2B7GK3a13gk0t" class="btn-buy">Buy Bundle</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Care Bundle -->
-    <div class="card" data-cat="bundle care">
-      <div class="card-cover theme-slate">
-        <span class="card-badge badge-bundle">Bundle</span>
-        <div class="cover-inner">
-          <div class="cover-icon">🤝</div>
-          <div class="cover-title">Care & Service Business Bundle</div>
-          <div class="cover-sub">4 AI-Proof Business Guides</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Care & Service Business Bundle — 4 Guides</h3>
-        <p class="card-desc">Senior Care Companion + Private Duty CNA + Mobile Notary & Fingerprinting + Home Inspector. Four human-essential, AI-proof businesses in one bundle. Physical presence required — nobody can take these from you.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-was">$188</span>
-            <span class="price-now">$150</span>
-            <span class="price-save">Save $38 (20% off)</span>
-          </div>
-          <a href="https://buy.stripe.com/test_8x2aEZgMz8Yx6CGdOF3gk0u" class="btn-buy">Buy Bundle</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Trust Bundle -->
-    <div class="card" data-cat="bundle wealth">
-      <div class="card-cover theme-emerald">
-        <span class="card-badge badge-series">Series</span>
-        <div class="cover-inner">
-          <div class="cover-icon">🔐</div>
-          <div class="cover-title">Lock It In — Complete Trust Series</div>
-          <div class="cover-sub">Parts 1 & 2</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Lock It In — Complete Trust Series</h3>
-        <p class="card-desc">Part 1: Trust formation, legal protection, and consulting business. Part 2: 15 creative funding strategies and all 50 state trust laws. The complete generational wealth protection system.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-was">$94</span>
-            <span class="price-now">$75</span>
-            <span class="price-save">Save $19 (20% off)</span>
-          </div>
-          <a href="https://buy.stripe.com/test_bJeaEZ7bZa2B7GK3a13gk0v" class="btn-buy">Buy Series</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Kingdom Bundle -->
-    <div class="card" data-cat="bundle ministry">
-      <div class="card-cover theme-purple">
-        <span class="card-badge badge-series">Series</span>
-        <div class="cover-inner">
-          <div class="cover-icon">👑</div>
-          <div class="cover-title">Build the Kingdom — Complete 508c1a Series</div>
-          <div class="cover-sub">Books 1 & 2</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Build the Kingdom — Complete 508c1a Series</h3>
-        <p class="card-desc">Book 1: Foundation, formation, and legal protection. Book 2: Revenue, real estate, political rights, and ministry scaling. The complete ministry authority guide — both books together.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-was">$94</span>
-            <span class="price-now">$75</span>
-            <span class="price-save">Save $19 (20% off)</span>
-          </div>
-          <a href="https://buy.stripe.com/test_8x29AV7bZ2A9f9cfWN3gk0w" class="btn-buy">Buy Series</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hustle Anywhere Bundle -->
-    <div class="card" data-cat="bundle blueprint">
-      <div class="card-cover theme-navy">
-        <span class="card-badge badge-bundle">Bundle</span>
-        <div class="cover-inner">
-          <div class="cover-icon">⚡</div>
-          <div class="cover-title">Hustle From Anywhere Bundle</div>
-          <div class="cover-sub">Trades + Second Chance</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Hustle From Anywhere Bundle</h3>
-        <p class="card-desc">Trades Apprenticeship + Second Chance Business Guide. Two guides for people building from the ground up — learn a trade and start a business regardless of your background. No excuses edition.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-was">$94</span>
-            <span class="price-now">$75</span>
-            <span class="price-save">Save $19 (20% off)</span>
-          </div>
-          <a href="https://buy.stripe.com/test_dRm00l9k7gqZf9c25X3gk0x" class="btn-buy">Buy Bundle</a>
-        </div>
-      </div>
-    </div>
-
+  <div style="text-align:center;">
+    <div class="vwas">$1,034 value</div>
+    <div class="vprice">$827</div>
+    <div class="vsave">You save $207</div>
+    <a href="https://buy.stripe.com/test_7sYfZjeEr4Ih1imcKB3gk0N" class="btn-g" style="margin-top:.7rem;">💳 Get Complete Vault</a>
+    <div style="font-size:.68rem;color:var(--muted);margin-top:.4rem;">🛡️ 30-day guarantee · ⚡ Instant delivery</div>
   </div>
-</div>
+</div></div>
 
-<hr class="divider"/>
+<!-- FILTER -->
+<div class="fbar"><div class="finner">
+  <span class="flabel">Filter:</span>
+  <button class="fb active" onclick="filt('all',this)">All</button>
+  <button class="fb" onclick="filt('bundle',this)">Bundles</button>
+  <button class="fb" onclick="filt('credit',this)">Credit & Finance</button>
+  <button class="fb" onclick="filt('care',this)">Care & Service</button>
+  <button class="fb" onclick="filt('wealth',this)">Wealth & Legal</button>
+  <button class="fb" onclick="filt('ministry',this)">Ministry</button>
+  <button class="fb" onclick="filt('hustle',this)">Quick Cash</button>
+  <button class="fb" onclick="filt('housing',this)">Housing</button>
+  <button class="fb" onclick="filt('digital',this)">Digital</button>
+</div></div>
 
-<!-- ══════════ NEW EBOOKS ══════════ -->
-<div class="section" id="ebooks">
-  <div class="section-header">
-    <h2 class="section-title">New Hustle Vault Ebooks</h2>
-    <span class="section-tag">$47 Each</span>
-  </div>
+<!-- BUNDLES -->
+<div class="sec" id="bundles"><div class="shdr"><h2 class="stitle">Featured Bundles</h2><span class="stag">Save 20%</span></div>
+<div class="grid grid2" id="g-bundles">
 
-  <div class="grid" id="ebook-grid">
+<div class="card" data-cat="bundle credit"><div class="ccover cc"><span class="cbadge b-bun">Bundle</span><div class="ci"><div class="ce">💳</div><div class="ct" style="color:#C9A84C">Credit & Finance Bundle</div><div class="cs">Credit Repair + Business Credit</div></div></div><div class="cbody"><h3 class="ctitle">Credit & Finance Bundle</h3><p class="cdesc">Fix personal credit AND build business credit from zero. Dispute letters, 6-month plan, Net 30 vendor list, $100K funding roadmap. Both guides together.</p><div class="cfoot"><div class="pb"><span class="pw">$94</span><span class="pn">$75</span><span class="ps">Save $19 · 20% off</span></div><a href="https://buy.stripe.com/test_14AbJ31RFa2B7GK3a13gk0t" class="btn-b">Buy Bundle</a></div></div></div>
 
-    <!-- Credit Repair -->
-    <div class="card" data-cat="credit">
-      <div class="card-cover theme-credit">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">📊</div>
-          <div class="cover-title" style="color:#C9A84C">Credit Repair Blueprint</div>
-          <div class="cover-sub" style="color:#aaa">Fix Your Credit. Build Your Future.</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Credit Repair Blueprint</h3>
-        <p class="card-desc">Fix errors, dispute collections, and rebuild your score — or start a credit repair business. Includes dispute letter templates, pay-for-delete scripts, and a 6-month action plan. 26 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_00wbJ367VdeNbX0dOF3gk0i" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="bundle care"><div class="ccover csl"><span class="cbadge b-bun">Bundle</span><div class="ci"><div class="ce">🤝</div><div class="ct" style="color:#D4919A">Care & Service Bundle</div><div class="cs">4 AI-Proof Business Guides</div></div></div><div class="cbody"><h3 class="ctitle">Care & Service Bundle — 4 Guides</h3><p class="cdesc">Senior Care + Private Duty CNA + Mobile Notary & Fingerprinting + Home Inspector. Four AI-proof human-essential businesses in one bundle.</p><div class="cfoot"><div class="pb"><span class="pw">$188</span><span class="pn">$150</span><span class="ps">Save $38 · 20% off</span></div><a href="https://buy.stripe.com/test_8x2aEZgMz8Yx6CGdOF3gk0u" class="btn-b">Buy Bundle</a></div></div></div>
 
-    <!-- Business Credit -->
-    <div class="card" data-cat="credit">
-      <div class="card-cover theme-green">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">🏦</div>
-          <div class="cover-title" style="color:#E8C96A">Business Credit Guru Guide</div>
-          <div class="cover-sub" style="color:#aaa">Build. Fund. Scale.</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Business Credit Guru Guide</h3>
-        <p class="card-desc">4-tier credit building system, Net 30 vendor master list, and a 90-day sprint to $100K+ in business funding. Separate your personal and business finances the right way. 26 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_8x2aEZcwjb6F8KO7qh3gk0j" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="bundle wealth"><div class="ccover cem"><span class="cbadge b-ser">Series</span><div class="ci"><div class="ce">🔐</div><div class="ct" style="color:#E8E8E8">Lock It In — Complete Trust Series</div><div class="cs">Parts 1 & 2</div></div></div><div class="cbody"><h3 class="ctitle">Lock It In — Complete Trust Series</h3><p class="cdesc">Part 1: trust formation, legal protection & consulting. Part 2: 15 funding strategies + all 50 state trust laws. Complete generational wealth system.</p><div class="cfoot"><div class="pb"><span class="pw">$94</span><span class="pn">$75</span><span class="ps">Save $19 · 20% off</span></div><a href="https://buy.stripe.com/test_bJeaEZ7bZa2B7GK3a13gk0v" class="btn-b">Buy Series</a></div></div></div>
 
-    <!-- Home Inspector -->
-    <div class="card" data-cat="care">
-      <div class="card-cover theme-char">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">🏠</div>
-          <div class="cover-title" style="color:#FFD95A">Home Inspector Startup Guide</div>
-          <div class="cover-sub" style="color:#aaa">$500+ Per Job. No Office Required.</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Home Inspector Startup Guide</h3>
-        <p class="card-desc">Get licensed, get equipped, and build a $15K/month inspection business. State licensing overview, agent referral strategy, inspection report software comparison, and 60-day launch plan. 27 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_aFa8wR67V1w51imh0R3gk0k" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="bundle ministry"><div class="ccover cpu"><span class="cbadge b-ser">Series</span><div class="ci"><div class="ce">👑</div><div class="ct" style="color:#E8C96A">Build the Kingdom Series</div><div class="cs">508c1a Books 1 & 2</div></div></div><div class="cbody"><h3 class="ctitle">Build the Kingdom — Complete 508c1a Series</h3><p class="cdesc">Book 1: formation, legal protection & financial controls. Book 2: revenue, real estate & political rights. The complete ministry authority guide.</p><div class="cfoot"><div class="pb"><span class="pw">$94</span><span class="pn">$75</span><span class="ps">Save $19 · 20% off</span></div><a href="https://buy.stripe.com/test_8x29AV7bZ2A9f9cfWN3gk0w" class="btn-b">Buy Series</a></div></div></div>
 
-    <!-- Senior Care -->
-    <div class="card" data-cat="care">
-      <div class="card-cover theme-slate">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">❤️</div>
-          <div class="cover-title" style="color:#D4919A">Senior Care Companion Guide</div>
-          <div class="cover-sub" style="color:#aaa">A Business That Matters.</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Senior Care Companion Service Startup Guide</h3>
-        <p class="card-desc">Launch a companion care business from scratch. Client intake system, VA Aid & Attendance benefits guide, referral partnerships, and roadmap from solo caregiver to $8K+/month agency. 27 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_00w4gBeEr2A9aSW6md3gk0l" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="bundle hustle"><div class="ccover cnv"><span class="cbadge b-bun">Bundle</span><div class="ci"><div class="ce">⚡</div><div class="ct" style="color:#F5832E">Hustle From Anywhere Bundle</div><div class="cs">Trades + Second Chance</div></div></div><div class="cbody"><h3 class="ctitle">Hustle From Anywhere Bundle</h3><p class="cdesc">Trades Apprenticeship + Second Chance Business Guide. Two guides for people building from the ground up — no background required.</p><div class="cfoot"><div class="pb"><span class="pw">$94</span><span class="pn">$75</span><span class="ps">Save $19 · 20% off</span></div><a href="https://buy.stripe.com/test_dRm00l9k7gqZf9c25X3gk0x" class="btn-b">Buy Bundle</a></div></div></div>
 
-    <!-- Mobile Notary -->
-    <div class="card" data-cat="care">
-      <div class="card-cover theme-burg">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">✍️</div>
-          <div class="cover-title" style="color:#F7E7CE">Mobile Notary & Fingerprinting</div>
-          <div class="cover-sub" style="color:#aaa">Two Streams. One Mobile Business.</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Mobile Notary & Fingerprinting Business Guide</h3>
-        <p class="card-desc">Get commissioned as a notary, become a certified fingerprinting provider, and earn $12K+/month from your car. Platforms, pricing, add-on services, and 60-day launch plan. 27 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_7sY8wR67VgqZaSWdOF3gk0m" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="bundle housing"><div class="ccover cin"><span class="cbadge b-gov">Govt Backed</span><div class="ci"><div class="ce">🏠</div><div class="ct" style="color:#C9A84C">Housing Empire Bundle</div><div class="cs">Land + NEMT + Assisted + Veterans</div></div></div><div class="cbody"><h3 class="ctitle">Housing Empire Bundle — 4 Guides</h3><p class="cdesc">Land Flip + NEMT + Assisted Living + Veterans Housing. Four housing and real estate income streams. Government-backed payments and recurring income.</p><div class="cfoot"><div class="pb"><span class="pw">$188</span><span class="pn">$150</span><span class="ps">Save $38 · 20% off</span></div><a href="https://buy.stripe.com/test_14AeVfcwj0s17GKdOF3gk0L" class="btn-b">Buy Bundle</a></div></div></div>
 
-    <!-- Trades -->
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover theme-gun">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">🔧</div>
-          <div class="cover-title" style="color:#E8304A">Trades Apprenticeship & Side Hustle</div>
-          <div class="cover-sub" style="color:#aaa">Learn. Earn. Build.</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Trades Apprenticeship & Side Hustle Guide</h3>
-        <p class="card-desc">Get into a paid apprenticeship, take legal side jobs, and build a licensed contracting business. 6 trades covered with pay scales, IBEW/UA program guide, and $10K–$20K/month roadmap. 27 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_9B6bJ30NB7Ut5yCh0R3gk0n" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+</div></div>
+<hr class="d"/>
 
-    <!-- Private Duty CNA -->
-    <div class="card" data-cat="care">
-      <div class="card-cover theme-forest">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">🏥</div>
-          <div class="cover-title" style="color:#FDF6EC">Private Duty CNA & Caregiver Kit</div>
-          <div class="cover-sub" style="color:#aaa">Go Private. Get Paid What You're Worth.</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Private Duty CNA & Caregiver Business Kit</h3>
-        <p class="card-desc">Get CNA/HHA certified, leave agency work, and go private duty. Pricing strategy, client service agreement template, referral partnerships, and roadmap to $8K+/month. 27 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_5kQ3cx3ZNeiR8KOeSJ3gk0o" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<!-- NEW EBOOKS -->
+<div class="sec" id="ebooks"><div class="shdr"><h2 class="stitle">New Hustle Vault Ebooks</h2><span class="stag">$47 Each</span></div>
+<div class="grid" id="g-ebooks">
 
-    <!-- Second Chance -->
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover theme-navy">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">🔓</div>
-          <div class="cover-title" style="color:#F5832E">Second Chance Business Guide</div>
-          <div class="cover-sub" style="color:#aaa">Your Record Doesn't Define Your Future.</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Second Chance Business Guide</h3>
-        <p class="card-desc">The complete reentry entrepreneurship guide. Know your rights, open bank accounts, build credit, access grants, and start a business. Generational wealth roadmap from day one of release. 27 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_aFa14pdAneiRaSW9yp3gk0p" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="credit"><div class="ccover cc"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">📊</div><div class="ct" style="color:#C9A84C">Credit Repair Blueprint</div><div class="cs">Fix Your Credit. Build Your Future.</div></div></div><div class="cbody"><h3 class="ctitle">Credit Repair Blueprint</h3><p class="cdesc">Fix errors, dispute collections, rebuild your score — or start a credit repair business. Dispute letter templates, pay-for-delete scripts, 6-month action plan. 26 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_00wbJ367VdeNbX0dOF3gk0i" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <!-- Lock It In Part 1 -->
-    <div class="card" data-cat="wealth">
-      <div class="card-cover theme-emerald">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">🔐</div>
-          <div class="cover-title" style="color:#E8E8E8">Lock It In — Family Trust Guide</div>
-          <div class="cover-sub" style="color:#aaa">Part 1 of 2 · Emerald & Silver</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Lock It In — The Family Trust Guide</h3>
-        <p class="card-desc">Protect assets, avoid probate, and build generational wealth. Covers revocable vs. irrevocable trusts, funding your trust, real estate, tax advantages, and how to build a trust consulting business. 27 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_aFa5kFcwjdeNe588ul3gk0q" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="credit"><div class="ccover cg"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">🏦</div><div class="ct" style="color:#E8C96A">Business Credit Guru Guide</div><div class="cs">Build. Fund. Scale.</div></div></div><div class="cbody"><h3 class="ctitle">Business Credit Guru Guide</h3><p class="cdesc">4-tier credit building system, Net 30 vendor master list, 90-day sprint to $100K+ in business funding. Separate personal and business finances. 26 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_8x2aEZcwjb6F8KO7qh3gk0j" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <!-- Lock It In Part 2 -->
-    <div class="card" data-cat="wealth">
-      <div class="card-cover theme-emerald">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">🗺️</div>
-          <div class="cover-title" style="color:#E8E8E8">Lock It In — Part 2</div>
-          <div class="cover-sub" style="color:#aaa">Funding Strategies & All 50 State Laws</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Lock It In Part 2 — Funding Strategies & State Laws</h3>
-        <p class="card-desc">15 creative trust funding strategies (life insurance, LLCs, 1031 exchanges, gifting, IBC) plus a complete all-50-state trust law reference. The most thorough state trust comparison available. 29 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_aFa5kFcwjdeNe588ul3gk0q" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="care"><div class="ccover cch"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">🏠</div><div class="ct" style="color:#FFD95A">Home Inspector Startup Guide</div><div class="cs">$500+ Per Job. No Office Required.</div></div></div><div class="cbody"><h3 class="ctitle">Home Inspector Startup Guide</h3><p class="cdesc">Get licensed, get equipped, build a $15K/month business. State licensing overview, agent referral strategy, software comparison, 60-day launch plan. 27 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_aFa8wR67V1w51imh0R3gk0k" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <!-- Kingdom Book 1 -->
-    <div class="card" data-cat="ministry">
-      <div class="card-cover theme-purple">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">👑</div>
-          <div class="cover-title" style="color:#E8C96A">Build the Kingdom — Book 1</div>
-          <div class="cover-sub" style="color:#aaa">508c1a Foundation & Legal Protection</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Build the Kingdom — 508c1a Strategy Guide Book 1</h3>
-        <p class="card-desc">Establish your ministry on solid legal footing. 508c1a vs 501c3, First Amendment protections, Articles of Incorporation, housing allowances, benevolence funds, and the Church Audit Procedures Act. 27 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_14AfZj8g3caJ8KO9yp3gk0r" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="care"><div class="ccover csl"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">❤️</div><div class="ct" style="color:#D4919A">Senior Care Companion Guide</div><div class="cs">A Business That Matters.</div></div></div><div class="cbody"><h3 class="ctitle">Senior Care Companion Service Startup Guide</h3><p class="cdesc">Launch a companion care business from scratch. Client intake system, VA benefits guide, referral partnerships, roadmap from solo to $8K+/month agency. 27 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_00w4gBeEr2A9aSW6md3gk0l" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <!-- Kingdom Book 2 -->
-    <div class="card" data-cat="ministry">
-      <div class="card-cover theme-purple">
-        <span class="card-badge badge-new">New</span>
-        <div class="cover-inner">
-          <div class="cover-icon">⚖️</div>
-          <div class="cover-title" style="color:#E8C96A">Build the Kingdom — Book 2</div>
-          <div class="cover-sub" style="color:#aaa">Revenue, Real Estate & Political Rights</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Build the Kingdom — 508c1a Strategy Guide Book 2</h3>
-        <p class="card-desc">Grow your ministry with legal revenue, real estate, and political authority. Church school formation, affordable housing, the Johnson Amendment, RLUIPA, church planting, and minister ordination. 27 pages.</p>
-        <div class="card-footer">
-          <div class="price-block">
-            <span class="price-now">$47</span>
-          </div>
-          <a href="https://buy.stripe.com/test_6oU28tgMz3Ed5yC6md3gk0s" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="care"><div class="ccover cbu"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">✍️</div><div class="ct" style="color:#F7E7CE">Mobile Notary & Fingerprinting</div><div class="cs">Two Streams. One Mobile Business.</div></div></div><div class="cbody"><h3 class="ctitle">Mobile Notary & Fingerprinting Business Guide</h3><p class="cdesc">Get commissioned as a notary and certified as a fingerprinting provider. Earn $12K+/month from your car. Platforms, pricing, add-ons, 60-day plan. 27 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_7sY8wR67VgqZaSWdOF3gk0m" class="btn-b">💳 Buy Now</a></div></div></div>
 
-  </div>
-</div>
+<div class="card" data-cat="hustle"><div class="ccover cgu"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">🔧</div><div class="ct" style="color:#E8304A">Trades Apprenticeship & Side Hustle</div><div class="cs">Learn. Earn. Build.</div></div></div><div class="cbody"><h3 class="ctitle">Trades Apprenticeship & Side Hustle Guide</h3><p class="cdesc">Get into a paid apprenticeship, take legal side jobs, build a licensed contracting business. 6 trades covered, pay scales, IBEW/UA guide, $10K–$20K/month roadmap. 27 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_9B6bJ30NB7Ut5yCh0R3gk0n" class="btn-b">💳 Buy Now</a></div></div></div>
 
-<hr class="divider"/>
+<div class="card" data-cat="care"><div class="ccover cfo"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">🏥</div><div class="ct" style="color:#FDF6EC">Private Duty CNA & Caregiver Kit</div><div class="cs">Go Private. Get Paid What You're Worth.</div></div></div><div class="cbody"><h3 class="ctitle">Private Duty CNA & Caregiver Business Kit</h3><p class="cdesc">Get CNA/HHA certified, leave agency work, go private duty. Pricing strategy, client contracts, referral partnerships, roadmap to $8K+/month. 27 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_5kQ3cx3ZNeiR8KOeSJ3gk0o" class="btn-b">💳 Buy Now</a></div></div></div>
 
-<!-- ══════════ ORIGINAL BLUEPRINTS ══════════ -->
-<div class="section" id="blueprints">
-  <div class="section-header">
-    <h2 class="section-title">Original Hustle Vault Blueprints</h2>
-    <span class="section-tag">$47 Each</span>
-  </div>
+<div class="card" data-cat="hustle"><div class="ccover cnv"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">🔓</div><div class="ct" style="color:#F5832E">Second Chance Business Guide</div><div class="cs">Your Record Doesn't Define Your Future.</div></div></div><div class="cbody"><h3 class="ctitle">Second Chance Business Guide</h3><p class="cdesc">The complete reentry entrepreneurship guide. Know your rights, build credit, open accounts, access grants, start a business. Full generational wealth roadmap. 27 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_aFa14pdAneiRaSW9yp3gk0p" class="btn-b">💳 Buy Now</a></div></div></div>
 
-  <div class="grid" id="blueprint-grid">
+<div class="card" data-cat="wealth"><div class="ccover cem"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">🔐</div><div class="ct" style="color:#E8E8E8">Lock It In — Family Trust Guide</div><div class="cs">Part 1 of 2</div></div></div><div class="cbody"><h3 class="ctitle">Lock It In — The Family Trust Guide</h3><p class="cdesc">Protect assets, avoid probate, build generational wealth. Revocable vs. irrevocable trusts, trust funding, real estate, tax advantages, consulting business. 27 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_aFa5kFcwjdeNe588ul3gk0q" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover" style="background:linear-gradient(135deg,#1a0000,#3d0000);">
-        <div class="cover-inner">
-          <div class="cover-icon">🏪</div>
-          <div class="cover-title" style="color:#C9A84C">Unit Gold</div>
-          <div class="cover-sub" style="color:#aaa">Storage Auction Blueprint</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Unit Gold — Storage Auction Blueprint</h3>
-        <p class="card-desc">The complete beginner's system for winning storage auctions and turning abandoned units into cash. 9 chapters, profit formula, bidding strategy, and resale system.</p>
-        <div class="card-footer">
-          <div class="price-block"><span class="price-now">$47</span></div>
-          <a href="https://buy.stripe.com/test_7sYdRbeEr4Ihd14eSJ3gk0y" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="wealth"><div class="ccover cem"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">🗺️</div><div class="ct" style="color:#E8E8E8">Lock It In — Part 2</div><div class="cs">Funding Strategies & All 50 State Laws</div></div></div><div class="cbody"><h3 class="ctitle">Lock It In Part 2 — Funding Strategies & State Laws</h3><p class="cdesc">15 creative trust funding strategies — life insurance, LLCs, 1031 exchanges, gifting, IBC — plus a complete all-50-state trust law reference. 29 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_aFa5kFcwjdeNe588ul3gk0q" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover" style="background:linear-gradient(135deg,#001a0d,#004d26);">
-        <div class="cover-inner">
-          <div class="cover-icon">🚗</div>
-          <div class="cover-title" style="color:#C9A84C">Dealer License Blueprint</div>
-          <div class="cover-sub" style="color:#aaa">Flip Cars for $1K–$5K Profit</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Dealer License Blueprint</h3>
-        <p class="card-desc">Get licensed and access wholesale auctions to flip cars for $1,000–$5,000 profit per deal. Step-by-step guide for all 50 states.</p>
-        <div class="card-footer">
-          <div class="price-block"><span class="price-now">$47</span></div>
-          <a href="https://buy.stripe.com/test_fZueVffIv4Ih3qucKB3gk0z" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="ministry"><div class="ccover cpu"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">👑</div><div class="ct" style="color:#E8C96A">Build the Kingdom — Book 1</div><div class="cs">508c1a Foundation & Legal Protection</div></div></div><div class="cbody"><h3 class="ctitle">Build the Kingdom — 508c1a Strategy Guide Book 1</h3><p class="cdesc">508c1a vs 501c3, First Amendment protections, Articles of Incorporation, housing allowances, benevolence funds, Church Audit Procedures Act. 27 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_14AfZj8g3caJ8KO9yp3gk0r" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover" style="background:linear-gradient(135deg,#1a0a00,#4d2a00);">
-        <div class="cover-inner">
-          <div class="cover-icon">🔑</div>
-          <div class="cover-title" style="color:#C9A84C">Repo Blueprint</div>
-          <div class="cover-sub" style="color:#aaa">$200–$400 Per Vehicle</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Repo Blueprint — Vehicle Repossession Business</h3>
-        <p class="card-desc">Get paid $200–$400 per vehicle recovered. Recession-proof income with low startup cost. Licensing guide, client acquisition, and scaling roadmap.</p>
-        <div class="card-footer">
-          <div class="price-block"><span class="price-now">$47</span></div>
-          <a href="https://buy.stripe.com/test_cNiaEZ67VcaJ8KOh0R3gk0A" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="ministry"><div class="ccover cpu"><span class="cbadge b-new">New</span><div class="ci"><div class="ce">⚖️</div><div class="ct" style="color:#E8C96A">Build the Kingdom — Book 2</div><div class="cs">Revenue, Real Estate & Political Rights</div></div></div><div class="cbody"><h3 class="ctitle">Build the Kingdom — 508c1a Strategy Guide Book 2</h3><p class="cdesc">Legal revenue streams, real estate, political authority. Church school formation, affordable housing, Johnson Amendment, church planting, minister ordination. 27 pages.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_6oU28tgMz3Ed5yC6md3gk0s" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover" style="background:linear-gradient(135deg,#001a1a,#004d4d);">
-        <div class="cover-inner">
-          <div class="cover-icon">🌍</div>
-          <div class="cover-title" style="color:#C9A84C">Land Flip Formula</div>
-          <div class="cover-sub" style="color:#aaa">Buy Cheap Land. Sell for 3X.</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Land Flip Formula — Buy Cheap Land Sell for 3X</h3>
-        <p class="card-desc">Buy vacant land from motivated sellers for pennies on the dollar and sell online for 3X. County tax records, seller letters, due diligence, and seller finance strategy.</p>
-        <div class="card-footer">
-          <div class="price-block"><span class="price-now">$47</span></div>
-          <a href="https://buy.stripe.com/test_bJeeVffIv0s15yC4e53gk0B" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+</div></div>
+<hr class="d"/>
 
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover" style="background:linear-gradient(135deg,#0a001a,#2a004d);">
-        <div class="cover-inner">
-          <div class="cover-icon">🚐</div>
-          <div class="cover-title" style="color:#C9A84C">NEMT Blueprint</div>
-          <div class="cover-sub" style="color:#aaa">Government-Contracted Medical Routes</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">NEMT Blueprint — Medical Transport Business</h3>
-        <p class="card-desc">Government-contracted medical routes pay $30–$80 per trip. Medicaid enrollment, broker contacts, vehicle requirements, and fleet scaling roadmap.</p>
-        <div class="card-footer">
-          <div class="price-block"><span class="price-now">$47</span></div>
-          <a href="https://buy.stripe.com/test_00wbJ33ZNa2BaSW4e53gk0C" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<!-- ORIGINAL BLUEPRINTS -->
+<div class="sec" id="blueprints"><div class="shdr"><h2 class="stitle">Original Hustle Vault Blueprints</h2><span class="stag">$47 Each</span></div>
+<div class="grid" id="g-blueprints">
 
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover" style="background:linear-gradient(135deg,#001a0a,#003d1a);">
-        <div class="cover-inner">
-          <div class="cover-icon">🖨️</div>
-          <div class="cover-title" style="color:#C9A84C">Print on Demand Blueprint</div>
-          <div class="cover-sub" style="color:#aaa">Zero Inventory. Forever Royalties.</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Print on Demand Blueprint — Zero Inventory Online Store</h3>
-        <p class="card-desc">Upload designs once, earn royalties forever. Zero inventory, no shipping, no employees. 50 proven niches, design system, platform setup, and 500-design scaling plan.</p>
-        <div class="card-footer">
-          <div class="price-block"><span class="price-now">$47</span></div>
-          <a href="https://buy.stripe.com/test_14A4gBcwjb6Ff9c6md3gk0D" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="hustle"><div class="ccover cre"><span class="cbadge b-hot">Best Seller</span><div class="ci"><div class="ce">🔐</div><div class="ct" style="color:#C9A84C">Unit Gold</div><div class="cs">Storage Auction Blueprint</div></div></div><div class="cbody"><h3 class="ctitle">Unit Gold — Storage Auction Blueprint</h3><p class="cdesc">Win storage auctions and flip the contents for profit. First income possible in 7 days. 9 chapters, profit formula, bidding strategy, resale system.</p><div class="cfoot"><div class="pb"><span class="pw">$57</span><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_7sYdRbeEr4Ihd14eSJ3gk0y" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover" style="background:linear-gradient(135deg,#1a1200,#4d3600);">
-        <div class="cover-inner">
-          <div class="cover-icon">🌐</div>
-          <div class="cover-title" style="color:#C9A84C">Domain Flipping Blueprint</div>
-          <div class="cover-sub" style="color:#aaa">Buy $10 Domains. Sell for Thousands.</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Domain Flipping Blueprint</h3>
-        <p class="card-desc">Register or buy domains for $10–$500 and sell them to businesses for $1,000–$50,000+. Valuation framework, research tools, outreach templates, and portfolio strategy.</p>
-        <div class="card-footer">
-          <div class="price-block"><span class="price-now">$47</span></div>
-          <a href="https://buy.stripe.com/test_6oU6oJdAn4Ih9OS7qh3gk0E" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="hustle"><div class="ccover cg"><span class="cbadge b-hot">High Income</span><div class="ci"><div class="ce">🚗</div><div class="ct" style="color:#C9A84C">Dealer License Blueprint</div><div class="cs">Flip Cars for $1K–$5K Profit</div></div></div><div class="cbody"><h3 class="ctitle">Dealer License Blueprint</h3><p class="cdesc">Get licensed and access wholesale auctions to flip cars for $1,000–$5,000 profit per deal. Step-by-step guide for all 50 states.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_fZueVffIv4Ih3qucKB3gk0z" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover" style="background:linear-gradient(135deg,#001a0d,#004d26);">
-        <div class="cover-inner">
-          <div class="cover-icon">🏡</div>
-          <div class="cover-title" style="color:#C9A84C">Assisted Living Blueprint</div>
-          <div class="cover-sub" style="color:#aaa">$27K/Month from a 6-Bed Home</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Assisted Living Blueprint — Residential Care Home Business</h3>
-        <p class="card-desc">A 6-bed home generates $27,000/month gross. Government-backed resident payments. State licensing, property setup, staffing framework, and multi-home scaling roadmap.</p>
-        <div class="card-footer">
-          <div class="price-block"><span class="price-now">$47</span></div>
-          <a href="https://buy.stripe.com/test_14AdRbfIveiR4uyh0R3gk0F" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="hustle"><div class="ccover cam"><span class="cbadge b-new">New Price</span><div class="ci"><div class="ce">🔑</div><div class="ct" style="color:#C9A84C">Repo Blueprint</div><div class="cs">$200–$400 Per Vehicle</div></div></div><div class="cbody"><h3 class="ctitle">Repo Blueprint — Vehicle Repossession Business</h3><p class="cdesc">Get paid $200–$400 per vehicle recovered. Recession-proof income with low startup cost. Licensing guide, client acquisition, scaling roadmap.</p><div class="cfoot"><div class="pb"><span class="pw">$37</span><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_cNiaEZ67VcaJ8KOh0R3gk0A" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover" style="background:linear-gradient(135deg,#0a001a,#2a004d);">
-        <div class="cover-inner">
-          <div class="cover-icon">🎖️</div>
-          <div class="cover-title" style="color:#C9A84C">Housing for Veterans Blueprint</div>
-          <div class="cover-sub" style="color:#aaa">HUD-VASH & Government Programs</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Housing for Veterans Blueprint</h3>
-        <p class="card-desc">Accept HUD-VASH vouchers and get government-guaranteed rent with near-zero vacancy. Full guide to HUD-VASH, GPD grants, SSVF partnerships, and VA case manager relationships.</p>
-        <div class="card-footer">
-          <div class="price-block"><span class="price-now">$47</span></div>
-          <a href="https://buy.stripe.com/test_8x25kFaob1w53qu9yp3gk0G" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="housing"><div class="ccover cte"><span class="cbadge b-pas">Passive</span><div class="ci"><div class="ce">📦</div><div class="ct" style="color:#C9A84C">Land Flip Formula</div><div class="cs">Buy Cheap Land. Sell for 3X.</div></div></div><div class="cbody"><h3 class="ctitle">Land Flip Formula — Buy Cheap Land Sell for 3X</h3><p class="cdesc">Buy vacant land from motivated sellers for pennies on the dollar and sell online for 3X. County records, seller letters, due diligence, seller finance strategy.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_bJeeVffIv0s15yC4e53gk0B" class="btn-b">💳 Buy Now</a></div></div></div>
 
-    <div class="card" data-cat="blueprint">
-      <div class="card-cover" style="background:linear-gradient(135deg,#1a1200,#4d3600);">
-        <div class="cover-inner">
-          <div class="cover-icon">🎰</div>
-          <div class="cover-title" style="color:#C9A84C">Vending Machine Blueprint</div>
-          <div class="cover-sub" style="color:#aaa">Cash Flow While You Sleep</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Vending Machine Blueprint — Cash Flow While You Sleep</h3>
-        <p class="card-desc">Place machines, stock product, collect cash. 50–70% margins. Location pitch system, machine comparison, route management, and fleet scaling guide.</p>
-        <div class="card-footer">
-          <div class="price-block"><span class="price-now">$47</span></div>
-          <a href="https://buy.stripe.com/test_cNi14p9k74Ihf9c11T3gk0H" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
+<div class="card" data-cat="housing"><div class="ccover cin"><span class="cbadge b-gov">Recurring</span><div class="ci"><div class="ce">🏥</div><div class="ct" style="color:#C9A84C">NEMT Blueprint</div><div class="cs">Government-Contracted Medical Routes</div></div></div><div class="cbody"><h3 class="ctitle">NEMT Blueprint — Medical Transport Business</h3><p class="cdesc">Government medical routes pay $30–$80 per trip. Medicaid enrollment, broker contacts, vehicle requirements, and fleet scaling roadmap.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_00wbJ33ZNa2BaSW4e53gk0C" class="btn-b">💳 Buy Now</a></div></div></div>
 
-  </div>
-</div>
+<div class="card" data-cat="digital"><div class="ccover cfo"><span class="cbadge b-pas">Passive</span><div class="ci"><div class="ce">🎨</div><div class="ct" style="color:#C9A84C">Print on Demand Blueprint</div><div class="cs">Zero Inventory. Forever Royalties.</div></div></div><div class="cbody"><h3 class="ctitle">Print on Demand Blueprint — Zero Inventory Online Store</h3><p class="cdesc">Upload designs once, earn royalties forever. Zero inventory, no shipping, no employees. 50 proven niches, design system, platform setup, 500-design scaling plan.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_14A4gBcwjb6Ff9c6md3gk0D" class="btn-b">💳 Buy Now</a></div></div></div>
 
-<hr class="divider"/>
+<div class="card" data-cat="digital"><div class="ccover cam"><span class="cbadge b-pas">Low Startup</span><div class="ci"><div class="ce">🌐</div><div class="ct" style="color:#C9A84C">Domain Flipping Blueprint</div><div class="cs">Buy $10 Domains. Sell for Thousands.</div></div></div><div class="cbody"><h3 class="ctitle">Domain Flipping Blueprint</h3><p class="cdesc">Register or buy domains for $10–$500 and sell to businesses for $1,000–$50,000+. Valuation framework, research tools, outreach templates, portfolio strategy.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_6oU6oJdAn4Ih9OS7qh3gk0E" class="btn-b">💳 Buy Now</a></div></div></div>
 
-<!-- ══════════ FULL COLLECTION ══════════ -->
-<div class="section" id="collection">
-  <div class="bundle-banner" style="background:linear-gradient(135deg,#0D0A00,#1A1200,#0D0A00);">
-    <div class="bundle-banner-text">
-      <h2>⚡ Complete Hustle Vault — All 22 Products</h2>
-      <p>Every blueprint, every ebook, every series — the complete Hustle Vault library. Over 600 pages of income education across credit, care services, wealth protection, ministry, trades, reentry, and digital business. Save 20% off individual pricing.</p>
-      <p style="margin-top:0.75rem; font-size:0.8rem; color:#666;">Includes: 12 new ebooks + 10 original blueprints + all bundles</p>
-    </div>
-    <div style="display:flex; flex-direction:column; align-items:center; gap:1rem;">
-      <div class="bundle-price-block">
-        <div class="bundle-was">$1,034 if bought separately</div>
-        <div class="bundle-price">$827</div>
-        <div class="bundle-save">✓ You save $207</div>
-      </div>
-      <a href="https://buy.stripe.com/test_7sYfZjeEr4Ih1imcKB3gk0N" class="btn-gold">Get Everything →</a>
-    </div>
-  </div>
-</div>
+<div class="card" data-cat="housing"><div class="ccover cg"><span class="cbadge b-hot">High Income</span><div class="ci"><div class="ce">🏠</div><div class="ct" style="color:#C9A84C">Assisted Living Blueprint</div><div class="cs">$27K/Month from a 6-Bed Home</div></div></div><div class="cbody"><h3 class="ctitle">Assisted Living Blueprint — Residential Care Home Business</h3><p class="cdesc">A 6-bed home generates $27,000/month gross. Government-backed resident payments. State licensing, property setup, staffing, multi-home scaling roadmap.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_14AdRbfIveiR4uyh0R3gk0F" class="btn-b">💳 Buy Now</a></div></div></div>
+
+<div class="card" data-cat="housing"><div class="ccover cin"><span class="cbadge b-gov">Govt Backed</span><div class="ci"><div class="ce">🇺🇸</div><div class="ct" style="color:#C9A84C">Housing for Veterans Blueprint</div><div class="cs">HUD-VASH & Government Programs</div></div></div><div class="cbody"><h3 class="ctitle">Housing for Veterans Blueprint — HUD-VASH and Government Programs</h3><p class="cdesc">Accept HUD-VASH vouchers and get government-guaranteed rent with near-zero vacancy. HUD-VASH, GPD grants, SSVF partnerships, VA case manager relationships.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_8x25kFaob1w53qu9yp3gk0G" class="btn-b">💳 Buy Now</a></div></div></div>
+
+<div class="card" data-cat="hustle"><div class="ccover cam"><span class="cbadge b-pas">Cash Daily</span><div class="ci"><div class="ce">🥤</div><div class="ct" style="color:#C9A84C">Vending Machine Blueprint</div><div class="cs">Cash Flow While You Sleep</div></div></div><div class="cbody"><h3 class="ctitle">Vending Machine Blueprint — Cash Flow While You Sleep</h3><p class="cdesc">Place machines, stock product, collect cash. 50–70% margins. Location pitch system, machine comparison, route management, and fleet scaling guide.</p><div class="cfoot"><div class="pb"><span class="pn">$47</span></div><a href="https://buy.stripe.com/test_cNi14p9k74Ihf9c11T3gk0H" class="btn-b">💳 Buy Now</a></div></div></div>
+
+</div></div>
+<hr class="d"/>
+
+<!-- FULL VAULT -->
+<div class="sec" id="vault">
+<div class="vbanner" style="border-radius:10px;">
+<div class="vbanner-inner">
+  <div><div class="vtitle">⚡ Complete Hustle Vault — All 22 Products</div><div class="vdesc">Every blueprint, every ebook, every series. 600+ pages of income education. Credit, care, wealth, ministry, trades, housing, and digital — all in one vault.</div></div>
+  <div style="text-align:center;"><div class="vwas">$1,034 if bought separately</div><div class="vprice">$827</div><div class="vsave">✓ You save $207</div><a href="https://buy.stripe.com/test_7sYfZjeEr4Ih1imcKB3gk0N" class="btn-g" style="margin-top:.7rem;">Get Everything →</a></div>
+</div></div></div>
+
+<!-- SOCIAL PROOF TICKER -->
+<div class="proof-wrap"><div class="proof-track">
+  <span class="pi"><span class="pd"></span><strong>Tamara</strong>&nbsp;just bought NEMT Blueprint</span>
+  <span class="pi"><span class="pd"></span><strong>Marcus</strong>&nbsp;just bought Dealer License Blueprint</span>
+  <span class="pi"><span class="pd"></span><strong>Keisha</strong>&nbsp;just bought Assisted Living Blueprint</span>
+  <span class="pi"><span class="pd"></span><strong>Darnell</strong>&nbsp;just bought Complete Vault</span>
+  <span class="pi"><span class="pd"></span><strong>Yvette</strong>&nbsp;just bought Credit Repair Blueprint</span>
+  <span class="pi"><span class="pd"></span><strong>Jerome</strong>&nbsp;just bought Build the Kingdom Book 1</span>
+  <span class="pi"><span class="pd"></span><strong>Simone</strong>&nbsp;just bought Senior Care Companion Guide</span>
+  <span class="pi"><span class="pd"></span><strong>Andre</strong>&nbsp;just bought Lock It In Trust Series</span>
+  <span class="pi"><span class="pd"></span><strong>Latoya</strong>&nbsp;just bought Private Duty CNA Kit</span>
+  <span class="pi"><span class="pd"></span><strong>Ray</strong>&nbsp;just bought Second Chance Business Guide</span>
+  <span class="pi"><span class="pd"></span><strong>Denise</strong>&nbsp;just bought Trades Apprenticeship Guide</span>
+  <span class="pi"><span class="pd"></span><strong>Calvin</strong>&nbsp;just bought Mobile Notary & Fingerprinting</span>
+  <span class="pi"><span class="pd"></span><strong>Tamara</strong>&nbsp;just bought NEMT Blueprint</span>
+  <span class="pi"><span class="pd"></span><strong>Marcus</strong>&nbsp;just bought Dealer License Blueprint</span>
+  <span class="pi"><span class="pd"></span><strong>Keisha</strong>&nbsp;just bought Assisted Living Blueprint</span>
+  <span class="pi"><span class="pd"></span><strong>Darnell</strong>&nbsp;just bought Complete Vault</span>
+  <span class="pi"><span class="pd"></span><strong>Yvette</strong>&nbsp;just bought Credit Repair Blueprint</span>
+  <span class="pi"><span class="pd"></span><strong>Jerome</strong>&nbsp;just bought Build the Kingdom Book 1</span>
+  <span class="pi"><span class="pd"></span><strong>Simone</strong>&nbsp;just bought Senior Care Companion Guide</span>
+  <span class="pi"><span class="pd"></span><strong>Andre</strong>&nbsp;just bought Lock It In Trust Series</span>
+</div></div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">HUSTLE VAULT</div>
-  <p class="footer-text">Real blueprints for real people. No fluff, no gatekeeping — just actionable education for building income, protecting wealth, and owning your future.</p>
-  <div class="footer-links">
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-    <a href="#">Refund Policy</a>
-    <a href="#">Terms of Service</a>
-    <a href="https://hustlevault.app">hustlevault.app</a>
-  </div>
-  <p style="margin-top:2rem; font-size:0.75rem; color:#444;">© 2026 Hustle Vault · All Rights Reserved</p>
+  <div class="flogo">HUSTLE VAULT</div>
+  <p class="ftxt">hustlevault.app · 22 Premium Digital Blueprints · Powered by Stripe</p>
+  <div class="flinks"><a href="#">About</a><a href="#">Contact</a><a href="#">Refund Policy</a><a href="#">Terms</a></div>
+  <p class="fcopy">© 2026 Hustle Vault · Sun Marketing LLC · All rights reserved.</p>
 </footer>
 
+<!-- NOTIFICATION POPUP -->
+<div class="notif" id="notif">
+  <div class="ni" id="n-icon">🏥</div>
+  <div class="nt"><strong id="n-name">Tamara</strong> just bought<br/><span id="n-prod">NEMT Blueprint</span></div>
+</div>
+
 <script>
-function filterCards(cat, btn) {
-  // Update active button
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+function filt(cat,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-
-  // Filter cards
-  document.querySelectorAll('.card').forEach(card => {
-    const cats = card.dataset.cat || '';
-    if (cat === 'all' || cats.includes(cat)) {
-      card.style.display = 'flex';
-    } else {
-      card.style.display = 'none';
-    }
+  document.querySelectorAll('.card').forEach(c=>{
+    c.style.display=(cat==='all'||(c.dataset.cat||'').includes(cat))?'flex':'none';
   });
-
-  // Show/hide section headers based on visible cards
-  ['bundle-grid','ebook-grid','blueprint-grid'].forEach(gridId => {
-    const grid = document.getElementById(gridId);
-    if (!grid) return;
-    const visible = [...grid.querySelectorAll('.card')].some(c => c.style.display !== 'none');
-    const section = grid.closest('.section');
-    if (section) section.style.display = visible ? '' : 'none';
+  ['g-bundles','g-ebooks','g-blueprints'].forEach(id=>{
+    const g=document.getElementById(id);if(!g)return;
+    const vis=[...g.querySelectorAll('.card')].some(c=>c.style.display!=='none');
+    const s=g.closest('.sec');if(s)s.style.display=vis?'':'none';
   });
 }
 
-// Smooth scroll for nav links
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+const buys=[
+  {n:'Tamara',p:'NEMT Blueprint',i:'🏥'},
+  {n:'Marcus',p:'Dealer License Blueprint',i:'🚗'},
+  {n:'Keisha',p:'Assisted Living Blueprint',i:'🏠'},
+  {n:'Darnell',p:'Complete Vault',i:'🔐'},
+  {n:'Yvette',p:'Credit Repair Blueprint',i:'📊'},
+  {n:'Jerome',p:'Build the Kingdom Book 1',i:'👑'},
+  {n:'Simone',p:'Senior Care Companion Guide',i:'❤️'},
+  {n:'Andre',p:'Lock It In Trust Series',i:'🔒'},
+  {n:'Latoya',p:'Private Duty CNA Kit',i:'🏥'},
+  {n:'Ray',p:'Second Chance Business Guide',i:'🔓'},
+  {n:'Denise',p:'Trades Apprenticeship Guide',i:'🔧'},
+  {n:'Calvin',p:'Mobile Notary & Fingerprinting',i:'✍️'},
+];
+let bi=0;
+function showNotif(){
+  const b=buys[bi%buys.length];bi++;
+  document.getElementById('n-name').textContent=b.n;
+  document.getElementById('n-prod').textContent=b.p;
+  document.getElementById('n-icon').textContent=b.i;
+  const n=document.getElementById('notif');
+  n.classList.add('show');
+  setTimeout(()=>n.classList.remove('show'),4200);
+  setTimeout(showNotif,9000+Math.random()*6000);
+}
+setTimeout(showNotif,3500);
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
   });
 });
 </script>
