@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Terms & Conditions — Hustle Vault</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root{--gold:#C9A84C;--gold-lt:#E8C96A;--black:#0A0A0A;--dark:#111;--mid:#1A1A1A;--text:#F0EDE8;--muted:#888880;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--black);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;}
+
+header{background:linear-gradient(180deg,#000 0%,var(--dark) 100%);border-bottom:1px solid rgba(201,168,76,.3);padding:0 2rem;}
+.hdr{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.logo{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:900;letter-spacing:.2em;color:var(--gold);text-decoration:none;}
+.back{font-family:'Cinzel',serif;font-size:.72rem;color:var(--muted);text-decoration:none;letter-spacing:.1em;transition:color .2s;}
+.back:hover{color:var(--gold);}
+
+.hero{background:linear-gradient(135deg,#000,#0A0A14,#000);padding:3.5rem 2rem 2.5rem;text-align:center;border-bottom:1px solid rgba(201,168,76,.15);}
+.hero-eye{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.35em;color:var(--gold);margin-bottom:1rem;}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:900;letter-spacing:.05em;margin-bottom:.75rem;}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:560px;margin:0 auto;}
+.effective{font-family:'Cinzel',serif;font-size:.75rem;color:var(--gold);margin-top:1rem;letter-spacing:.1em;}
+
+.content{max-width:900px;margin:0 auto;padding:3rem 2rem 5rem;}
+
+.alert-box{background:linear-gradient(135deg,#1A0A0A,#2A1010);border:1px solid rgba(192,57,43,.5);border-radius:10px;padding:1.5rem 2rem;margin-bottom:3rem;}
+.alert-box h2{font-family:'Cinzel',serif;font-size:1.1rem;color:#E74C3C;margin-bottom:.75rem;letter-spacing:.05em;}
+.alert-box p{font-size:.95rem;color:#F5C6C6;line-height:1.6;}
+.alert-box ul{margin-top:.75rem;padding-left:1.25rem;}
+.alert-box li{font-size:.9rem;color:#F5C6C6;line-height:1.7;}
+
+section{margin-bottom:2.75rem;}
+h2.sec-title{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(201,168,76,.2);}
+h3.sub-title{font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;color:var(--text);margin:1rem 0 .5rem;letter-spacing:.05em;}
+p{font-size:1rem;line-height:1.7;color:rgba(240,237,232,.85);margin-bottom:.75rem;}
+ul,ol{padding-left:1.5rem;margin-bottom:.75rem;}
+li{font-size:.95rem;line-height:1.75;color:rgba(240,237,232,.8);}
+li strong{color:var(--text);}
+.highlight{background:rgba(201,168,76,.08);border-left:3px solid var(--gold);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin:.75rem 0;font-size:.95rem;color:rgba(240,237,232,.9);}
+.red-box{background:rgba(192,57,43,.08);border-left:3px solid #C0392B;padding:.75rem 1rem;border-radius:0 6px 6px 0;margin:.75rem 0;font-size:.95rem;color:rgba(245,200,200,.9);}
+
+.refund-table{width:100%;border-collapse:collapse;margin:1rem 0;}
+.refund-table th{background:rgba(201,168,76,.15);color:var(--gold);font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding:.75rem 1rem;text-align:left;border-bottom:1px solid rgba(201,168,76,.3);}
+.refund-table td{padding:.75rem 1rem;font-size:.9rem;color:rgba(240,237,232,.8);border-bottom:1px solid rgba(255,255,255,.05);line-height:1.5;}
+.refund-table tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+.refund-table .yes{color:#4CAF50;font-weight:700;}
+.refund-table .no{color:#E74C3C;font-weight:700;}
+.refund-table .maybe{color:var(--gold);font-weight:700;}
+
+.step-box{background:var(--mid);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:1.25rem 1.5rem;margin:.75rem 0;}
+.step-num{font-family:'Cinzel',serif;font-size:.7rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.35rem;}
+.step-text{font-size:.95rem;color:rgba(240,237,232,.85);line-height:1.6;}
+
+.contact-box{background:linear-gradient(135deg,#0D0A00,#1A1200);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:1.5rem 2rem;text-align:center;margin-top:2rem;}
+.contact-box h3{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);margin-bottom:.75rem;letter-spacing:.05em;}
+.contact-box p{font-size:.9rem;color:var(--muted);margin-bottom:.35rem;}
+.contact-box a{color:var(--gold);text-decoration:none;}
+.contact-box a:hover{text-decoration:underline;}
+
+footer{background:var(--dark);border-top:1px solid rgba(201,168,76,.2);padding:2rem;text-align:center;}
+.flogo{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);margin-bottom:.5rem;letter-spacing:.2em;}
+.fcopy{font-size:.75rem;color:#444;}
+
+@media(max-width:768px){.content{padding:2rem 1.25rem 3rem;}.hero{padding:2.5rem 1.25rem 2rem;}}
+</style>
+</head>
+<body>
+
+<header><div class="hdr">
+  <a href="/" class="logo">HUSTLE VAULT</a>
+  <a href="/" class="back">← Back to Store</a>
+</div></header>
+
+<div class="hero">
+  <p class="hero-eye">Legal Agreement</p>
+  <h1>Terms & Conditions</h1>
+  <p class="hero-sub">Please read these terms carefully before purchasing. By completing a purchase you agree to be bound by these terms in full.</p>
+  <p class="effective">Effective Date: January 1, 2026 · Last Updated: March 30, 2026</p>
+</div>
+
+<div class="content">
+
+  <!-- REFUND ALERT BOX -->
+  <div class="alert-box">
+    <h2>⚠️ Important — Read Before Purchasing</h2>
+    <p>All Hustle Vault products are <strong>digital downloads delivered instantly upon purchase.</strong> Due to the immediate nature of digital delivery, our refund policy is strict and limited. By purchasing, you acknowledge:</p>
+    <ul>
+      <li>You have read the product description and understand what you are purchasing</li>
+      <li>Digital products cannot be "returned" once delivered</li>
+      <li>Refunds are only available under specific conditions described in Section 5</li>
+      <li>Chargebacks filed without following the refund process are considered fraud and will be disputed</li>
+    </ul>
+  </div>
+
+  <!-- 1. AGREEMENT -->
+  <section>
+    <h2 class="sec-title">1. Agreement to Terms</h2>
+    <p>These Terms and Conditions ("Terms") constitute a legally binding agreement between you ("Customer," "you," or "your") and Hustle Vault, operated by Sun Marketing LLC ("Hustle Vault," "we," "us," or "our"), governing your purchase and use of digital products available at hustlevault.app.</p>
+    <p>By clicking "Buy Now," completing a purchase, or accessing any Hustle Vault product, you confirm that you have read, understood, and agree to be bound by these Terms in their entirety. If you do not agree, do not complete the purchase.</p>
+  </section>
+
+  <!-- 2. PRODUCTS -->
+  <section>
+    <h2 class="sec-title">2. Products & Delivery</h2>
+    <h3 class="sub-title">2.1 Digital Products</h3>
+    <p>Hustle Vault sells digital educational products including PDF guides, ebooks, templates, and related materials. All products are delivered digitally — there are no physical goods shipped.</p>
+    <h3 class="sub-title">2.2 Instant Delivery</h3>
+    <p>Upon successful payment, digital products are delivered immediately via download link or email. Delivery is considered complete at the moment the download link is made available, regardless of whether you access it immediately.</p>
+    <h3 class="sub-title">2.3 Product Descriptions</h3>
+    <p>We make every effort to accurately describe our products. Product descriptions, page counts, and content summaries are provided in good faith. Slight variations in final product specifications do not constitute grounds for a refund.</p>
+    <div class="highlight">All product content is for educational and informational purposes only. Results from applying information in our products vary based on individual effort, market conditions, and other factors. Hustle Vault does not guarantee specific financial outcomes.</div>
+  </section>
+
+  <!-- 3. PRICING -->
+  <section>
+    <h2 class="sec-title">3. Pricing & Payment</h2>
+    <h3 class="sub-title">3.1 Pricing</h3>
+    <p>All prices are listed in US Dollars (USD) and are subject to change without notice. The price displayed at checkout is the price you will be charged. Bundle pricing reflects a discount from individual product prices and is non-negotiable.</p>
+    <h3 class="sub-title">3.2 Payment Processing</h3>
+    <p>All payments are processed securely through Stripe. Hustle Vault does not store your credit card information. By completing a purchase you agree to Stripe's Terms of Service at stripe.com/terms.</p>
+    <h3 class="sub-title">3.3 Sales Tax</h3>
+    <p>Sales tax may be applied to your purchase where required by applicable law. The applicable tax amount will be displayed during checkout.</p>
+  </section>
+
+  <!-- 4. LICENSE -->
+  <section>
+    <h2 class="sec-title">4. License & Permitted Use</h2>
+    <h3 class="sub-title">4.1 Personal License</h3>
+    <p>Upon purchase, Hustle Vault grants you a limited, non-exclusive, non-transferable, personal license to access and use the purchased digital product for your own personal and business education purposes.</p>
+    <h3 class="sub-title">4.2 Prohibited Uses</h3>
+    <p>You may NOT, under any circumstances:</p>
+    <ul>
+      <li><strong>Resell, redistribute, or share</strong> purchased products with any third party — paid or free</li>
+      <li><strong>Upload</strong> purchased products to any file-sharing platform, website, or cloud storage accessible to others</li>
+      <li><strong>Reproduce or republish</strong> any portion of the content without written permission</li>
+      <li><strong>Create derivative works</strong> for commercial sale based on Hustle Vault content</li>
+      <li><strong>Claim authorship</strong> or ownership of any Hustle Vault product or content</li>
+      <li><strong>Use content to train AI models</strong> or machine learning systems</li>
+    </ul>
+    <div class="red-box">Violation of these license terms results in immediate termination of your license without refund and may result in legal action for copyright infringement. Hustle Vault actively monitors for unauthorized distribution of its products.</div>
+  </section>
+
+  <!-- 5. REFUND POLICY -->
+  <section>
+    <h2 class="sec-title">5. Refund Policy</h2>
+    <h3 class="sub-title">5.1 General Policy</h3>
+    <p>Because our products are digital and delivered instantly upon purchase, <strong>all sales are final as a general rule.</strong> We are not obligated to issue refunds simply because a customer changed their mind, found the content less useful than expected, or purchased the wrong product.</p>
+
+    <h3 class="sub-title">5.2 Refund Eligibility Table</h3>
+    <table class="refund-table">
+      <tr><th>Reason for Refund Request</th><th>Eligible?</th></tr>
+      <tr><td>You did not receive your product after purchase</td><td class="yes">YES — Contact us within 48 hours</td></tr>
+      <tr><td>Product is technically defective (file will not open or download)</td><td class="yes">YES — Contact us within 7 days with proof</td></tr>
+      <tr><td>You were charged twice for the same order</td><td class="yes">YES — Contact us with order details</td></tr>
+      <tr><td>Product content is materially different from the description</td><td class="maybe">CASE BY CASE — Must be reported within 7 days with specific details</td></tr>
+      <tr><td>You changed your mind after purchase</td><td class="no">NO — All sales final</td></tr>
+      <tr><td>You did not read the product description before purchasing</td><td class="no">NO — All sales final</td></tr>
+      <tr><td>You found the content less useful than expected</td><td class="no">NO — Educational content usefulness is subjective</td></tr>
+      <tr><td>You purchased the wrong product</td><td class="no">NO — Please review product descriptions before purchasing</td></tr>
+      <tr><td>You already knew the information in the product</td><td class="no">NO — Prior knowledge does not entitle a refund</td></tr>
+      <tr><td>You did not implement the strategies and didn't see results</td><td class="no">NO — Results depend on individual effort and circumstances</td></tr>
+      <tr><td>Refund requested after 7 days from purchase</td><td class="no">NO — Outside refund window</td></tr>
+    </table>
+
+    <h3 class="sub-title">5.3 Required Refund Process</h3>
+    <p>To be considered for a refund under eligible circumstances, you MUST follow this process exactly. Requests that do not follow this process will not be honored:</p>
+
+    <div class="step-box"><div class="step-num">Step 1</div><div class="step-text"><strong>Contact us by email only</strong> at sunmarketingllc@gmail.com with the subject line: "REFUND REQUEST — [Your Order Number]"</div></div>
+    <div class="step-box"><div class="step-num">Step 2</div><div class="step-text"><strong>Include in your email:</strong> (a) your full name, (b) the email address used at checkout, (c) your Stripe order/payment ID, (d) the specific product purchased, (e) the specific reason for the refund request with details, and (f) any supporting evidence (screenshots of technical errors, etc.)</div></div>
+    <div class="step-box"><div class="step-num">Step 3</div><div class="step-text"><strong>Submit within the refund window:</strong> All refund requests must be submitted within <strong>7 days</strong> of the original purchase date. Requests outside this window will not be considered regardless of reason.</div></div>
+    <div class="step-box"><div class="step-num">Step 4</div><div class="step-text"><strong>Allow 3–5 business days</strong> for us to review your request. We will respond to your email with a decision. Approved refunds are processed within 5–10 business days through Stripe.</div></div>
+
+    <h3 class="sub-title">5.4 Chargeback Policy</h3>
+    <div class="red-box"><strong>Important:</strong> Filing a chargeback or payment dispute with your bank or credit card company without first following the refund process above is a violation of these Terms and constitutes fraudulent misuse of the payment dispute system. We maintain complete records of all purchases, deliveries, and download activity. Any chargeback filed without following the refund process will be disputed with full documentation provided to the payment processor, including proof of delivery and evidence that these Terms were agreed to at checkout. We reserve the right to pursue legal remedies for fraudulent chargebacks.</div>
+
+    <h3 class="sub-title">5.5 Bundle Purchases</h3>
+    <p>Bundle purchases are treated as a single transaction. If a refund is approved for a bundle purchase, the refund applies to the entire bundle — not individual products within the bundle.</p>
+  </section>
+
+  <!-- 6. DISCLAIMER -->
+  <section>
+    <h2 class="sec-title">6. Disclaimer of Warranties</h2>
+    <p>Hustle Vault products are provided "as is" and "as available" without warranties of any kind, express or implied. We do not warrant that:</p>
+    <ul>
+      <li>The information in our products is complete, accurate, or current at the time of purchase</li>
+      <li>Any specific financial results will be achieved by applying the information provided</li>
+      <li>The strategies described will be legal or suitable in your specific jurisdiction</li>
+      <li>Business results described in our products represent typical or average outcomes</li>
+    </ul>
+    <div class="highlight">All income figures and business examples in our products are for illustrative purposes only. Individual results vary significantly based on effort, experience, market conditions, location, and many other factors. Success is not guaranteed.</div>
+  </section>
+
+  <!-- 7. LIMITATION OF LIABILITY -->
+  <section>
+    <h2 class="sec-title">7. Limitation of Liability</h2>
+    <p>To the maximum extent permitted by applicable law, Hustle Vault and Sun Marketing LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your purchase or use of our products, including but not limited to:</p>
+    <ul>
+      <li>Lost profits or revenue</li>
+      <li>Business losses</li>
+      <li>Loss of data or digital content</li>
+      <li>Any losses resulting from reliance on product content</li>
+    </ul>
+    <p>Our total liability to you for any claim arising from a product purchase shall not exceed the amount you paid for that specific product.</p>
+  </section>
+
+  <!-- 8. INTELLECTUAL PROPERTY -->
+  <section>
+    <h2 class="sec-title">8. Intellectual Property</h2>
+    <p>All Hustle Vault products, content, graphics, brand elements, and materials are the exclusive intellectual property of Sun Marketing LLC and are protected by United States copyright law. Unauthorized reproduction, distribution, or use constitutes copyright infringement and will be pursued to the full extent of the law.</p>
+    <p>The Hustle Vault name, logo, and brand identity are trademarks of Sun Marketing LLC. You may not use our trademarks without prior written permission.</p>
+  </section>
+
+  <!-- 9. PRIVACY -->
+  <section>
+    <h2 class="sec-title">9. Privacy & Data</h2>
+    <p>When you make a purchase, we collect your name, email address, and payment information (processed and stored by Stripe — we do not store card numbers). We use your email address to deliver your product and for occasional marketing communications. You may opt out of marketing emails at any time.</p>
+    <p>We do not sell, rent, or share your personal information with third parties except as required to process your payment (Stripe) or as required by law.</p>
+  </section>
+
+  <!-- 10. GOVERNING LAW -->
+  <section>
+    <h2 class="sec-title">10. Governing Law & Disputes</h2>
+    <p>These Terms are governed by the laws of the State of New Jersey, United States of America, without regard to conflict of law principles. Any dispute arising from these Terms or a purchase shall be resolved through binding arbitration under the rules of the American Arbitration Association, conducted in New Jersey. You waive any right to a jury trial or class action proceeding.</p>
+    <p>Before initiating arbitration, you agree to first contact us at sunmarketingllc@gmail.com to attempt to resolve the dispute informally. If we cannot resolve the dispute within 30 days, either party may initiate arbitration.</p>
+  </section>
+
+  <!-- 11. CHANGES -->
+  <section>
+    <h2 class="sec-title">11. Changes to These Terms</h2>
+    <p>We reserve the right to modify these Terms at any time. Changes take effect immediately upon posting to this page. The "Last Updated" date at the top of this page reflects the most recent revision. Your continued use of our store after changes are posted constitutes acceptance of the revised Terms. It is your responsibility to review these Terms periodically.</p>
+  </section>
+
+  <!-- 12. CONTACT -->
+  <section>
+    <h2 class="sec-title">12. Contact Information</h2>
+    <p>For questions about these Terms, refund requests, or any other matters, contact us:</p>
+    <div class="contact-box">
+      <h3>Hustle Vault — Sun Marketing LLC</h3>
+      <p>Email: <a href="mailto:sunmarketingllc@gmail.com">sunmarketingllc@gmail.com</a></p>
+      <p>Website: <a href="https://hustlevault.app">hustlevault.app</a></p>
+      <p style="margin-top:.75rem;font-size:.8rem;">Response time: 2–3 business days</p>
+      <p style="font-size:.8rem;">Refund requests must follow the process in Section 5.3</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="flogo">HUSTLE VAULT</div>
+  <p class="fcopy">© 2026 Hustle Vault · Sun Marketing LLC · All rights reserved.</p>
+</footer>
+
+</body>
+</html>
