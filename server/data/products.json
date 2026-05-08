@@ -1,0 +1,110 @@
+{
+  "1": {
+    "id": 1,
+    "name": "UNIT GOLD — Storage Auction Blueprint",
+    "description": "Start making money this weekend with storage auctions.",
+    "price": 5700,
+    "digitalContent": {
+      "title": "UNIT GOLD",
+      "files": [
+        {
+          "name": "Unit Gold Storage Auction Blueprint HustleVault.pdf",
+          "type": "pdf",
+          "size": "7.8KB",
+          "url": "https://drive.google.com/uc?export=download&id=1b7io0leJ-7kjFe0YxetlEhgmQW_JfLbm"
+        }
+      ],
+      "accessNote": "You now have lifetime access to the Storage Auction profit system."
+    }
+  },
+  "2": {
+    "id": 2,
+    "name": "DEALER LICENSE — Car Flipping Blueprint",
+    "description": "Get your dealer license and flip cars legally.",
+    "price": 4700,
+    "digitalContent": {
+      "title": "DEALER LICENSE",
+      "files": [
+        {
+          "name": "DealerLicense_Guide.pdf",
+          "type": "pdf",
+          "size": "3.8MB",
+          "url": "http://localhost:3001/public/sample_blueprint.pdf"
+        }
+      ],
+      "accessNote": "Verified car flipping strategies now at your fingertips."
+    }
+  },
+  "3": {
+    "id": 3,
+    "name": "HUSTLE BUNDLE — Unit Gold + Dealer License",
+    "description": "Two complete income streams at one price.",
+    "price": 8700,
+    "digitalContent": {
+      "title": "HUSTLE BUNDLE",
+      "files": [
+        {
+          "name": "HustleBundle_Pack.zip",
+          "type": "zip",
+          "size": "8.5MB",
+          "url": "http://localhost:3001/public/sample_blueprint.pdf"
+        }
+      ],
+      "accessNote": "Both major blueprints are included in this combined archive."
+    }
+  },
+  "4": {
+    "id": 4,
+    "name": "REPO BLUEPRINT — Vehicle Repossession",
+    "description": "Repo companies pay $200-$400 per vehicle recovered.",
+    "price": 3700,
+    "digitalContent": {
+      "title": "REPO BLUEPRINT",
+      "files": [
+        {
+          "name": "Repo_Execution.pdf",
+          "type": "pdf",
+          "size": "2.1MB",
+          "url": "http://localhost:3001/public/sample_blueprint.pdf"
+        }
+      ],
+      "accessNote": "Your path to high-ticket vehicle recovery begins here."
+    }
+  },
+  "5": {
+    "id": 5,
+    "name": "LAND FLIP FORMULA — Buy Cheap Land, Sell 3X",
+    "description": "Buy vacant land for $500-$2,000 and sell for 3x.",
+    "price": 4700,
+    "digitalContent": {
+      "title": "LAND FLIP FORMULA",
+      "files": [
+        {
+          "name": "LandFlipping_Mastery.pdf",
+          "type": "pdf",
+          "size": "5.4MB",
+          "url": "http://localhost:3001/public/sample_blueprint.pdf"
+        }
+      ],
+      "accessNote": "Start flipping real estate assets with minimal capital."
+    }
+  },
+  "6": {
+    "id": 6,
+    "name": "NEMT BLUEPRINT — Medical Transport Business",
+    "description": "Government-contracted medical transport pays $30-$80/ride.",
+    "price": 4700,
+    "digitalContent": {
+      "title": "NEMT BLUEPRINT",
+      "files": [
+        {
+          "name": "NEMT Startup Guide HustleVault.pdf",
+          "type": "pdf",
+          "size": "39KB",
+          "url": "https://drive.google.com/uc?export=download&id=1DyE7xlL37sCnQLyq50xsfjSxTW4NyZPn"
+        }
+      ],
+      "accessNote": "The medical transport blueprint is now available for your review."
+    }
+  }
+}
