@@ -87,7 +87,7 @@ const DEFAULT_PRODUCTS = {
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "ASSISTED LIVING — Residential Care Home Business",
-      files: [{ name: "Assisted_Living_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", url: "" }],
+      files: [{ name: "Assisted_Living_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", url: "https://drive.google.com/uc?export=download&id=1mZbthMdhyIKZKpmqZZt2VxYrLQ5uk0is" }],
       accessNote: "You now have lifetime access to the Assisted Living Guide.",
     }
   },
@@ -96,7 +96,7 @@ const DEFAULT_PRODUCTS = {
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "VETERANS HOUSING — HUD-VASH Programs",
-      files: [{ name: "Veterans_Housing_Guide_HustleVault.pdf", type: "pdf", size: "34 KB", url: "" }],
+      files: [{ name: "Veterans_Housing_Guide_HustleVault.pdf", type: "pdf", size: "34 KB", url: "https://drive.google.com/uc?export=download&id=1mT-GXWj0MpRYDIGxo_zeC35Lx52c4ZAt" }],
       accessNote: "You now have lifetime access to the Veterans Housing Guide.",
     }
   },
