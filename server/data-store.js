@@ -28,30 +28,30 @@ const DEFAULT_PRODUCTS = {
       bonus: "BONUS: Join our private community for live auction tips."
     }
   },
-  2: { 
-    id: 2, name: "DEALER LICENSE — Car Dealer License Guide", description: "Get licensed and access wholesale auctions to flip cars.", 
+  2: {
+    id: 2, name: "DEALER LICENSE — Car Dealer License Guide", description: "Get licensed and access wholesale auctions to flip cars.",
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "DEALER LICENSE — Car Dealer License Guide",
-      files: [{ name: "Dealer License Guide.pdf", type: "pdf", size: "3.1 MB", url: "" }],
+      files: [{ name: "Dealer_License_Guide_HustleVault.pdf", type: "pdf", size: "30 KB", url: "https://drive.google.com/uc?export=download&id=1E5EHYmSbGGt3m1Yb6ntlkXqycOlKDjKi" }],
       accessNote: "You now have lifetime access to the Dealer License Guide.",
     }
   },
-  3: { 
-    id: 3, name: "REPO BLUEPRINT — Vehicle Repossession Business", description: "Get paid $200–$400 per vehicle recovered.", 
+  3: {
+    id: 3, name: "REPO BLUEPRINT — Vehicle Repossession Business", description: "Get paid $200–$400 per vehicle recovered.",
     price: 3700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "REPO BLUEPRINT — Vehicle Repossession Business",
-      files: [{ name: "Repo Blueprint.pdf", type: "pdf", size: "2.8 MB", url: "" }],
+      files: [{ name: "Repo_Blueprint_HustleVault.pdf", type: "pdf", size: "32 KB", url: "https://drive.google.com/uc?export=download&id=1bPXSiyVSMh68alXL8hGQhKEWdBxyHluw" }],
       accessNote: "You now have lifetime access to the Repo Blueprint.",
     }
   },
-  4: { 
-    id: 4, name: "LAND FLIP FORMULA — Buy Cheap Land Sell for 3X", description: "Buy vacant land from motivated sellers and flip it.", 
+  4: {
+    id: 4, name: "LAND FLIP FORMULA — Buy Cheap Land Sell for 3X", description: "Buy vacant land from motivated sellers and flip it.",
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "LAND FLIP FORMULA — Buy Cheap Land Sell for 3X",
-      files: [{ name: "Land Flip Formula.pdf", type: "pdf", size: "3.4 MB", url: "" }],
+      files: [{ name: "Land_Flip_Formula_HustleVault.pdf", type: "pdf", size: "31 KB", url: "https://drive.google.com/uc?export=download&id=1NEeNAHxeWbin477eJ-MjhYq42PBW-8Tc" }],
       accessNote: "You now have lifetime access to the Land Flip Formula.",
     }
   },
@@ -64,48 +64,48 @@ const DEFAULT_PRODUCTS = {
       accessNote: "You now have lifetime access to the NEMT Blueprint.",
     }
   },
-  6: { 
-    id: 6, name: "PRINT ON DEMAND — Zero Inventory Online Store", description: "Upload designs once, earn royalties forever.", 
+  6: {
+    id: 6, name: "PRINT ON DEMAND — Zero Inventory Online Store", description: "Upload designs once, earn royalties forever.",
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "PRINT ON DEMAND — Zero Inventory Online Store",
-      files: [{ name: "Print On Demand Guide.pdf", type: "pdf", size: "2.9 MB", url: "" }],
+      files: [{ name: "Print_On_Demand_HustleVault.pdf", type: "pdf", size: "84 KB", url: "https://drive.google.com/uc?export=download&id=1ZuX265K1nhADd90OPncm9CB-qmstAHbt" }],
       accessNote: "You now have lifetime access to the Print On Demand Guide.",
     }
   },
-  7: { 
-    id: 7, name: "DOMAIN FLIPPING — Buy $10 Domains Sell for Thousands", description: "Register domains for $10 and sell for $1,000+.", 
+  7: {
+    id: 7, name: "DOMAIN FLIPPING — Buy $10 Domains Sell for Thousands", description: "Register domains for $10 and sell for $1,000+.",
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "DOMAIN FLIPPING — Buy $10 Domains Sell for Thousands",
-      files: [{ name: "Domain Flipping Guide.pdf", type: "pdf", size: "2.1 MB", url: "" }],
+      files: [{ name: "Domain_Flipping_HustleVault.pdf", type: "pdf", size: "64 KB", url: "https://drive.google.com/uc?export=download&id=1bsVYabgaE5tdUbU4BnPEy5aNpQW_DBjy" }],
       accessNote: "You now have lifetime access to the Domain Flipping Guide.",
     }
   },
-  8: { 
-    id: 8, name: "ASSISTED LIVING — Residential Care Home Business", description: "A 6-bed home generates $27,000/month gross.", 
+  8: {
+    id: 8, name: "ASSISTED LIVING — Residential Care Home Business", description: "A 6-bed home generates $27,000/month gross.",
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "ASSISTED LIVING — Residential Care Home Business",
-      files: [{ name: "Assisted Living Guide.pdf", type: "pdf", size: "4.2 MB", url: "" }],
+      files: [{ name: "Assisted_Living_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", url: "" }],
       accessNote: "You now have lifetime access to the Assisted Living Guide.",
     }
   },
-  9: { 
-    id: 9, name: "VETERANS HOUSING — HUD-VASH Programs", description: "Accept HUD-VASH vouchers and get government-guaranteed rent.", 
+  9: {
+    id: 9, name: "VETERANS HOUSING — HUD-VASH Programs", description: "Accept HUD-VASH vouchers and get government-guaranteed rent.",
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "VETERANS HOUSING — HUD-VASH Programs",
-      files: [{ name: "Veterans Housing Guide.pdf", type: "pdf", size: "3.8 MB", url: "" }],
+      files: [{ name: "Veterans_Housing_Guide_HustleVault.pdf", type: "pdf", size: "34 KB", url: "" }],
       accessNote: "You now have lifetime access to the Veterans Housing Guide.",
     }
   },
-  10: { 
-    id: 10, name: "VENDING MACHINE — Cash Flow While You Sleep", description: "Place machines, stock product, collect cash.", 
+  10: {
+    id: 10, name: "VENDING MACHINE — Cash Flow While You Sleep", description: "Place machines, stock product, collect cash.",
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "VENDING MACHINE — Cash Flow While You Sleep",
-      files: [{ name: "Vending Machine Guide.pdf", type: "pdf", size: "2.5 MB", url: "" }],
+      files: [{ name: "Vending_Machine_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", url: "https://drive.google.com/uc?export=download&id=1OURjLXcfoANi5addxutEYpBH2TBa-a3u" }],
       accessNote: "You now have lifetime access to the Vending Machine Guide.",
     }
   },
