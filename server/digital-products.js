@@ -52,7 +52,7 @@ const DIGITAL_PRODUCTS = {
   },
   5: {
     id: 5,
-    title: "LAND FLIP FORMULA — Buy Cheap Land, Sell 3X",
+    title: "LAND FLIP FORMULA — Buy and Flip Vacant Land",
     files: [
       { name: "Land Flip Formula — Full Guide.pdf", type: "pdf", size: "3.4 MB", url: "" },
       { name: "County Research Worksheet.pdf", type: "pdf", size: "280 KB", url: "" },

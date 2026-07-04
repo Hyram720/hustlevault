@@ -12,22 +12,41 @@ const C = {
 const GG  = `linear-gradient(135deg,#7A5A18 0%,${C.gold} 30%,${C.goldBri} 55%,${C.gold} 80%,#7A5A18 100%)`;
 const GT  = { background:GG, WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent", display:"inline-block" };
 
+// US flag as inline SVG — the 🇺🇸 emoji renders as plain "US" text on Windows
+function USFlag({width=40}) {
+  const stripe = 28/13;
+  return (
+    <svg width={width} height={width*0.7} viewBox="0 0 40 28" style={{borderRadius:3,display:"block",boxShadow:"0 2px 8px rgba(0,0,0,0.4)"}}>
+      <rect width="40" height="28" fill="#B22234"/>
+      {[1,3,5,7,9,11].map(i=><rect key={i} y={i*stripe} width="40" height={stripe} fill="#FFFFFF"/>)}
+      <rect width="17" height={stripe*7} fill="#3C3B6E"/>
+      {[0,1,2,3,4].map(r=>
+        [0,1,2,3,4].map(c=>{
+          const odd = r%2===1;
+          if(odd && c===4) return null;
+          return <circle key={`${r}-${c}`} cx={2.2+(odd?1.6:0)+c*3.2} cy={2.2+r*2.4} r="0.85" fill="#FFFFFF"/>;
+        })
+      )}
+    </svg>
+  );
+}
+
 // ── PRODUCTS ───────────────────────────────────────────────────
 const PRODUCTS = [
   { id:1,  emoji:"🔐", title:"UNIT GOLD",           sub:"Storage Auction Blueprint",        price:57,  orig:97,  accent:"#C9A84C", cat:"Quick Cash",  tag:"BEST SELLER",  tagC:"#F0C040", desc:"Win storage auctions and flip the contents for profit. First income possible in 7 days.", inc:["9 Complete Chapters","Profit Formula Calculator","3 Real Case Studies","Auction Finder Guide","Selling Platform Cheat Sheet","Scaling Roadmap"] },
-  { id:2,  emoji:"🚗", title:"DEALER LICENSE",      sub:"Car Dealer License Guide",         price:47,  orig:79,  accent:"#C0392B", cat:"Business",     tag:"HIGH INCOME",  tagC:"#E74C3C", desc:"Get licensed and access wholesale auctions to flip cars for $1,000–$5,000 profit per deal.", inc:["State-by-State Requirements","Application Walkthrough","Wholesale Auction Access","Deal Formula Calculator","4 Case Studies","Compliance Checklist"] },
-  { id:3,  emoji:"🔑", title:"REPO BLUEPRINT",      sub:"Vehicle Repossession Business",    price:37,  orig:67,  accent:"#2471A3", cat:"Quick Cash",   tag:"NEW",          tagC:"#3498DB", desc:"Get paid $200–$400 per vehicle recovered. Recession-proof income with low startup cost.", inc:["State Licensing Guide","Finding BHPH Clients","Recovery Process Steps","Pricing and Rate Sheet","3 Case Studies","Safety and Legal Guide"] },
-  { id:4,  emoji:"📦", title:"LAND FLIP FORMULA",   sub:"Buy Cheap Land Sell for 3X",      price:47,  orig:89,  accent:"#27AE60", cat:"Business",     tag:"PASSIVE",      tagC:"#2ECC71", desc:"Buy vacant land from motivated sellers for pennies on the dollar and sell it online for 3X.", inc:["County Tax Record System","Seller Letter Template","Valuation Framework","5 Case Studies","Due Diligence Checklist","Seller Finance Strategy"] },
-  { id:5,  emoji:"🏥", title:"NEMT BLUEPRINT",      sub:"Medical Transport Business",       price:47,  orig:89,  accent:"#16A085", cat:"Business",     tag:"RECURRING",    tagC:"#1ABC9C", desc:"Government-contracted medical routes pay $30–$80 per trip. Steady recurring Medicaid income.", inc:["Medicaid Enrollment Guide","Broker Contact List","Vehicle Requirements","3 Case Studies","Billing System","Fleet Scaling Roadmap"] },
+  { id:2,  emoji:"🚗", title:"DEALER LICENSE",      sub:"Car Dealer License Guide",         price:47,  orig:79,  accent:"#C0392B", cat:"Business",     tag:"HIGH INCOME",  tagC:"#E74C3C", desc:"Get licensed and access wholesale auctions to flip cars for profit.", inc:["State-by-State Requirements","Application Walkthrough","Wholesale Auction Access","Deal Formula Calculator","4 Case Studies","Compliance Checklist"] },
+  { id:3,  emoji:"🔑", title:"REPO BLUEPRINT",      sub:"Vehicle Repossession Business",    price:37,  orig:67,  accent:"#2471A3", cat:"Quick Cash",   tag:"NEW",          tagC:"#3498DB", desc:"Get paid per vehicle recovered. Recession-proof income with low startup cost.", inc:["State Licensing Guide","Finding BHPH Clients","Recovery Process Steps","Pricing and Rate Sheet","3 Case Studies","Safety and Legal Guide"] },
+  { id:4,  emoji:"📦", title:"LAND FLIP FORMULA",   sub:"Buy and Flip Vacant Land",        price:47,  orig:89,  accent:"#27AE60", cat:"Business",     tag:"PASSIVE",      tagC:"#2ECC71", desc:"Buy vacant land from motivated sellers for pennies on the dollar and sell it online.", inc:["County Tax Record System","Seller Letter Template","Valuation Framework","5 Case Studies","Due Diligence Checklist","Seller Finance Strategy"] },
+  { id:5,  emoji:"🏥", title:"NEMT BLUEPRINT",      sub:"Medical Transport Business",       price:47,  orig:89,  accent:"#16A085", cat:"Business",     tag:"RECURRING",    tagC:"#1ABC9C", desc:"Government-contracted medical transport routes. Steady recurring Medicaid income.", inc:["Medicaid Enrollment Guide","Broker Contact List","Vehicle Requirements","3 Case Studies","Billing System","Fleet Scaling Roadmap"] },
   { id:6,  emoji:"🎨", title:"PRINT ON DEMAND",     sub:"Zero Inventory Online Store",      price:47,  orig:89,  accent:"#8E44AD", cat:"Digital",      tag:"PASSIVE",      tagC:"#9B59B6", desc:"Upload designs once, earn royalties forever. No inventory, no shipping, no employees.", inc:["50 Proven Niches","Design Creation System","Platform Setup Guide","Marketing Blueprint","3 Case Studies","500-Design Scaling Plan"] },
-  { id:7,  emoji:"🌐", title:"DOMAIN FLIPPING",     sub:"Buy $10 Domains Sell for Thousands",price:47, orig:89,  accent:"#1F618D", cat:"Digital",      tag:"LOW STARTUP",  tagC:"#2980B9", desc:"Register or buy domains for $10–$500 and sell them to businesses for $1,000–$50,000+.", inc:["Valuation Framework","NameBio Research System","Outreach Email Templates","4 Case Studies","Marketplace Directory","Portfolio Strategy"] },
-  { id:8,  emoji:"🏠", title:"ASSISTED LIVING",     sub:"Residential Care Home Business",   price:47,  orig:89,  accent:"#884EA0", cat:"Housing",      tag:"HIGH INCOME",  tagC:"#9B59B6", desc:"A 6-bed home generates $27,000/month gross. Government-backed resident payments.", inc:["State Licensing Navigator","Property Setup Guide","Staffing Framework","4 Case Studies","Medicaid Waiver Enrollment","Multi-Home Scaling"] },
-  { id:9,  emoji:"🇺🇸", title:"VETERANS HOUSING",   sub:"HUD-VASH and Government Programs", price:47,  orig:89,  accent:"#1A5276", cat:"Housing",      tag:"GOVT BACKED",  tagC:"#2471A3", desc:"Accept HUD-VASH vouchers and get government-guaranteed rent with near-zero vacancy.", inc:["HUD-VASH Landlord Guide","GPD Grant Application","SSVF Partnership System","3 Case Studies","VA Contact Directory","Portfolio Scaling"] },
-  { id:10, emoji:"🥤", title:"VENDING MACHINE",     sub:"Cash Flow While You Sleep",        price:47,  orig:89,  accent:"#D35400", cat:"Physical",     tag:"CASH DAILY",   tagC:"#E67E22", desc:"Place machines, stock product, collect cash. 50–70% margins. Scales to full-time income.", inc:["Location Pitch Script","Machine Comparison Chart","Stocking Strategy","3 Case Studies","Route Management System","Cashless Tech Guide"] },
+  { id:7,  emoji:"🌐", title:"DOMAIN FLIPPING",     sub:"Buy Low, Sell Domains for Profit",price:47, orig:89,  accent:"#1F618D", cat:"Digital",      tag:"LOW STARTUP",  tagC:"#2980B9", desc:"Register or buy undervalued domains and sell them to businesses for profit.", inc:["Valuation Framework","NameBio Research System","Outreach Email Templates","4 Case Studies","Marketplace Directory","Portfolio Strategy"] },
+  { id:8,  emoji:"🏠", title:"ASSISTED LIVING",     sub:"Residential Care Home Business",   price:47,  orig:89,  accent:"#884EA0", cat:"Housing",      tag:"HIGH INCOME",  tagC:"#9B59B6", desc:"Operate a residential care home with government-backed resident payments.", inc:["State Licensing Navigator","Property Setup Guide","Staffing Framework","4 Case Studies","Medicaid Waiver Enrollment","Multi-Home Scaling"] },
+  { id:9,  emoji:<USFlag/>, title:"VETERANS HOUSING",   sub:"HUD-VASH and Government Programs", price:47,  orig:89,  accent:"#1A5276", cat:"Housing",      tag:"GOVT BACKED",  tagC:"#2471A3", desc:"Accept HUD-VASH vouchers and get government-guaranteed rent with near-zero vacancy.", inc:["HUD-VASH Landlord Guide","GPD Grant Application","SSVF Partnership System","3 Case Studies","VA Contact Directory","Portfolio Scaling"] },
+  { id:10, emoji:"🥤", title:"VENDING MACHINE",     sub:"Cash Flow While You Sleep",        price:47,  orig:89,  accent:"#D35400", cat:"Physical",     tag:"CASH DAILY",   tagC:"#E67E22", desc:"Place machines, stock product, collect cash. Scales to full-time income.", inc:["Location Pitch Script","Machine Comparison Chart","Stocking Strategy","3 Case Studies","Route Management System","Cashless Tech Guide"] },
 ];
 
 const BUNDLES = [
-  { id:"B1", emoji:"⚡", title:"QUICK CASH BUNDLE", tag:"FASTEST INCOME", tagC:C.green, accent:"#2ECC71", price:141, orig:141, desc:"Storage auctions, repo, and car flipping — all income possible within 30 days.", productIds:[1,3,2], saves:28, features:["First income in 7 days","$200-$5,000 per deal","Low startup cost","No experience needed"] },
+  { id:"B1", emoji:"⚡", title:"QUICK CASH BUNDLE", tag:"FASTEST INCOME", tagC:C.green, accent:"#2ECC71", price:141, orig:141, desc:"Storage auctions, repo, and car flipping — all income possible within 30 days.", productIds:[1,3,2], saves:28, features:["First income possible in 7 days","Flip physical assets for profit","Low startup cost","No experience needed"] },
   { id:"B2", emoji:"🏢", title:"BUSINESS BUILDER BUNDLE", tag:"BUILD ASSETS", tagC:"#3498DB", accent:"#3498DB", price:282, orig:282, desc:"6 complete business blueprints — land flipping, NEMT, assisted living, veterans housing, vending, and dealer license.", productIds:[2,4,5,8,9,10], saves:56, features:["6 complete businesses","Government-backed income","Multiple physical and digital","Recurring monthly revenue"] },
   { id:"B3", emoji:"💻", title:"DIGITAL EMPIRE BUNDLE", tag:"100% ONLINE", tagC:C.purple, accent:"#8E44AD", price:151, orig:151, desc:"3 location-independent streams. Print on demand, domain flipping, and storage auctions.", productIds:[1,6,7], saves:30, features:["Work from anywhere","No physical inventory","Scales without employees","Passive income potential"] },
   { id:"B4", emoji:"🏘️", title:"HOUSING EMPIRE BUNDLE", tag:"REAL ESTATE", tagC:"#884EA0", accent:"#884EA0", price:188, orig:188, desc:"4 housing streams — land flipping, assisted living, veterans housing, and NEMT.", productIds:[4,5,8,9], saves:38, features:["Government-guaranteed payments","Real estate wealth building","Recurring monthly income","Mission-driven impact"] },
@@ -35,20 +54,20 @@ const BUNDLES = [
 ];
 
 const ORDER_BUMPS = {
-  1:  { title:"Add the Repo Blueprint for just $17 more",       productId:3,  price:17 },
-  2:  { title:"Add the Land Flip Formula for just $17 more",    productId:4,  price:17 },
-  3:  { title:"Add the Dealer License Blueprint for just $17",  productId:2,  price:17 },
-  4:  { title:"Add the NEMT Blueprint for just $17 more",       productId:5,  price:17 },
-  5:  { title:"Add the Assisted Living Blueprint for $17 more", productId:8,  price:17 },
-  6:  { title:"Add Domain Flipping for just $17 more",          productId:7,  price:17 },
-  7:  { title:"Add Print on Demand for just $17 more",          productId:6,  price:17 },
-  8:  { title:"Add Veterans Housing for just $17 more",         productId:9,  price:17 },
-  9:  { title:"Add Assisted Living for just $17 more",          productId:8,  price:17 },
-  10: { title:"Add the Repo Blueprint for just $17 more",       productId:3,  price:17 },
-  B1: { title:"Add Land Flip Formula for $17",                 productId:4,  price:17 },
-  B2: { title:"Upgrade: Add Digital Empire Bundle for $47",    productId:"B3",price:47 },
-  B3: { title:"Add NEMT Blueprint for $17",                    productId:5,  price:17 },
-  B4: { title:"Add Print on Demand for $17",                   productId:6,  price:17 },
+  1:  { title:"Add the Repo Blueprint",             productId:3,  price:17 },
+  2:  { title:"Add the Land Flip Formula",          productId:4,  price:17 },
+  3:  { title:"Add the Dealer License Blueprint",   productId:2,  price:17 },
+  4:  { title:"Add the NEMT Blueprint",             productId:5,  price:17 },
+  5:  { title:"Add the Assisted Living Blueprint",  productId:8,  price:17 },
+  6:  { title:"Add Domain Flipping",                productId:7,  price:17 },
+  7:  { title:"Add Print on Demand",                productId:6,  price:17 },
+  8:  { title:"Add Veterans Housing",               productId:9,  price:17 },
+  9:  { title:"Add Assisted Living",                productId:8,  price:17 },
+  10: { title:"Add the Repo Blueprint",             productId:3,  price:17 },
+  B1: { title:"Add Land Flip Formula",              productId:4,  price:17 },
+  B2: { title:"Upgrade: Add Digital Empire Bundle", productId:"B3",price:47 },
+  B3: { title:"Add NEMT Blueprint",                 productId:5,  price:17 },
+  B4: { title:"Add Print on Demand",                productId:6,  price:17 },
   B5: null,
 };
 
@@ -103,7 +122,7 @@ function ProductCard({item, onBuy, onView, highlight=false}) {
         <p style={{fontSize:12,color:"#C0B8A8",lineHeight:1.7,margin:0,fontStyle:"italic"}}>{item.desc}</p>
         <div style={{display:"flex",alignItems:"baseline",gap:8,marginTop:"auto",paddingTop:6}}>
           <span style={{...GT,fontSize:26,fontWeight:900}}>${isBundle ? Math.round(item.price * 0.8) : item.price}</span>
-          <span style={{fontSize:12,color:C.dim,textDecoration:"line-through"}}>${item.price}</span>
+          <span style={{fontSize:12,color:C.dim,textDecoration:"line-through"}}>${isBundle ? item.price : item.orig}</span>
         </div>
       </div>
       <div style={{padding:"0 20px 20px",display:"flex",gap:8}}>
@@ -130,9 +149,47 @@ function PreviewModal({item, onClose, onBuy}) {
         <div style={{padding:"24px 32px"}}>
           <p style={{fontSize:13,color:"#C8C0B0",lineHeight:1.8,marginBottom:20}}>{item.desc}</p>
 
+          {item.inc && (
+            <div style={{marginBottom:22}}>
+              <div style={{fontSize:10,color:C.gold,letterSpacing:3,textTransform:"uppercase",fontWeight:700,marginBottom:10}}>What's Inside</div>
+              <div style={{display:"grid",gap:8}}>
+                {item.inc.map(x=>(
+                  <div key={x} style={{display:"flex",alignItems:"center",gap:10,fontSize:12,color:"#C8C0B0"}}>
+                    <span style={{color:C.green,fontSize:11,flexShrink:0}}>✓</span>{x}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {isBundle && (
+            <div style={{marginBottom:22}}>
+              <div style={{fontSize:10,color:C.gold,letterSpacing:3,textTransform:"uppercase",fontWeight:700,marginBottom:10}}>Includes {item.productIds.length} Blueprints</div>
+              <div style={{display:"grid",gap:8,marginBottom:16}}>
+                {item.productIds.map(pid=>{
+                  const p = getProduct(pid);
+                  return p && (
+                    <div key={pid} style={{display:"flex",alignItems:"center",gap:10,fontSize:12,color:"#C8C0B0"}}>
+                      <span style={{color:C.gold,fontSize:11,flexShrink:0}}>◆</span>{p.title} <span style={{color:C.dim}}>— ${p.price}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              {item.features && (
+                <div style={{display:"grid",gap:8}}>
+                  {item.features.map(f=>(
+                    <div key={f} style={{display:"flex",alignItems:"center",gap:10,fontSize:12,color:"#C8C0B0"}}>
+                      <span style={{color:C.green,fontSize:11,flexShrink:0}}>✓</span>{f}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           <div style={{display:"flex",alignItems:"baseline",gap:12,marginBottom:14}}>
             <span style={{...GT,fontSize:36,fontWeight:900}}>${isBundle ? Math.round(item.price * 0.8) : item.price}</span>
-            <span style={{fontSize:13,color:C.dim,textDecoration:"line-through"}}>${item.price}</span>
+            <span style={{fontSize:13,color:C.dim,textDecoration:"line-through"}}>${isBundle ? item.price : item.orig}</span>
           </div>
           <Btn onClick={()=>{onClose();onBuy(item);}} full>Get Instant Access — ${isBundle ? Math.round(item.price * 0.8) : item.price}</Btn>
         </div>
@@ -209,7 +266,7 @@ function CheckoutModal({item, onClose}) {
 
 
           <Btn onClick={handleCheckout} disabled={loading} full style={{padding:"15px",fontSize:12}}>
-            {loading ? "Redirecting to Stripe..." : `Redirecting to Checkout — ${final}`}
+            {loading ? "Redirecting to Stripe..." : `Proceed to Checkout — $${final}`}
           </Btn>
           <div style={{textAlign:"center",marginTop:10,fontSize:9,color:C.dim}}>🔒 SSL Secure · ⚡ Instant Delivery</div>
         </div>
@@ -241,7 +298,7 @@ export default function HustleVault() {
       {/* Ticker */}
       <div style={{background:`linear-gradient(90deg,#1A0A00,#2A1400,#1A0A00)`,borderBottom:`1px solid ${C.gold}30`,padding:"10px 0",overflow:"hidden"}}>
         <div className="ticker-wrap">
-          {["10 Blueprints — One Vault","Bills don't stop — neither should your income","First income in 7 days possible","Government-backed income streams","Join 2400+ customers building wealth"].flatMap(x=>[x,x]).map((t,i)=>(
+          {["10 Blueprints — One Vault","Bills don't stop — neither should your income","Step-by-step systems, not theory","Government-backed income streams","Instant download — lifetime access"].flatMap(x=>[x,x]).map((t,i)=>(
             <span key={i} style={{fontSize:10,color:C.gold,letterSpacing:2,whiteSpace:"nowrap",padding:"0 40px"}}>◆ {t}</span>
           ))}
         </div>
@@ -250,7 +307,7 @@ export default function HustleVault() {
       {/* Nav */}
       <nav style={{position:"sticky",top:0,zIndex:100,background:scrolled?`${C.surface}F0`:"transparent",backdropFilter:scrolled?"blur(15px)":"none",borderBottom:scrolled?`1px solid ${C.border}`:"none",transition:"0.3s",padding:"0 24px"}}>
         <div style={{maxWidth:1280,margin:"0 auto",height:64,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-           <div style={{display:"flex",alignItems:"center",gap:10}}><VaultIcon size={24}/><div><div style={{...GT,fontSize:14,fontWeight:900,letterSpacing:4,textTransform:"uppercase"}}>Hustle</div></div></div>
+           <div style={{display:"flex",alignItems:"center",gap:10}}><VaultIcon size={24}/><div><div style={{...GT,fontSize:14,fontWeight:900,letterSpacing:4,textTransform:"uppercase"}}>Hustle Vault</div></div></div>
            <Btn onClick={()=>document.getElementById("products")?.scrollIntoView({behavior:"smooth"})} style={{padding:"9px 20px",fontSize:9}}>Get The Vault $376</Btn>
         </div>
       </nav>
@@ -282,7 +339,14 @@ export default function HustleVault() {
         </div>
       </section>
       <footer style={{padding:"40px 24px",textAlign:"center",background:C.surface,color:C.dim,fontSize:10,letterSpacing:2}}>
-         <div style={{marginBottom:10}}>HUSTLE VAULT · © 2026 · ALL RIGHTS RESERVED</div>
+         <div style={{marginBottom:14}}>HUSTLE VAULT · © 2026 · ALL RIGHTS RESERVED</div>
+         <div style={{display:"flex",gap:20,justifyContent:"center",flexWrap:"wrap",marginBottom:12}}>
+           {[["Terms of Service","/terms.html"],["Refund Policy","/refund-policy.html"],["Privacy Policy","/privacy.html"],["Earnings Disclaimer","/earnings-disclaimer.html"]].map(([label,href])=>(
+             <a key={href} href={href} style={{color:C.muted,textDecoration:"none",fontSize:10,letterSpacing:2,textTransform:"uppercase"}}>{label}</a>
+           ))}
+         </div>
+         <div style={{color:C.dim,fontSize:9,maxWidth:640,margin:"0 auto 10px",lineHeight:1.6,letterSpacing:1,textTransform:"none"}}>Income figures shown are examples of what these business models can produce, not typical results or guarantees. Your results depend on your effort, location, and market conditions. See our <a href="/earnings-disclaimer.html" style={{color:C.muted}}>Earnings Disclaimer</a>.</div>
+         <div style={{color:C.dim,fontSize:9}}>Support: sunmarketingllc@gmail.com</div>
       </footer>
 
       {/* Modals */}

@@ -38,7 +38,7 @@ const DEFAULT_PRODUCTS = {
     }
   },
   3: {
-    id: 3, name: "REPO BLUEPRINT — Vehicle Repossession Business", description: "Get paid $200–$400 per vehicle recovered.",
+    id: 3, name: "REPO BLUEPRINT — Vehicle Repossession Business", description: "Get paid per vehicle recovered. Recession-proof income.",
     price: 3700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "REPO BLUEPRINT — Vehicle Repossession Business",
@@ -47,16 +47,16 @@ const DEFAULT_PRODUCTS = {
     }
   },
   4: {
-    id: 4, name: "LAND FLIP FORMULA — Buy Cheap Land Sell for 3X", description: "Buy vacant land from motivated sellers and flip it.",
+    id: 4, name: "LAND FLIP FORMULA — Buy and Flip Vacant Land", description: "Buy vacant land from motivated sellers and flip it.",
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
-      title: "LAND FLIP FORMULA — Buy Cheap Land Sell for 3X",
+      title: "LAND FLIP FORMULA — Buy and Flip Vacant Land",
       files: [{ name: "Land_Flip_Formula_HustleVault.pdf", type: "pdf", size: "31 KB", url: "https://drive.google.com/uc?export=download&id=1NEeNAHxeWbin477eJ-MjhYq42PBW-8Tc" }],
       accessNote: "You now have lifetime access to the Land Flip Formula.",
     }
   },
   5: { 
-    id: 5, name: "NEMT BLUEPRINT — Medical Transport Business", description: "Government-contracted medical routes pay $30–$80 per trip.", 
+    id: 5, name: "NEMT BLUEPRINT — Medical Transport Business", description: "Government-contracted medical transport routes. Recurring Medicaid income.", 
     price: 4700, bumpPrice: 1700, upsellPrice: 3700,
     digitalContent: {
       title: "NEMT BLUEPRINT — Medical Transport Business",
@@ -74,16 +74,16 @@ const DEFAULT_PRODUCTS = {
     }
   },
   7: {
-    id: 7, name: "DOMAIN FLIPPING — Buy $10 Domains Sell for Thousands", description: "Register domains for $10 and sell for $1,000+.",
+    id: 7, name: "DOMAIN FLIPPING — Buy Low, Sell Domains for Profit", description: "Register or buy undervalued domains and sell them for profit.",
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
-      title: "DOMAIN FLIPPING — Buy $10 Domains Sell for Thousands",
+      title: "DOMAIN FLIPPING — Buy Low, Sell Domains for Profit",
       files: [{ name: "Domain_Flipping_HustleVault.pdf", type: "pdf", size: "64 KB", url: "https://drive.google.com/uc?export=download&id=1bsVYabgaE5tdUbU4BnPEy5aNpQW_DBjy" }],
       accessNote: "You now have lifetime access to the Domain Flipping Guide.",
     }
   },
   8: {
-    id: 8, name: "ASSISTED LIVING — Residential Care Home Business", description: "A 6-bed home generates $27,000/month gross.",
+    id: 8, name: "ASSISTED LIVING — Residential Care Home Business", description: "Operate a residential care home with government-backed resident payments.",
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "ASSISTED LIVING — Residential Care Home Business",
