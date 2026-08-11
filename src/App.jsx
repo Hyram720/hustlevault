@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HustleVault from './HustleVault'
 import Success from './Success'
 import Cancel from './Cancel'
+import Blog from './blog/Blog'
+import BlogPost from './blog/BlogPost'
 import AdminLogin from './admin/AdminLogin'
 import AdminLayout from './admin/AdminLayout'
 import Dashboard from './admin/Dashboard'
@@ -16,6 +18,8 @@ function App() {
       <Routes>
         {/* Public */}
         <Route path="/" element={<HustleVault />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
 
