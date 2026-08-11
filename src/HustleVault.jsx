@@ -17,6 +17,7 @@ const GT  = { background:GG, WebkitBackgroundClip:"text", backgroundClip:"text",
 // ── IMAGES (Higgsfield-generated, dark-gold vault aesthetic) ───
 const IMG = "https://d8j0ntlcm91z4.cloudfront.net/user_391qpEAynVndVvvLA4RZWiHERjU/";
 const HERO_IMG = IMG + "hf_20260810_204014_47196f1f-19bc-4591-8ed2-50a21cf519aa.png";
+const VAULT_VIDEO = IMG + "hf_20260811_165934_1c5a7a1f-5e2b-4b79-a7fd-42cca3f35a0a.mp4";
 const PRODUCT_IMG = {
   1:  IMG + "hf_20260810_204014_842ea22c-c197-4158-97ee-f015154aa0a8.png",
   2:  IMG + "hf_20260810_204014_182f9339-d846-4e02-a1a5-08fbccd3e110.png",
@@ -240,8 +241,23 @@ function CheckoutModal({item, onClose}) {
   );
 }
 
+// ── VAULT INTRO OVERLAY ────────────────────────────────────────
+function IntroOverlay({onDone}) {
+  const [fading,setFading]=useState(false);
+  const finish=()=>{setFading(true);setTimeout(onDone,800);};
+  useEffect(()=>{const t=setTimeout(finish,7500);return()=>clearTimeout(t);},[]);
+  return (
+    <div style={{position:"fixed",inset:0,zIndex:9999,background:"#000",display:"flex",alignItems:"center",justifyContent:"center",opacity:fading?0:1,transition:"opacity 0.8s ease",pointerEvents:fading?"none":"auto"}}>
+      <video src={VAULT_VIDEO} autoPlay muted playsInline onEnded={finish} style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+      <div style={{position:"absolute",inset:0,background:`radial-gradient(ellipse at center,transparent 55%,${C.bg} 100%)`,pointerEvents:"none"}}/>
+      <button onClick={finish} style={{position:"absolute",bottom:28,right:28,background:"rgba(0,0,0,0.35)",border:`1px solid ${C.gold}`,color:C.gold,fontSize:11,letterSpacing:2,padding:"9px 20px",borderRadius:2,cursor:"pointer",fontFamily:"Georgia,serif",textTransform:"uppercase"}}>Enter The Vault →</button>
+    </div>
+  );
+}
+
 // ── MAIN LANDING PAGE ──────────────────────────────────────────
 export default function HustleVault() {
+  const [showIntro, setShowIntro] = useState(true);
   const [filter, setFilter] = useState("All");
   const [preview, setPreview] = useState(null);
   const [checkout, setCheckout] = useState(null);
@@ -268,6 +284,7 @@ export default function HustleVault() {
 
   return (
     <div style={{background:C.bg,minHeight:"100vh",color:C.cream,fontFamily:"Inter, system-ui, sans-serif"}}>
+      {showIntro && <IntroOverlay onDone={()=>setShowIntro(false)}/>}
       <style>{`
         *{box-sizing:border-box;margin:0;padding:0;}
         ::selection{background:rgba(201,168,76,0.3);color:#F5F0E8;}
