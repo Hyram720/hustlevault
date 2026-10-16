@@ -11,6 +11,12 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
 
+[[headers]]
+  for = "/door-script"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Cache-Control = "no-store"
+
 # Vite outputs content-hashed filenames — safe to cache for 1 year
 [[headers]]
   for = "/assets/*"
