@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HustleVault from './HustleVault'
 import Success from './Success'
 import Cancel from './Cancel'
+import DoorScript from './DoorScript'
 import Blog from './blog/Blog'
 import BlogPost from './blog/BlogPost'
 import AdminLogin from './admin/AdminLogin'
@@ -22,6 +23,7 @@ function App() {
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
+        <Route path="/door-script" element={<DoorScript />} />
 
         {/* Admin */}
         <Route path="/admin" element={<AdminLogin />} />

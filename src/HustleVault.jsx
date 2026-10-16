@@ -308,6 +308,7 @@ export default function HustleVault() {
            <div style={{display:"flex",alignItems:"center",gap:22}}>
              <a href="/#products" style={{color:C.muted,fontSize:11,letterSpacing:2,textTransform:"uppercase",textDecoration:"none",fontFamily:"Georgia,serif"}}>Blueprints</a>
              <Link to="/blog" style={{color:C.muted,fontSize:11,letterSpacing:2,textTransform:"uppercase",textDecoration:"none",fontFamily:"Georgia,serif"}}>Blog</Link>
+             <Link to="/door-script" style={{color:C.muted,fontSize:11,letterSpacing:2,textTransform:"uppercase",textDecoration:"none",fontFamily:"Georgia,serif"}}>Door Script</Link>
              <Btn onClick={()=>document.getElementById("products")?.scrollIntoView({behavior:"smooth"})} style={{padding:"9px 20px",fontSize:9}}>Get The Vault $376</Btn>
            </div>
         </div>
@@ -347,6 +348,7 @@ export default function HustleVault() {
          <div style={{display:"flex",gap:24,justifyContent:"center",flexWrap:"wrap",marginBottom:18}}>
             <a href="/#products" style={{color:C.muted,textDecoration:"none"}}>Blueprints</a>
             <Link to="/blog" style={{color:C.muted,textDecoration:"none"}}>Blog</Link>
+            <Link to="/door-script" style={{color:C.muted,textDecoration:"none"}}>Door Script</Link>
             <a href="/#products" style={{color:C.muted,textDecoration:"none"}}>Bundles</a>
          </div>
          <div style={{marginBottom:10}}>HUSTLE VAULT · © 2026 · ALL RIGHTS RESERVED</div>

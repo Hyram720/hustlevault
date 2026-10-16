@@ -32,6 +32,7 @@ export default function BlogLayout({ children }) {
           <div style={{ display: "flex", gap: 22, alignItems: "center" }}>
             <Link to="/#products" style={{ color: C.muted, fontSize: 11, letterSpacing: 2, textTransform: "uppercase", textDecoration: "none", fontFamily: "Georgia,serif" }}>Blueprints</Link>
             <Link to="/blog" style={{ color: C.gold, fontSize: 11, letterSpacing: 2, textTransform: "uppercase", textDecoration: "none", fontFamily: "Georgia,serif" }}>Blog</Link>
+            <Link to="/door-script" style={{ color: C.muted, fontSize: 11, letterSpacing: 2, textTransform: "uppercase", textDecoration: "none", fontFamily: "Georgia,serif" }}>Door Script</Link>
           </div>
         </div>
       </nav>
@@ -42,6 +43,7 @@ export default function BlogLayout({ children }) {
         <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap", marginBottom: 18 }}>
           <Link to="/#products" style={{ color: C.muted, textDecoration: "none" }}>Blueprints</Link>
           <Link to="/blog" style={{ color: C.muted, textDecoration: "none" }}>Blog</Link>
+          <Link to="/door-script" style={{ color: C.muted, textDecoration: "none" }}>Door Script</Link>
           <Link to="/" style={{ color: C.muted, textDecoration: "none" }}>Home</Link>
         </div>
         <div>HUSTLE VAULT · © 2026 · ALL RIGHTS RESERVED</div>
