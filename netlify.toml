@@ -5,6 +5,7 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+  external_node_modules = ["sharp"]
 
 [[headers]]
   for = "/*"
@@ -42,6 +43,26 @@
   for = "/*.html"
   [headers.values]
     Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/sponsors/stats/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Cache-Control = "no-store"
+    Referrer-Policy = "no-referrer"
+
+[[headers]]
+  for = "/sponsors/edit/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Cache-Control = "no-store"
+    Referrer-Policy = "no-referrer"
+
+[[redirects]]
+  from = "/advertise"
+  to = "/sponsors"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/*"

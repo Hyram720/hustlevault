@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { APPS } from "../shared/apps.js";
 import { track, ventureCheckUrl } from "./apps/utm";
 import { useSEO } from "./seo";
+import { SponsoredStrip, AdvertiseCallout } from "./sponsors/HomeBits";
 
 // ── BRAND ──────────────────────────────────────────────────────
 const C = {
@@ -170,6 +171,7 @@ export default function HustleVault() {
              <button onClick={()=>go("start")} style={navA}>Start</button>
              <button onClick={()=>go("grow")} style={navA}>Grow</button>
              <Link to="/blog" className="hv-hide-m" style={navA}>Blog</Link>
+             <Link to="/sponsors" className="hv-hide-m" style={navA}>Advertise</Link>
              <Link to="/door-script" className="hv-hide-m" style={navA}>Door Script</Link>
              <Link to="/my" className="hv-hide-m" style={navA}>My purchases</Link>
            </div>
@@ -212,11 +214,16 @@ export default function HustleVault() {
         <p style={{textAlign:"center",fontSize:12,color:C.dim,marginTop:24,lineHeight:1.7}}>Our tools give you plans, scripts and ideas — not promises. Results depend on your effort and market; no income is guaranteed.</p>
       </section>
 
+      <SponsoredStrip/>
+      <AdvertiseCallout/>
+
       <footer style={{padding:"48px 24px",textAlign:"center",background:C.surface,color:C.dim,fontSize:10,letterSpacing:2}}>
          <div style={{display:"flex",gap:22,justifyContent:"center",flexWrap:"wrap",marginBottom:18}}>
             <a href="/#start" style={{color:C.muted,textDecoration:"none"}}>Start Your Hustle</a>
             <a href="/#grow" style={{color:C.muted,textDecoration:"none"}}>Grow Your Hustle</a>
             <Link to="/blog" style={{color:C.muted,textDecoration:"none"}}>Blog</Link>
+            <Link to="/sponsors" title="Put your logo in front of our visitors" style={{color:C.muted,textDecoration:"none"}}>Advertise</Link>
+            <Link to="/sponsors/policy" style={{color:C.muted,textDecoration:"none"}}>Ad Policy</Link>
             <Link to="/door-script" style={{color:C.muted,textDecoration:"none"}}>Door Script</Link>
             <Link to="/my" style={{color:C.muted,textDecoration:"none"}}>My purchases</Link>
             <a href="/terms.html" style={{color:C.muted,textDecoration:"none"}}>Terms</a>
@@ -224,6 +231,7 @@ export default function HustleVault() {
             <a href="/privacy.html" style={{color:C.muted,textDecoration:"none"}}>Privacy</a>
             <a href="/earnings-disclaimer.html" style={{color:C.muted,textDecoration:"none"}}>Earnings disclaimer</a>
          </div>
+         <div style={{marginBottom:10,letterSpacing:1}}><Link to="/sponsors#inquire" style={{color:C.muted,textDecoration:"none"}}>Advertise: put your logo in front of our visitors →</Link></div>
          <div style={{marginBottom:10}}>HUSTLE VAULT · © 2026 · ALL RIGHTS RESERVED</div>
       </footer>
     </div>

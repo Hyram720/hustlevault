@@ -2,18 +2,11 @@ import { useEffect, useState, useCallback } from "react";
 import { Shell, C, GT, money } from "./ui";
 import { useSEO } from "../seo";
 
-const KEY = "hv_admin_token";
+import { KEY, api } from "./adminApi";
+import AdminSponsors from "./AdminSponsors";
+import AdminBlog from "./AdminBlog";
 const pct = (v) => (v == null ? "—" : (v * 100).toFixed(1) + "%");
 const usd = (c) => "$" + ((c || 0) / 100).toFixed(2);
-
-async function api(path, opts = {}) {
-  const token = sessionStorage.getItem(KEY);
-  const r = await fetch(`/api/hv-admin/${path}`, { ...opts, headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, ...(opts.headers || {}) } });
-  if (r.status === 401) { sessionStorage.removeItem(KEY); throw Object.assign(new Error("Signed out"), { auth: true }); }
-  const d = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(d.error || "Request failed");
-  return d;
-}
 
 function Login({ onOk }) {
   const [pw, setPw] = useState(""); const [err, setErr] = useState(""); const [busy, setBusy] = useState(false);
@@ -167,13 +160,35 @@ function Dashboard({ onOut }) {
   );
 }
 
+const TABS = [["dashboard", "Dashboard"], ["sponsors", "Sponsors"], ["blog", "Blog"]];
+function Tabs({ tab, setTab }) {
+  return (
+    <div role="tablist" style={{ display: "flex", gap: 6, marginBottom: 18, borderBottom: `1px solid ${C.border}`, flexWrap: "wrap" }}>
+      {TABS.map(([k, l]) => (
+        <button key={k} role="tab" aria-selected={tab === k} data-tab={k} onClick={() => setTab(k)}
+          style={{ padding: "10px 16px", background: "none", border: "none", borderBottom: `2px solid ${tab === k ? C.gold : "transparent"}`, color: tab === k ? C.gold : C.muted, fontWeight: 800, cursor: "pointer", fontSize: 14 }}>{l}</button>
+      ))}
+    </div>
+  );
+}
+
 export default function Admin() {
   useSEO({ title: "Admin – Hustle Vault", description: "Admin", path: "/admin", noindex: true });
   const [authed, setAuthed] = useState(() => !!sessionStorage.getItem(KEY));
+  const [tab, setTabState] = useState(() => (["sponsors", "blog"].includes(window.location.hash.slice(1)) ? window.location.hash.slice(1) : "dashboard"));
+  const setTab = (t) => { setTabState(t); history.replaceState(null, "", t === "dashboard" ? "/admin" : `/admin#${t}`); };
+  const out = () => setAuthed(false);
   return (
     <Shell>
       <style>{`main{max-width:1200px !important}`}</style>
-      {authed ? <Dashboard onOut={() => setAuthed(false)} /> : <Login onOk={() => setAuthed(true)} />}
+      {authed ? (
+        <>
+          <Tabs tab={tab} setTab={setTab} />
+          {tab === "dashboard" && <Dashboard onOut={out} />}
+          {tab === "sponsors" && <AdminSponsors onOut={out} />}
+          {tab === "blog" && <AdminBlog onOut={out} />}
+        </>
+      ) : <Login onOk={() => setAuthed(true)} />}
     </Shell>
   );
 }

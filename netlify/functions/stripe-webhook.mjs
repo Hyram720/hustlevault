@@ -4,6 +4,15 @@ import { claimOnce, logEvent } from "../lib/store.mjs";
 import { stripe, verifiedStripe, VENTURECHECK_PAYMENT_LINK } from "../lib/stripe.mjs";
 import { markPaid, generate, setStatusIf, applyRefund } from "../lib/fulfill.mjs";
 import { PURCHASE_ID_RE } from "../lib/http.mjs";
+import { onSponsorCheckout, syncSubscription } from "../lib/sponsorsub.mjs";
+import { getSponsors } from "../lib/content.mjs";
+
+// Only touch subscriptions that a sponsor is linked to (other apps share this Stripe account).
+async function syncIfSponsor(subId, metaKind) {
+  if (typeof subId !== "string") return;
+  const linked = (await getSponsors()).list.some((s) => s.subscriptionId === subId);
+  if (linked || metaKind === "sponsor") await syncSubscription(subId, "webhook");
+}
 
 async function purchaseIdForCharge(charge) {
   if (charge.metadata?.hv_purchase_id) return charge.metadata.hv_purchase_id; // event is signature-verified
@@ -47,6 +56,7 @@ export default async (req, context) => {
           if (await claimOnce("vc/" + obj.id)) await logEvent("vc_purchase", { app: "venturecheck", amount: obj.amount_total || 0 });
           break;
         }
+        if (obj.metadata?.hv_kind === "sponsor") { await onSponsorCheckout(obj); break; }
         const id = obj.metadata?.hv_purchase_id;
         if (!id || !PURCHASE_ID_RE.test(id)) break; // not ours (other apps share this Stripe account)
         if (obj.payment_status === "paid") {
@@ -71,6 +81,16 @@ export default async (req, context) => {
       case "charge.refunded": {
         const id = await purchaseIdForCharge(obj);
         if (id && PURCHASE_ID_RE.test(id)) await applyRefund(id, obj);
+        break;
+      }
+      case "customer.subscription.created":
+      case "customer.subscription.updated":
+      case "customer.subscription.deleted":
+        await syncIfSponsor(obj.id, obj.metadata?.hv_kind);
+        break;
+      case "invoice.payment_failed": {
+        const sub = obj.subscription || obj.parent?.subscription_details?.subscription;
+        await syncIfSponsor(typeof sub === "string" ? sub : sub?.id, obj.parent?.subscription_details?.metadata?.hv_kind);
         break;
       }
       default:

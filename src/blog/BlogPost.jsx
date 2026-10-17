@@ -1,59 +1,47 @@
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import BlogLayout, { C, GT, GG } from "./BlogLayout";
 import { getPost, POSTS } from "./posts";
-import { useSEO, SITE } from "../seo";
+import { useSEO } from "../seo";
+import { fmtDateET } from "../../shared/blog.js";
+import { blogPostMeta } from "../../shared/pagemeta.js";
+import { renderMarkdown } from "../../shared/markdown.js";
 
-const fmtDate = (iso) =>
-  new Date(iso + "T00:00:00").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+const fmtDate = fmtDateET;
+export const MD_CSS = `.hv-md h2{font-size:24px;font-weight:800;margin:36px 0 14px;color:${C.cream};line-height:1.25}
+.hv-md h3{font-size:19px;font-weight:800;margin:28px 0 10px;color:${C.cream}}
+.hv-md p,.hv-md li{font-size:16px;line-height:1.8;color:#C8C0B0}.hv-md p{margin:0 0 18px}
+.hv-md ul,.hv-md ol{margin:0 0 18px;padding-left:22px}.hv-md li{margin-bottom:8px}
+.hv-md a{color:${C.gold}}.hv-md strong{color:${C.cream}}
+.hv-md blockquote{border-left:3px solid ${C.gold};margin:24px 0;padding:6px 20px;font-style:italic}
+.hv-md blockquote p{color:${C.cream};font-size:17px}
+.hv-md img{max-width:100%;height:auto;border-radius:6px;margin:8px 0}
+.hv-md code{background:#14141f;padding:2px 5px;border-radius:3px;font-size:14px}
+.hv-md pre{background:#0E0E18;border:1px solid ${C.border};padding:14px;border-radius:6px;overflow-x:auto;margin:0 0 18px}
+.hv-md pre code{background:none;padding:0}.hv-md hr{border:none;border-top:1px solid ${C.border};margin:28px 0}`;
 
-function Block({ b }) {
-  if (b.h2) return <h2 style={{ fontSize: 24, fontWeight: 800, margin: "36px 0 14px", color: C.cream, lineHeight: 1.25 }}>{b.h2}</h2>;
-  if (b.p) return <p style={{ fontSize: 16, lineHeight: 1.8, color: "#C8C0B0", margin: "0 0 18px" }}>{b.p}</p>;
-  if (b.quote) return <blockquote style={{ borderLeft: `3px solid ${C.gold}`, margin: "24px 0", padding: "6px 20px", fontSize: 17, fontStyle: "italic", color: C.cream }}>{b.quote}</blockquote>;
-  if (b.ul) return <ul style={{ margin: "0 0 18px", paddingLeft: 22 }}>{b.ul.map((li, i) => <li key={i} style={{ fontSize: 16, lineHeight: 1.7, color: "#C8C0B0", marginBottom: 8 }}>{li}</li>)}</ul>;
-  if (b.ol) return <ol style={{ margin: "0 0 18px", paddingLeft: 22 }}>{b.ol.map((li, i) => <li key={i} style={{ fontSize: 16, lineHeight: 1.7, color: "#C8C0B0", marginBottom: 8 }}>{li}</li>)}</ol>;
-  return null;
+function useDynamicPost(slug, skip) {
+  const emb = window.__HV_DATA__?.blogPost;
+  const [st, setSt] = useState(() => (emb?.dynamic && emb.slug === slug ? { slug, post: emb } : null));
+  useEffect(() => {
+    if (skip || st?.slug === slug) return;
+    let on = true;
+    fetch(`/api/blog/${encodeURIComponent(slug)}`).then((r) => (r.ok ? r.json() : { post: null }))
+      .then((d) => on && setSt({ slug, post: d.post || null })).catch(() => on && setSt({ slug, post: null }));
+    return () => { on = false; };
+  }, [slug, skip, st]);
+  if (skip) return null;
+  return st?.slug === slug ? st.post : undefined;
 }
 
 export default function BlogPost() {
   const { slug } = useParams();
-  const post = getPost(slug);
-
-  useSEO({
-    title: post ? `${post.title} | Hustle Vault` : "Article Not Found | Hustle Vault",
-    description: post ? post.description : "The article you are looking for could not be found.",
-    path: `/blog/${slug}`,
-    type: "article",
-    image: post?.cover,
-    jsonLd: post
-      ? {
-          "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "BlogPosting",
-              headline: post.title,
-              description: post.description,
-              image: post.cover,
-              datePublished: post.date,
-              dateModified: post.dateModified || post.date,
-              author: { "@type": "Organization", name: post.author, url: SITE },
-              publisher: { "@type": "Organization", name: "Hustle Vault", logo: { "@type": "ImageObject", url: SITE + "/favicon.svg" } },
-              mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE}/blog/${post.slug}` },
-              keywords: post.keywords,
-            },
-            {
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Home", item: SITE },
-                { "@type": "ListItem", position: 2, name: "Blog", item: SITE + "/blog" },
-                { "@type": "ListItem", position: 3, name: post.title, item: `${SITE}/blog/${post.slug}` },
-              ],
-            },
-          ],
-        }
-      : null,
-  });
-
+  const staticPost = getPost(slug);
+  const dyn = useDynamicPost(slug, !!staticPost);
+  const post = staticPost || dyn;
+  const loading = !staticPost && dyn === undefined;
+  useSEO(blogPostMeta(post, slug));
+  if (loading) return <BlogLayout><main style={{ maxWidth: 720, margin: "0 auto", padding: "100px 24px", color: C.muted }}>Loading…</main></BlogLayout>;
   if (!post) {
     return (
       <BlogLayout>
@@ -77,12 +65,14 @@ export default function BlogPost() {
         </nav>
 
         <p style={{ fontSize: 11, color: C.gold, letterSpacing: 2, textTransform: "uppercase", marginBottom: 14 }}>
-          {fmtDate(post.date)} · {post.readMins} min read
+          <time dateTime={post.date}>{fmtDate(post.date)}</time> · {post.readMins} min read
         </p>
         <h1 style={{ fontSize: "clamp(28px,4.5vw,42px)", fontWeight: 900, lineHeight: 1.15, marginBottom: 22, color: C.cream }}>{post.title}</h1>
-        <img src={post.cover} alt={post.title} width="720" height="405" style={{ width: "100%", height: "auto", borderRadius: 8, border: `1px solid ${C.border}`, marginBottom: 32, display: "block" }} />
+        {post.cover && <img src={post.cover} alt={post.coverAlt || post.title} width="720" height="405" style={{ width: "100%", height: "auto", borderRadius: 8, border: `1px solid ${C.border}`, marginBottom: 32, display: "block" }} />}
 
-        <div>{post.content.map((b, i) => <Block key={i} b={b} />)}</div>
+        {post.dynamic
+          ? <><style>{MD_CSS}</style><div className="hv-md" dangerouslySetInnerHTML={{ __html: renderMarkdown(post.body).html }} /></>
+          : <div>{post.content.map((b, i) => <Block key={i} b={b} />)}</div>}
 
         {/* CTA */}
         <aside style={{ marginTop: 40, background: C.surface, border: `1px solid ${C.borderH}`, borderRadius: 8, padding: "28px 26px", textAlign: "center" }}>

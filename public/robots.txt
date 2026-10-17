@@ -2,5 +2,10 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /door-script
+Disallow: /my
+Disallow: /go/
+Disallow: /sponsors/stats/
+Disallow: /sponsors/edit/
+Disallow: /api/
 
 Sitemap: https://hustlevault.app/sitemap.xml

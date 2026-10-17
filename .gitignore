@@ -34,3 +34,6 @@ server/.env
 
 # Local Netlify folder
 .netlify
+
+# Local screenshots from test/browser-sponsors.mjs
+/*.png

@@ -29,7 +29,7 @@ export function Shell({ children }) {
       <main style={{ maxWidth: 760, margin: "0 auto", padding: "24px 16px 60px" }}>{children}</main>
       <footer style={{ textAlign: "center", color: C.dim, fontSize: 11, padding: "24px 16px 40px", lineHeight: 1.7 }}>
         Results are AI-generated suggestions for education only — no income or sales results are guaranteed.<br />
-        <a href="/terms.html" style={{ color: C.muted }}>Terms</a> · <a href="/refund-policy.html" style={{ color: C.muted }}>Refunds</a> · <a href="/privacy.html" style={{ color: C.muted }}>Privacy</a>
+        <Link to="/blog" style={{ color: C.muted }}>Blog</Link> · <Link to="/sponsors" title="Put your logo in front of our visitors" style={{ color: C.muted }}>Advertise</Link> · <a href="/terms.html" style={{ color: C.muted }}>Terms</a> · <a href="/refund-policy.html" style={{ color: C.muted }}>Refunds</a> · <a href="/privacy.html" style={{ color: C.muted }}>Privacy</a>
       </footer>
     </div>
   );

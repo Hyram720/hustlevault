@@ -14,7 +14,10 @@ export function stripe() {
   if (!client) {
     const [src, k] = pick();
     if (!k) throw new Error("Stripe not configured");
-    client = new Stripe(k); source = src;
+    // Local test runs can point the SDK at a mock Stripe (never honored in production).
+    const host = process.env.HV_ALLOW_LOCALHOST === "1" && process.env.HV_STRIPE_API_HOST;
+    client = host ? new Stripe(k, { host, port: +process.env.HV_STRIPE_API_PORT || 80, protocol: "http" }) : new Stripe(k);
+    source = src;
   }
   return client;
 }
