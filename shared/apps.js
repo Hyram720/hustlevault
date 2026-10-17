@@ -63,6 +63,13 @@ export const APPS = [
     get: "A clear verdict — Push, Nurture or Walk away — with the reasons, buying signals, red flags and a suggested next message",
     fast: "Under 1 minute",
   },
+  {
+    id: "pricing-watcher", path: "grow", name: "Competitor Pricing Watcher", price: 500, status: "soon",
+    tagline: "Get an email the moment a competitor changes a price or adds or drops a plan.",
+    give: "Your competitors' pricing page links and the email for alerts",
+    get: "A daily check of each page and an alert only when a price or plan really changes, not when the wording does",
+    fast: "Set up in about 1 minute, then it runs every day",
+  },
 ];
 
 export const COACH_INDUSTRIES = {

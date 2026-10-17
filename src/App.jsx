@@ -7,6 +7,7 @@ import ObjectionCoach from './apps/ObjectionCoach'
 import MyPurchase, { MyList } from './apps/MyPurchase'
 import AppPage from './apps/AppPage'
 import Admin from './apps/Admin'
+import PricingWatcher from './apps/PricingWatcher'
 import Blog from './blog/Blog'
 import BlogPost from './blog/BlogPost'
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/cancel" element={<Cancel />} />
         <Route path="/door-script" element={<DoorScript />} />
         <Route path="/apps/objection-coach" element={<ObjectionCoach />} />
+        <Route path="/apps/pricing-watcher" element={<PricingWatcher />} />
         <Route path="/my" element={<MyList />} />
         <Route path="/my/:id" element={<MyPurchase />} />
 
