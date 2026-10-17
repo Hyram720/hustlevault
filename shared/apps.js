@@ -1,7 +1,8 @@
 // Hustle Vault AI app catalog — shared by the website and the server functions.
 // Prices are in cents. `status`: "live" (anyone can buy), "soon" (shown as Coming soon,
 // not buyable), "hidden" (not shown). Admin overrides live in storage and win over these defaults.
-// New apps default to "soon" until a real paid test passes.
+// New apps default to "soon" until a real paid test passes. `price: null` = no price yet
+// (the card shows "Coming soon" instead of a price and checkout refuses it).
 
 export const VENTURECHECK_URL = "https://venturecheck-dun.vercel.app/";
 
@@ -64,7 +65,7 @@ export const APPS = [
     fast: "Under 1 minute",
   },
   {
-    id: "pricing-watcher", path: "grow", name: "Competitor Pricing Watcher", price: 500, status: "soon",
+    id: "pricing-watcher", path: "grow", name: "Competitor Pricing Watcher", price: null, status: "soon",
     tagline: "Get an email the moment a competitor changes a price or adds or drops a plan.",
     give: "Your competitors' pricing page links and the email for alerts",
     get: "A daily check of each page and an alert only when a price or plan really changes, not when the wording does",

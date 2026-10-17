@@ -27,6 +27,7 @@ export default handle(async (req, context) => {
   const preview = typeof body.preview === "string" ? body.preview.slice(0, 100) : "";
   if (!app || app.status === "hidden" && !hasPreview(preview)) throw new HttpError(404, "App not found");
   if (!canBuy(app, preview)) throw new HttpError(403, "This app is coming soon and can't be bought yet.");
+  if (!Number.isInteger(app.price) || app.price < 100) throw new HttpError(403, "This app is coming soon and can't be bought yet.");
   const validate = validatorFor(app.id);
   const product = STRIPE_PRODUCTS[app.id];
   if (!validate || !product) throw new HttpError(403, "This app is coming soon and can't be bought yet.");

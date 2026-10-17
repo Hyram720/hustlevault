@@ -1,0 +1,10 @@
+import puppeteer from "puppeteer-core";
+const B = process.env.BASE;
+const b = await puppeteer.launch({ executablePath: "/usr/bin/google-chrome", headless: true, args: ["--no-sandbox"] });
+const p = await b.newPage(); await p.setViewport({ width: 1280, height: 900 });
+await p.goto(B + "/", { waitUntil: "networkidle0" }); await new Promise(r => setTimeout(r, 1500));
+console.log(await p.evaluate(() => { const el = [...document.querySelectorAll("div")].find(d => d.children.length > 2 && /Competitor Pricing Watcher/.test(d.textContent) && /You give/i.test(d.textContent) && d.textContent.length < 900); return el ? el.innerText.replace(/\s+/g, " ").slice(0, 500) : "card not found"; }));
+await p.goto(B + "/apps/pricing-watcher", { waitUntil: "networkidle0" });
+console.log("public:", (await p.evaluate(() => document.body.innerText)).replace(/\s+/g, " ").slice(0, 300), "| robots:", await p.evaluate(() => document.querySelector('meta[name=robots]')?.content));
+await p.screenshot({ path: process.env.SHOT || "/tmp/pw-public.png" });
+await b.close();

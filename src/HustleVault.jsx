@@ -69,7 +69,7 @@ function AppCard({app}) {
         </div>
         <div style={{...GT,fontSize:18,fontWeight:900,letterSpacing:1}}>{app.name}</div>
         <p style={{fontSize:14,color:"#C0B8A8",lineHeight:1.6,margin:"6px 0 12px"}}>{app.tagline}</p>
-        {row("You give",app.give)}{row("You get",app.get)}{row("Price",app.external?`Free score · ${money(app.price)} full report`:`${money(app.price)} one time`)}{row("How fast",app.fast)}
+        {row("You give",app.give)}{row("You get",app.get)}{row("Price",app.price==null?"Coming soon":app.external?`Free score · ${money(app.price)} full report`:`${money(app.price)} one time`)}{row("How fast",app.fast)}
       </div>
       <div style={{padding:"12px 20px 20px",marginTop:"auto"}}>
         {app.external

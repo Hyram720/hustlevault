@@ -45,13 +45,13 @@ function Table({ cols, rows }) {
 }
 
 function AppEditor({ app, onSaved }) {
-  const [f, setF] = useState({ price: (app.price / 100).toFixed(2), tagline: app.tagline, give: app.give, get: app.get, fast: app.fast });
+  const [f, setF] = useState({ price: app.price == null ? "" : (app.price / 100).toFixed(2), tagline: app.tagline, give: app.give, get: app.get, fast: app.fast });
   const [msg, setMsg] = useState("");
   const save = async (extra = {}) => {
     setMsg("Saving…");
     try {
       const body = { id: app.id, tagline: f.tagline, give: f.give, get: f.get, fast: f.fast, ...extra };
-      if (!app.external) body.price = Math.round(parseFloat(f.price) * 100);
+      if (!app.external && String(f.price).trim() !== "") body.price = Math.round(parseFloat(f.price) * 100);
       const d = await api("apps", { method: "PUT", body: JSON.stringify(body) }); onSaved(d.apps); setMsg("Saved ✓");
     } catch (e) { setMsg(e.message); }
   };
@@ -131,7 +131,7 @@ function Dashboard({ onOut }) {
           <h2 style={{ fontSize: 18, margin: "8px 0 10px" }}>By app <span style={{ fontSize: 12, color: C.dim }}>(sorted by popularity below)</span></h2>
           <div className="hv-card" style={{ padding: 8, marginBottom: 20 }}>
             <Table rows={s.popular.map((id) => s.byApp.find((a) => a.id === id))} cols={[
-              ["App", (r) => r.name], ["Status", (r) => r.status], ["Price", (r) => money(r.price)], ["Views", (r) => r.views], ["Checkouts", (r) => r.checkouts],
+              ["App", (r) => r.name], ["Status", (r) => r.status], ["Price", (r) => (r.price == null ? "—" : money(r.price))], ["Views", (r) => r.views], ["Checkouts", (r) => r.checkouts],
               ["Sales", (r) => (r.id === "venturecheck" ? `${s.venturecheck.salesAllSources} (all sources)` : r.purchases)],
               ["Revenue", (r) => (r.id === "venturecheck" ? usd(s.venturecheck.revenueAllSources) : usd(r.revenue))], ["Refunds", (r) => r.refunds],
               ["View→sale", (r) => pct(r.viewToPurchase)], ["Checkout→sale", (r) => pct(r.checkoutToPurchase)], ["AI cost/sale", (r) => (r.aiCostPerSale ? "$" + r.aiCostPerSale.toFixed(4) : "—")],

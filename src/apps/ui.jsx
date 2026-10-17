@@ -44,7 +44,7 @@ export function Facts({ app }) {
   );
   return (
     <div style={{ marginBottom: 18 }}>
-      {row("You give", app.give)}{row("You get", app.get)}{row("How much", `${money(app.price)} one time — no subscription`)}{row("How fast", app.fast)}
+      {row("You give", app.give)}{row("You get", app.get)}{row("How much", app.price == null ? "Coming soon" : `${money(app.price)} one time — no subscription`)}{row("How fast", app.fast)}
     </div>
   );
 }
