@@ -31,7 +31,7 @@ function upsertLink(rel, href) {
 // ── SEO HOOK ───────────────────────────────────────────────────
 // Sets <title>, meta description, canonical, Open Graph + Twitter tags,
 // and injects JSON-LD structured data for the current route.
-export function useSEO({ title, description, path = "/", image, type = "website", jsonLd }) {
+export function useSEO({ title, description, path = "/", image, type = "website", jsonLd, noindex = false }) {
   const jsonKey = jsonLd ? JSON.stringify(jsonLd) : "";
   useEffect(() => {
     const url = SITE + path;
@@ -39,7 +39,7 @@ export function useSEO({ title, description, path = "/", image, type = "website"
 
     if (title) document.title = title;
     upsertMeta("name", "description", description);
-    upsertMeta("name", "robots", "index, follow");
+    upsertMeta("name", "robots", noindex ? "noindex, nofollow" : "index, follow");
     upsertLink("canonical", url);
 
     upsertMeta("property", "og:site_name", BRAND);
@@ -67,5 +67,5 @@ export function useSEO({ title, description, path = "/", image, type = "website"
     return () => {
       if (script) script.remove();
     };
-  }, [title, description, path, image, type, jsonKey]);
+  }, [title, description, path, image, type, jsonKey, noindex]);
 }

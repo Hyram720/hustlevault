@@ -3,6 +3,8 @@ import HustleVault from './HustleVault'
 import Success from './Success'
 import Cancel from './Cancel'
 import DoorScript from './DoorScript'
+import ObjectionCoach from './apps/ObjectionCoach'
+import MyPurchase, { MyList } from './apps/MyPurchase'
 import Blog from './blog/Blog'
 import BlogPost from './blog/BlogPost'
 import AdminLogin from './admin/AdminLogin'
@@ -24,6 +26,9 @@ function App() {
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
         <Route path="/door-script" element={<DoorScript />} />
+        <Route path="/apps/objection-coach" element={<ObjectionCoach />} />
+        <Route path="/my" element={<MyList />} />
+        <Route path="/my/:id" element={<MyPurchase />} />
 
         {/* Admin */}
         <Route path="/admin" element={<AdminLogin />} />
