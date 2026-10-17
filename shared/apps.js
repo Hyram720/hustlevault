@@ -29,6 +29,13 @@ export const APPS = [
     fast: "About 2 minutes",
   },
   {
+    id: "first-customer-finder", path: "start", name: "First Customer Finder", price: 500, status: "soon",
+    tagline: "Find real people on Reddit who are asking for what you sell.",
+    give: "Your business idea and (optionally) your city or area",
+    get: "Up to 10 recent public Reddit posts from people looking for your service — with the post, subreddit, date and link",
+    fast: "About 1 minute",
+  },
+  {
     id: "objection-coach", path: "grow", name: "Sales Objection Coach", price: 500, status: "soon",
     tagline: "Know exactly what to say when a customer pushes back.",
     give: "Your industry and the objection you keep hearing",
@@ -131,6 +138,11 @@ export const APP_FORMS = {
     { name: "appointment", label: "What appointment do you want?", type: "text", max: 80, min: 3, placeholder: "e.g. 20-minute free roof inspection" },
     { name: "tone", label: "Tone", type: "select", options: ["Friendly", "Professional", "Casual"] },
     { name: "notes", label: "Anything else? (optional — no names or phone numbers)", type: "textarea", max: 240, min: 0, placeholder: "e.g. They mentioned a leak in the back bedroom" },
+  ],
+  "first-customer-finder": [
+    { name: "idea", label: "What do you sell or want to offer?", type: "text", max: 160, min: 4, placeholder: "e.g. Mobile notary, dog walking, website design" },
+    { name: "area", label: "Who can you serve?", type: "select", options: ["People near me (local)", "Anyone (online / remote)"] },
+    { name: "location", label: "Your city or area (optional, for local)", type: "text", max: 80, min: 0, placeholder: "e.g. Philadelphia, PA" },
   ],
   "lead-qualifier": [
     { name: "reply", label: "Paste the prospect's reply", type: "textarea", max: 1500, min: 10, rows: 6, placeholder: "e.g. \"Sounds interesting but we're pretty busy right now. What would this cost us?\" (remove phone numbers and email addresses)" },

@@ -27,6 +27,14 @@ export function toSections(appId, o = {}) {
         { h: "Tips", items: L(o.tips).map((t) => ({ text: "• " + t })) },
         { h: "Reminder", items: [{ text: "These are drafts — nothing is sent for you. Only text or email people who gave you permission to contact them, and honor any request to stop." }] },
       ];
+    case "first-customer-finder":
+      return [
+        { h: L(o.results).length ? `Your top ${L(o.results).length} leads` : "No strong leads right now", items: L(o.results).length
+          ? L(o.results).map((r, i) => ({ label: `${i + 1}. r/${r.subreddit} · ${r.date} · match ${r.score}/10`, text: [r.title, r.excerpt && `“${r.excerpt}”`, r.why && `Why it fits: ${r.why}`].filter(Boolean).join("\n\n"), link: r.url }))
+          : [{ text: `We checked ${o.scanned || 0} recent public Reddit posts and didn't find anyone clearly asking for this in the last year. That's common for new or very specific ideas — try the searches below yourself every few days, widen your area, or describe your service the way a customer would.` }] },
+        { h: "How to reach out (the right way)", items: [{ text: "• Read each subreddit's rules first — many ban self-promotion.\n• Reply in the thread with genuinely helpful advice; mention what you do only if it fits.\n• Only send a private message if the poster invited offers.\n• Never copy-paste the same message to many people. Posts are public, but people aren't leads until they say yes." }] },
+        { h: "Searches we ran", items: [{ text: [...L(o.queries).map((q) => "• " + q), ...L(o.subreddits).map((s) => "• r/" + s)].join("\n") }] },
+      ];
     case "lead-qualifier":
       return [
         { h: "Verdict", items: [{ label: o.verdict ? `${o.verdict.toUpperCase()}${o.confidence ? ` — ${o.confidence} confidence` : ""}` : "", text: o.reason }] },
@@ -51,7 +59,7 @@ export function toPlainText(title, appId, o) {
   const lines = [title, ""];
   for (const s of toSections(appId, o)) {
     lines.push(s.h.toUpperCase(), "");
-    for (const it of s.items) { if (it.label) lines.push(it.label); if (it.text) lines.push(it.text); lines.push(""); }
+    for (const it of s.items) { if (it.label) lines.push(it.label); if (it.text) lines.push(it.text); if (it.link) lines.push(it.link); lines.push(""); }
   }
   lines.push(DISCLAIMER);
   return lines.join("\n");

@@ -2,6 +2,7 @@
 import { APP_FORMS } from "../../shared/apps.js";
 import { cleanText, HttpError } from "./http.mjs";
 import { chatJSON, GUARD, fence, str } from "./ai.mjs";
+import { generateFinder } from "./finder.mjs";
 
 export function validateForm(appId, raw = {}) {
   const fields = APP_FORMS[appId];
@@ -104,9 +105,10 @@ Base everything only on what the reply and context actually say. Do not invent f
   },
 };
 
-export const hasGenerator = (appId) => !!SPECS[appId];
+export const hasGenerator = (appId) => !!SPECS[appId] || appId === "first-customer-finder";
 
 export async function generateForm(appId, inputs) {
+  if (appId === "first-customer-finder") return generateFinder(inputs);
   const spec = SPECS[appId];
   if (!spec) throw new Error("No generator");
   const sys = `${BASE}\n${GUARD}\nTask: ${spec.task}\nReturn JSON exactly in this shape:\n${spec.format}`;

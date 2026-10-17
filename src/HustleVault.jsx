@@ -20,7 +20,7 @@ const IMG = "https://d8j0ntlcm91z4.cloudfront.net/user_391qpEAynVndVvvLA4RZWiHER
 const HERO_IMG = IMG + "hf_20260810_204014_47196f1f-19bc-4591-8ed2-50a21cf519aa.png";
 const VAULT_VIDEO = IMG + "hf_20260811_165934_1c5a7a1f-5e2b-4b79-a7fd-42cca3f35a0a.mp4";
 
-const ICON = { "venturecheck":"🧭", "first-sale-blueprint":"🗺️", "offer-builder":"🧰", "objection-coach":"🎯", "lead-follow-up":"📨", "reactivation-kit":"🔁", "lead-qualifier":"🚦" };
+const ICON = { "venturecheck":"🧭", "first-sale-blueprint":"🗺️", "offer-builder":"🧰", "objection-coach":"🎯", "lead-follow-up":"📨", "reactivation-kit":"🔁", "lead-qualifier":"🚦", "first-customer-finder":"🔎" };
 const ACCENT = { start:"#2ECC71", grow:"#3498DB" };
 const money = c => "$" + (c % 100 === 0 ? c/100 : (c/100).toFixed(2));
 

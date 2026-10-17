@@ -116,6 +116,7 @@ function FormResult({ p }) {
                 <div style={{ fontSize: 13, color: C.gold, fontWeight: 700 }}>{it.label}</div>{s.copy && <Copy text={it.text} />}
               </div>}
               <div style={{ fontSize: 15.5, lineHeight: 1.6, whiteSpace: "pre-wrap" }}>{it.text}</div>
+              {/^https:\/\/www\.reddit\.com\//.test(it.link || "") && <a href={it.link} target="_blank" rel="noopener noreferrer nofollow" style={{ display: "inline-block", marginTop: 6, color: C.gold, fontSize: 14 }}>Open the post on Reddit →</a>}
             </div>
           ))}
         </div>

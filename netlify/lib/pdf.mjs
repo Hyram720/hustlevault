@@ -47,6 +47,7 @@ export async function buildPdf({ title, appId, result, purchaseId }) {
     for (const it of s.items) {
       if (it.label) write(it.label, { f: bold, size: 11 });
       if (it.text) write(it.text, { size: 11 });
+      if (it.link) write(it.link, { size: 9, color: grey });
       y -= 6;
     }
   }
