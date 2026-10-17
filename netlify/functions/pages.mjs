@@ -2,7 +2,7 @@
 // content and tags), plus /blog/rss.xml, /sitemap.xml and the public blog JSON API.
 import { esc, renderMarkdown } from "../../shared/markdown.js";
 import { POSTS as STATIC_POSTS } from "../../src/blog/posts.js";
-import { publishedPosts, visibleSponsors, publicSponsor } from "../lib/content.mjs";
+import { publishedPosts, visibleSponsors, publicSponsor, CDN } from "../lib/content.mjs";
 import { publicPost, mergePosts, fmtDateET, PER_PAGE, absUrl } from "../../shared/blog.js";
 import { sponsorsMeta, policyMeta, blogIndexMeta, blogPostMeta, SITE, DEFAULT_OG } from "../../shared/pagemeta.js";
 import { COPY, SPONSOR_PRICE_LABEL, LOGO_SPEC, POLICY_UPDATED } from "../../shared/sponsors.js";
@@ -53,7 +53,7 @@ async function page(req, m, body, data, { status = 200, extraHead = "" } = {}) {
     .replace(/<!-- (Primary SEO|Open Graph|Twitter Card) -->\s*/g, "")
     .replace("</head>", `    ${head(m, extraHead)}\n  </head>`)
     .replace(/<div id="root"><\/div>/, `<div id="root"><div id="hv-ssr" style="max-width:860px;margin:0 auto;padding:24px;color:#F5F0E8;font-family:Inter,system-ui,sans-serif">${NAV}${body}${FOOT}</div></div>\n    <script>window.__HV_DATA__=${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`);
-  return new Response(html, { status, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "public, max-age=0, must-revalidate", "Netlify-CDN-Cache-Control": "public, s-maxage=60, stale-while-revalidate=300", "Netlify-Vary": "query=page" } });
+  return new Response(html, { status, headers: { "Content-Type": "text/html; charset=utf-8", ...CDN(60), "Netlify-Vary": "query=page" } });
 }
 
 async function allPosts() {
@@ -108,7 +108,7 @@ async function rss() {
   const posts = (await allPosts()).slice(0, 30);
   const items = posts.map((p) => `<item><title>${esc(p.title)}</title><link>${SITE}/blog/${esc(p.slug)}</link><guid isPermaLink="true">${SITE}/blog/${esc(p.slug)}</guid><pubDate>${new Date(/^\d{4}-\d{2}-\d{2}$/.test(p.date) ? p.date + "T12:00:00Z" : p.date).toUTCString()}</pubDate><description>${esc(p.excerpt)}</description></item>`).join("\n");
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The Hustle Vault Blog</title><link>${SITE}/blog</link><description>Practical guides on side hustles and growing a small business with AI.</description><language>en-us</language><atom:link href="${SITE}/blog/rss.xml" rel="self" type="application/rss+xml"/>\n${items}\n</channel></rss>`;
-  return new Response(xml, { headers: { "Content-Type": "application/rss+xml; charset=utf-8", "Cache-Control": "public, max-age=0, must-revalidate", "Netlify-CDN-Cache-Control": "public, s-maxage=300" } });
+  return new Response(xml, { headers: { "Content-Type": "application/rss+xml; charset=utf-8", ...CDN(300) } });
 }
 
 async function sitemap() {
@@ -120,10 +120,10 @@ async function sitemap() {
     ...posts.map((p) => [`/blog/${p.slug}`, day(p.dateModified || p.date), "monthly", "0.7"]),
   ];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, m, c, p]) => `  <url>\n    <loc>${SITE}${esc(u)}</loc>\n    <lastmod>${m}</lastmod>\n    <changefreq>${c}</changefreq>\n    <priority>${p}</priority>\n  </url>`).join("\n")}\n</urlset>\n`;
-  return new Response(xml, { headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=0, must-revalidate", "Netlify-CDN-Cache-Control": "public, s-maxage=300" } });
+  return new Response(xml, { headers: { "Content-Type": "application/xml; charset=utf-8", ...CDN(300) } });
 }
 
-const jsonRes = (d, status = 200) => new Response(JSON.stringify(d), { status, headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=30" } });
+const jsonRes = (d, status = 200) => new Response(JSON.stringify(d), { status, headers: { "Content-Type": "application/json", ...(status === 200 ? CDN(60) : { "Cache-Control": "no-store" }) } });
 
 export default async (req) => {
   const path = new URL(req.url).pathname.replace(/\/+$/, "") || "/";

@@ -4,7 +4,7 @@ import { purchases, events, meta, rateLimit } from "../lib/store.mjs";
 import { verifyPassword, issueToken, requireAdmin, signOutEverywhere } from "../lib/admin.mjs";
 import { getCatalog, getOverrides, isBuilt } from "../lib/apps.mjs";
 import { APPS } from "../../shared/apps.js";
-import { content, getSponsors, updateSponsors, sponsorFields, setMediaPublic, deleteMedia, listInquiries, listAudit, audit, getSettings, setSettings, token, rid, listPosts, postFields, POST_ID_RE, SPONSOR_ID_RE, mediaUrls } from "../lib/content.mjs";
+import { content, getSponsors, updateSponsors, sponsorFields, setMediaPublic, deleteMedia, listInquiries, listAudit, audit, getSettings, setSettings, token, rid, listPosts, postFields, POST_ID_RE, SPONSOR_ID_RE, mediaUrls, purgePublic } from "../lib/content.mjs";
 import { sponsorVisible } from "../../shared/sponsors.js";
 import { sponsorStats, deleteSponsorStats } from "../lib/sponsorstats.mjs";
 import { sendWelcome, emailConfigured, sponsorLinks } from "../lib/email.mjs";
@@ -152,6 +152,7 @@ async function postsAdmin(req, url) {
     const p = { id: "p_" + rid(9), ...f, createdAt: now, updatedAt: now };
     if (p.cover) await setMediaPublic(p.cover, true);
     await content().setJSON(`post/${p.id}`, p);
+    await purgePublic();
     await audit("post_created", { post: p.id, slug: p.slug, status: p.status });
     return { post: p };
   }
@@ -162,12 +163,14 @@ async function postsAdmin(req, url) {
     const f = postFields(await readJson(req, 90000), reserved(id));
     const p = { ...cur, ...f, updatedAt: new Date().toISOString() };
     await content().setJSON(`post/${id}`, p);
+    await purgePublic();
     if (cur.cover && cur.cover !== p.cover) await deleteMedia(cur.cover);
     await audit("post_updated", { post: id, slug: p.slug, status: p.status });
     return { post: p };
   }
   if (req.method === "DELETE") {
     await content().delete(`post/${id}`);
+    await purgePublic();
     if (cur.cover) await deleteMedia(cur.cover);
     await audit("post_deleted", { post: id, slug: cur.slug });
     return { ok: true };

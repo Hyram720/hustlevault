@@ -2,7 +2,7 @@
 // and the (off-by-default) $100/month sponsor checkout.
 import { json, handle, readJson, HttpError, ipHash, baseUrl } from "../lib/http.mjs";
 import { rateLimit } from "../lib/store.mjs";
-import { content, getSponsors, visibleSponsors, publicSponsor, getSettings, updateSponsors, audit, rid, text, email, httpsUrl, MEDIA_ID_RE, TOKEN_RE, SPONSOR_ID_RE, mediaUrls } from "../lib/content.mjs";
+import { content, getSponsors, visibleSponsors, publicSponsor, getSettings, updateSponsors, audit, rid, text, email, httpsUrl, MEDIA_ID_RE, TOKEN_RE, SPONSOR_ID_RE, mediaUrls, CDN } from "../lib/content.mjs";
 import { isBot, visitor, capFilter, record, sponsorStats } from "../lib/sponsorstats.mjs";
 import { createSponsorCheckout } from "../lib/sponsorsub.mjs";
 import { etDay, PLACEMENTS } from "../../shared/sponsors.js";
@@ -13,9 +13,6 @@ async function inquiry(req, context) {
   const b = await readJson(req, 12000);
   if (b.company_fax || b.website2) return json({ ok: true }); // honeypot: pretend success, store nothing
   if (typeof b.t === "number" && b.t < 2500) return json({ ok: true }); // filled faster than a human can
-  const who = ipHash(context, req);
-  if (!(await rateLimit("sp-inq", who, 3, 600)) || !(await rateLimit("sp-inq-day", who, 10, 86400)) || !(await rateLimit("sp-inq-all", "all", 60, 86400)))
-    throw new HttpError(429, "Too many messages — please try again later.");
   if (b.agree !== true) throw new HttpError(400, "Please agree to the Ad Policy.");
   const logo = String(b.logo || "");
   if (logo && !MEDIA_ID_RE.test(logo)) throw new HttpError(400, "Bad logo upload — please try again.");
@@ -27,6 +24,10 @@ async function inquiry(req, context) {
     logoUrl: httpsUrl(b.logoUrl, "Logo URL", { required: false }), logo, message: text(b.message, "Message", 0, 2000, { required: false }),
     agreedPolicy: true, test: /\bTEST\b/.test(`${b.business} ${b.name}`),
   };
+  // Rate limits count only valid submissions (validation above is cheap and stores nothing).
+  const who = ipHash(context, req);
+  if (!(await rateLimit("sp-inq", who, 3, 600)) || !(await rateLimit("sp-inq-day", who, 10, 86400)) || !(await rateLimit("sp-inq-all", "all", 60, 86400)))
+    throw new HttpError(429, "Too many messages — please try again later.");
   await content().setJSON(`inq/${now}-${rec.id}`, rec);
   await audit("inquiry_received", { inquiry: rec.id, business: rec.business });
   return json({ ok: true, id: rec.id });
@@ -74,7 +75,7 @@ export default handle(async (req, context) => {
   const { action, token } = context.params || {};
   if (!action && req.method === "GET") {
     const [list, settings] = await Promise.all([visibleSponsors(), getSettings()]);
-    return json({ sponsors: list.map(publicSponsor), checkout: !!settings.checkout }, 200, { "Cache-Control": "public, max-age=30, s-maxage=30" });
+    return json({ sponsors: list.map(publicSponsor), checkout: !!settings.checkout }, 200, CDN(60));
   }
   if (action === "inquiry" && req.method === "POST") return inquiry(req, context);
   if (action === "imp" && req.method === "POST") return impressions(req, context);

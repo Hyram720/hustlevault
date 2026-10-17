@@ -1,6 +1,7 @@
 // Sponsors, inquiries, blog posts, media and audit log on Netlify Blobs.
 import crypto from "node:crypto";
 import { getStore } from "@netlify/blobs";
+import { purgeCache } from "@netlify/functions";
 import { HttpError, cleanText } from "./http.mjs";
 import { sponsorVisible } from "../../shared/sponsors.js";
 import { slugify } from "../../shared/markdown.js";
@@ -16,6 +17,13 @@ export const token = () => crypto.randomBytes(24).toString("base64url"); // 192-
 export const MEDIA_ID_RE = /^m_[A-Za-z0-9_-]{16}$/;
 export const SPONSOR_ID_RE = /^sp_[A-Za-z0-9_-]{12}$/;
 export const TOKEN_RE = /^[A-Za-z0-9_-]{32}$/;
+
+// ── CDN cache: public pages/APIs carry this tag; every content write purges it ──
+export const PUBLIC_TAG = "hv-public";
+export const CDN = (sec = 60) => ({ "Cache-Control": "public, max-age=0, must-revalidate", "Netlify-CDN-Cache-Control": `public, s-maxage=${sec}, stale-while-revalidate=120`, "Netlify-Cache-Tag": PUBLIC_TAG });
+export async function purgePublic() {
+  try { await purgeCache({ tags: [PUBLIC_TAG] }); } catch (e) { console.warn("cache purge failed:", e?.message || e); }
+}
 
 // ── field validation ───────────────────────────────────────────
 export function httpsUrl(v, field = "Link", { required = true } = {}) {
@@ -61,6 +69,7 @@ export async function setSettings(patch) {
   const cur = await getSettings();
   const next = { ...cur, ...patch, updatedAt: new Date().toISOString() };
   await content().setJSON("settings/sponsors", next);
+  await purgePublic();
   return next;
 }
 
@@ -76,7 +85,7 @@ export async function updateSponsors(mutate, tries = 6) {
     if (!next) return list;
     // (The local dev sandbox returns no ETags; production always does.)
     const res = await content().setJSON("sponsors", next, etag ? { onlyIfMatch: etag } : exists ? {} : { onlyIfNew: true });
-    if (res.modified) return next;
+    if (res.modified) { await purgePublic(); return next; }
     await new Promise((r) => setTimeout(r, 60 + Math.random() * 200));
   }
   throw new HttpError(409, "Someone else changed sponsors at the same time. Please try again.");

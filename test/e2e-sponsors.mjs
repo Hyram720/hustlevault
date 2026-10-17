@@ -211,7 +211,7 @@ ok(r.s === 302 && r.h.get("location") === "https://example.com/?ref=hv", "/go/sp
 r = await req(`/go/sponsor/${sp.id}?p=ticker`, { headers: { "User-Agent": "curl/8.0" } });
 ok(r.s === 302, "bot click still redirects (not counted)");
 r = await req(`/go/sponsor/sp_doesnotexist?p=wall`);
-ok(r.s === 302 && r.h.get("location") === "/sponsors", "unknown sponsor click -> /sponsors");
+ok(r.s === 302 && /^(https:\/\/[^/]+)?\/sponsors$/.test(r.h.get("location") || ""), "unknown sponsor click -> /sponsors");
 await sleep(500);
 r = await admin(`sponsor-stats?id=${sp.id}&days=7`);
 ok(r.s === 200 && r.d.totals.wall.imp === 1 && r.d.totals.ticker.imp === 1 && r.d.totals.wall.clk === 1 && r.d.totals.ticker.clk === 0 && r.d.totals.wall.ctr === 1 && r.d.daily.length === 7, "admin stats: impressions, clicks, CTR by placement, daily rows");
