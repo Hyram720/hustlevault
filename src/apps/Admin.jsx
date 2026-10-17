@@ -111,6 +111,7 @@ function Dashboard({ onOut }) {
         <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
           <select className="hv-in" style={{ width: "auto", padding: "8px 10px", fontSize: 14 }} value={days} onChange={(e) => setDays(+e.target.value)}>{[1, 7, 30, 90, 365].map((d) => <option key={d} value={d}>Last {d} day{d > 1 ? "s" : ""}</option>)}</select>
           <label style={{ fontSize: 13, color: C.muted, display: "flex", gap: 6, alignItems: "center" }}><input type="checkbox" checked={test} onChange={(e) => setTest(e.target.checked)} />Include test purchases</label>
+          <a href="/apps/pricing-watcher" style={{ border: `1px solid ${C.gold}`, color: C.gold, padding: "8px 12px", borderRadius: 4, fontSize: 13, textDecoration: "none" }}>Pricing Watcher</a>
           <button onClick={load} style={{ background: "none", border: `1px solid ${C.borderH}`, color: C.muted, padding: "8px 12px", borderRadius: 4, cursor: "pointer" }}>Refresh</button>
           <button onClick={async () => { try { await api("logout-all", { method: "POST" }); } catch {} sessionStorage.removeItem(KEY); onOut(); }} style={{ background: "none", border: `1px solid ${C.borderH}`, color: C.muted, padding: "8px 12px", borderRadius: 4, cursor: "pointer" }}>Sign out everywhere</button>
         </div>
