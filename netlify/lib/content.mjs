@@ -146,12 +146,19 @@ export async function saveMedia(processed, kind, { isPublic, source }) {
 export async function setMediaPublic(id, isPublic = true) {
   if (!MEDIA_ID_RE.test(id || "")) return;
   const m = await media().get(`${id}/meta`, { type: "json" });
-  if (m && m.public !== isPublic) await media().setJSON(`${id}/meta`, { ...m, public: isPublic });
+  if (m && m.public !== isPublic) {
+    await media().setJSON(`${id}/meta`, { ...m, public: isPublic });
+    if (!isPublic) await purgeMedia(id);
+  }
 }
 export async function deleteMedia(id) {
   if (!MEDIA_ID_RE.test(id || "")) return;
   const { blobs } = await media().list({ prefix: id + "/" });
   await Promise.all(blobs.map((b) => media().delete(b.key)));
+  await purgeMedia(id);
+}
+async function purgeMedia(id) {
+  try { await purgeCache({ tags: [`hv-media-${id}`] }); } catch (e) { console.warn("media cache purge failed:", e?.message || e); }
 }
 
 // ── inquiries ──────────────────────────────────────────────────

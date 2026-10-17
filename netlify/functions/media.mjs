@@ -19,7 +19,8 @@ export default async (req, context) => {
     headers: {
       "Content-Type": meta.variants[file].type, "X-Content-Type-Options": "nosniff",
       "Content-Security-Policy": "default-src 'none'; sandbox", "Content-Disposition": "inline",
-      "Cache-Control": meta.public ? "public, max-age=3600" : "private, no-store",
+      // Public files are cached at the CDN under a per-file tag that deleteMedia()/setMediaPublic(false) purge.
+      ...(meta.public ? { "Cache-Control": "public, max-age=300", "Netlify-CDN-Cache-Control": "public, s-maxage=86400", "Netlify-Cache-Tag": `hv-media-${id}` } : { "Cache-Control": "private, no-store" }),
     },
   });
 };
