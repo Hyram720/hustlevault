@@ -27,6 +27,14 @@ export function toSections(appId, o = {}) {
         { h: "Tips", items: L(o.tips).map((t) => ({ text: "• " + t })) },
         { h: "Reminder", items: [{ text: "These are drafts — nothing is sent for you. Only text or email people who gave you permission to contact them, and honor any request to stop." }] },
       ];
+    case "lead-qualifier":
+      return [
+        { h: "Verdict", items: [{ label: o.verdict ? `${o.verdict.toUpperCase()}${o.confidence ? ` — ${o.confidence} confidence` : ""}` : "", text: o.reason }] },
+        { h: "Buying signals", items: L(o.buying_signals).map((t) => ({ text: "• " + t })) },
+        { h: "Red flags", items: L(o.red_flags).map((t) => ({ text: "• " + t })) },
+        { h: "Suggested next message", copy: true, items: [{ label: o.next_step, text: o.next_message }] },
+        { h: "Reminder", items: [{ text: "This is a draft — nothing is sent for you. A verdict is a judgment call, not a guarantee the prospect will or won't buy." }] },
+      ].filter((s) => s.items.length);
     case "reactivation-kit":
       return [
         { h: "Campaign plan", items: L(o.plan).map((t) => ({ text: "• " + t })) },

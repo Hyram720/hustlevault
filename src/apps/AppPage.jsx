@@ -10,6 +10,7 @@ const NOTES = {
   "first-sale-blueprint": "You'll get it on screen and as a PDF download. A plan, not a promise — no income is guaranteed.",
   "offer-builder": "Suggested pricing is a starting point — check what others charge near you.",
   "lead-follow-up": "Drafts only — nothing is sent for you. Only contact people who agreed to hear from you.",
+  "lead-qualifier": "Remove phone numbers and email addresses before pasting. The suggested reply is a draft — nothing is sent for you.",
   "reactivation-kit": "No customer lists or personal data needed — you add names yourself. Downloadable PDF + text file.",
 };
 
@@ -70,7 +71,7 @@ export default function AppPage() {
               {f.type === "select" ? (
                 <select id={f.name} className="hv-in" value={vals[f.name]} onChange={(e) => setVals({ ...vals, [f.name]: e.target.value })}>{f.options.map((o) => <option key={o}>{o}</option>)}</select>
               ) : f.type === "textarea" ? (
-                <textarea id={f.name} className="hv-in" rows={3} maxLength={f.max} placeholder={f.placeholder} value={vals[f.name]} onChange={(e) => setVals({ ...vals, [f.name]: e.target.value })} />
+                <textarea id={f.name} className="hv-in" rows={f.rows || 3} maxLength={f.max} placeholder={f.placeholder} value={vals[f.name]} onChange={(e) => setVals({ ...vals, [f.name]: e.target.value })} />
               ) : (
                 <input id={f.name} className="hv-in" maxLength={f.max} placeholder={f.placeholder} value={vals[f.name]} onChange={(e) => setVals({ ...vals, [f.name]: e.target.value })} />
               )}

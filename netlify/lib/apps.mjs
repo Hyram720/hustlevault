@@ -10,6 +10,7 @@ export const STRIPE_PRODUCTS = {
   "offer-builder": "prod_VSGlVkU8cmpzoZ",
   "lead-follow-up": "prod_VSGlhmlr5L5vIG",
   "reactivation-kit": "prod_VSGlCCTcMEHYZL",
+  "lead-qualifier": "prod_VSTsGMezmXvpD8",
 };
 
 export async function getOverrides() {

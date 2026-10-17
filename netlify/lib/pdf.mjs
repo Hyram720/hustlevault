@@ -39,7 +39,7 @@ export async function buildPdf({ title, appId, result, purchaseId }) {
   };
   newPage();
   write(title, { f: bold, size: 22, color: gold, gap: 8 });
-  write(`Purchase ${purchaseId} · ${new Date().toISOString().slice(0, 10)}`, { size: 9, color: grey });
+  write(`Purchase ${purchaseId} · ${new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" })}`, { size: 9, color: grey });
   y -= 10;
   for (const s of toSections(appId, result)) {
     y -= 8;

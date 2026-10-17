@@ -49,6 +49,13 @@ export const APPS = [
     get: "Ready-to-send email and text campaigns you can download",
     fast: "About 2 minutes",
   },
+  {
+    id: "lead-qualifier", path: "grow", name: "Lead Qualifier", price: 500, status: "soon",
+    tagline: "Know if a prospect is ready to buy — or wasting your time.",
+    give: "A prospect's reply (email, text or DM) and a little context",
+    get: "A clear verdict — Push, Nurture or Walk away — with the reasons, buying signals, red flags and a suggested next message",
+    fast: "Under 1 minute",
+  },
 ];
 
 export const COACH_INDUSTRIES = {
@@ -124,6 +131,13 @@ export const APP_FORMS = {
     { name: "appointment", label: "What appointment do you want?", type: "text", max: 80, min: 3, placeholder: "e.g. 20-minute free roof inspection" },
     { name: "tone", label: "Tone", type: "select", options: ["Friendly", "Professional", "Casual"] },
     { name: "notes", label: "Anything else? (optional — no names or phone numbers)", type: "textarea", max: 240, min: 0, placeholder: "e.g. They mentioned a leak in the back bedroom" },
+  ],
+  "lead-qualifier": [
+    { name: "reply", label: "Paste the prospect's reply", type: "textarea", max: 1500, min: 10, rows: 6, placeholder: "e.g. \"Sounds interesting but we're pretty busy right now. What would this cost us?\" (remove phone numbers and email addresses)" },
+    { name: "channel", label: "Where did they reply?", type: "select", options: ["Email", "Text message", "DM (social media)", "Other"] },
+    { name: "offer", label: "What did you offer? (optional)", type: "text", max: 160, min: 0, placeholder: "e.g. Monthly lawn care service" },
+    { name: "pricePoint", label: "Price point (optional)", type: "text", max: 60, min: 0, placeholder: "e.g. $150/month" },
+    { name: "context", label: "Anything else we should know? (optional)", type: "textarea", max: 300, min: 0, placeholder: "e.g. Second follow-up, they asked for a quote last week" },
   ],
   "reactivation-kit": [
     { name: "business", label: "What kind of business do you run?", type: "text", max: 120, min: 3, placeholder: "e.g. Hair salon" },

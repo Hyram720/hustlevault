@@ -67,6 +67,28 @@ const SPECS = {
     }),
     ok: (o) => o.messages.length === 5,
   },
+  "lead-qualifier": {
+    maxTokens: 700,
+    task: `Qualify a sales prospect from their reply. Decide one verdict:
+- "Push": clear interest or buying signals (asks about price, timing, next steps, decision-maker involved) — move toward a close or booked call now.
+- "Nurture": some interest but not ready (timing, budget later, needs info, polite but vague) — stay helpful and follow up later.
+- "Walk away": clear no, hostile, asked not to be contacted, no need/budget/authority at all, or signs of a scam — stop spending time.
+If they asked not to be contacted, the verdict must be "Walk away" and the next message must only politely confirm you won't contact them again.
+Base everything only on what the reply and context actually say. Do not invent facts about the user's business: if the next message needs a price, plan option, date or detail the user didn't give, use a [placeholder] like [start date] or [smaller plan option] instead. Never pressure, mislead or create fake urgency. The suggested next message is a draft the user sends themselves.`,
+    format: `{"verdict":"Push|Nurture|Walk away","confidence":"high|medium|low","reason":"1-2 plain sentences",
+"buying_signals":["0-4 short bullets quoting or paraphrasing the reply"],"red_flags":["0-4 short bullets"],
+"next_step":"what to do next in under 15 words","next_message":"ready-to-send reply, matched to the channel (text/DM under 300 characters, email 40-120 words), [Name] placeholders"}`,
+    norm: (d) => {
+      const v = String(d.verdict || "").toLowerCase();
+      return {
+        verdict: v.startsWith("push") ? "Push" : v.startsWith("nurt") ? "Nurture" : v.startsWith("walk") ? "Walk away" : "",
+        confidence: ["high", "medium", "low"].includes(String(d.confidence).toLowerCase()) ? String(d.confidence).toLowerCase() : "",
+        reason: str(d.reason, 400), buying_signals: L(d.buying_signals, 5, 200), red_flags: L(d.red_flags, 5, 200),
+        next_step: str(d.next_step, 140), next_message: str(d.next_message, 1200),
+      };
+    },
+    ok: (o) => o.verdict && o.reason && o.next_message,
+  },
   "reactivation-kit": {
     maxTokens: 1700,
     task: "Create a customer reactivation (win-back) campaign. Do not ask for or use any customer records; use placeholders like [First name].",
