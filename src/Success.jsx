@@ -114,7 +114,7 @@ export default function Success() {
         // Check for upsell eligibility
         const up = UPSELLS[data.productId];
         // If it was already an upsell session, don't show another upsell (prevent loop)
-        if (up && !params.get("upsell")) {
+        if (false && up && !params.get("upsell")) { // ebook upsells retired — downloads still work
            setUpsellItem(up);
            // Delay modal slightly for effect
            setTimeout(() => setShowUpsell(true), 1500);
@@ -242,7 +242,7 @@ export default function Success() {
 
             <div style={{ textAlign: "center" }}>
               <Link to="/" style={{ display: "block", background: GG, color: "#000", padding: "18px", fontSize: 12, fontWeight: 900, letterSpacing: 4, textTransform: "uppercase", textDecoration: "none", borderRadius: 4, transition: "all 0.2s", boxShadow: `0 20px 40px ${C.gold}20` }} onMouseEnter={e => e.target.style.boxShadow = `0 10px 20px ${C.gold}40`} onMouseLeave={e => e.target.style.boxShadow = `0 20px 40px ${C.gold}20`}>
-                Enter the Main Vault
+                Back to Hustle Vault
               </Link>
               <div style={{ marginTop: 24, display: "flex", alignItems: "center", justifyContent: "center", gap: 10, opacity: 0.6 }}>
                 <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.green }} />

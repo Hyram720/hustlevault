@@ -3,10 +3,11 @@ import { json, handle, readJson, HttpError, newId, cleanText, baseUrl, ipHash } 
 import { purchases, logEvent, rateLimit } from "../lib/store.mjs";
 import { getApp, canBuy, hasPreview, STRIPE_PRODUCTS } from "../lib/apps.mjs";
 import { validateCoachInputs } from "../lib/coach.mjs";
+import { validateForm, hasGenerator } from "../lib/generators.mjs";
 import { isFlagged } from "../lib/ai.mjs";
 import { verifiedStripe } from "../lib/stripe.mjs";
 
-const VALIDATORS = { "objection-coach": validateCoachInputs };
+const validatorFor = (id) => (id === "objection-coach" ? validateCoachInputs : hasGenerator(id) ? (raw) => validateForm(id, raw) : null);
 
 function cleanUtm(u = {}) {
   const o = {};
@@ -25,7 +26,7 @@ export default handle(async (req, context) => {
   const preview = typeof body.preview === "string" ? body.preview.slice(0, 100) : "";
   if (!app || app.status === "hidden" && !hasPreview(preview)) throw new HttpError(404, "App not found");
   if (!canBuy(app, preview)) throw new HttpError(403, "This app is coming soon and can't be bought yet.");
-  const validate = VALIDATORS[app.id];
+  const validate = validatorFor(app.id);
   const product = STRIPE_PRODUCTS[app.id];
   if (!validate || !product) throw new HttpError(403, "This app is coming soon and can't be bought yet.");
   const inputs = validate(body.inputs || {});
@@ -70,7 +71,7 @@ export default handle(async (req, context) => {
   }
 
   await purchases().setJSON(id, { ...record, sessionId: session.id });
-  await logEvent("checkout_start", { app: app.id, source: utm.source, campaign: utm.campaign, amount: app.price });
+  await logEvent(isPreview ? "checkout_start_test" : "checkout_start", { app: app.id, source: utm.source, campaign: utm.campaign, amount: app.price });
   return json({ url: session.url, purchaseId: id });
 });
 

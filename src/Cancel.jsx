@@ -21,7 +21,7 @@ export default function Cancel() {
             Your payment was cancelled — you weren't charged. The blueprints are here whenever you're ready.
           </p>
           <Link to="/" style={{ display: "inline-block", background: GG, color: "#000", padding: "15px 36px", fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", textDecoration: "none", borderRadius: 2, fontFamily: "Georgia,serif" }}>
-            Back to the Vault
+            Back to Hustle Vault
           </Link>
           <div style={{ marginTop: 14, fontSize: 11, color: C.dim }}>Your payment was not processed</div>
         </div>

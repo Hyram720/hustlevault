@@ -5,15 +5,10 @@ import Cancel from './Cancel'
 import DoorScript from './DoorScript'
 import ObjectionCoach from './apps/ObjectionCoach'
 import MyPurchase, { MyList } from './apps/MyPurchase'
+import AppPage from './apps/AppPage'
+import Admin from './apps/Admin'
 import Blog from './blog/Blog'
 import BlogPost from './blog/BlogPost'
-import AdminLogin from './admin/AdminLogin'
-import AdminLayout from './admin/AdminLayout'
-import Dashboard from './admin/Dashboard'
-import Orders from './admin/Orders'
-import Products from './admin/Products'
-import Settings from './admin/Settings'
-import LivePreview from './admin/LivePreview'
 
 function App() {
   return (
@@ -30,15 +25,12 @@ function App() {
         <Route path="/my" element={<MyList />} />
         <Route path="/my/:id" element={<MyPurchase />} />
 
-        {/* Admin */}
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="preview" element={<LivePreview />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="products" element={<Products />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
+        {/* Admin (new, server-authenticated) */}
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/*" element={<Admin />} />
+
+        {/* Apps */}
+        <Route path="/apps/:id" element={<AppPage />} />
       </Routes>
     </BrowserRouter>
   )

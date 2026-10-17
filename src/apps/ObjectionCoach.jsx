@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Shell, Facts, C, GT, money } from "./ui";
 import { COACH_INDUSTRIES } from "../../shared/apps.js";
-import { getUtm } from "./utm";
+import { getUtm, previewToken, track } from "./utm";
 import { useSEO } from "../seo";
 
 const FALLBACK = { id: "objection-coach", name: "Sales Objection Coach", price: 500, status: "soon",
@@ -13,7 +13,7 @@ const FALLBACK = { id: "objection-coach", name: "Sales Objection Coach", price: 
 
 export default function ObjectionCoach() {
   const [q] = useSearchParams();
-  const preview = q.get("preview") || "";
+  const preview = previewToken(q.get("preview") || "");
   const [app, setApp] = useState(FALLBACK);
   const [buyable, setBuyable] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -27,6 +27,7 @@ export default function ObjectionCoach() {
 
   useSEO({ title: "Sales Objection Coach – Hustle Vault", description: FALLBACK.tagline, path: "/apps/objection-coach", noindex: !!preview || app.status !== "live" });
 
+  useEffect(() => { track("app_view", "objection-coach"); }, []);
   useEffect(() => {
     fetch(`/api/apps${preview ? `?preview=${encodeURIComponent(preview)}` : ""}`)
       .then((r) => r.json())

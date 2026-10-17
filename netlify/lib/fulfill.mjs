@@ -2,6 +2,7 @@
 import { getPurchase, updatePurchase, claimOnce, logEvent } from "./store.mjs";
 import { addUsage } from "./ai.mjs";
 import { generateCoachScript, startPractice } from "./coach.mjs";
+import { generateForm, hasGenerator } from "./generators.mjs";
 
 const GEN_STALE_MS = 75_000;
 const MAX_GEN_ATTEMPTS = 4;
@@ -24,7 +25,7 @@ export async function markPaid(purchaseId, session) {
     return p;
   });
   if (updated && (await claimOnce("paid/" + purchaseId))) {
-    await logEvent(session.livemode ? "purchase" : "purchase_test", {
+    await logEvent(session.livemode && !updated.preview ? "purchase" : "purchase_test", {
       app: updated.appId, source: updated.utm?.source, campaign: updated.utm?.campaign,
       amount: updated.amountPaid || 0, extra: purchaseId,
     });
@@ -48,6 +49,7 @@ export async function generate(purchaseId) {
   try {
     let out, usage;
     if (p0.appId === "objection-coach") ({ out, usage } = await generateCoachScript(p0.inputs));
+    else if (hasGenerator(p0.appId)) ({ out, usage } = await generateForm(p0.appId, p0.inputs));
     else throw new Error("No generator for app " + p0.appId);
     return await updatePurchase(purchaseId, (p) => {
       if (p.result) return null;
@@ -85,7 +87,7 @@ export async function applyRefund(purchaseId, charge) {
     return p;
   });
   if (updated && (await claimOnce(`refund/${charge.id}/${charge.amount_refunded}`))) {
-    await logEvent(charge.livemode ? "refund" : "refund_test", { app: updated.appId, source: updated.utm?.source, campaign: updated.utm?.campaign, amount: charge.amount_refunded, extra: purchaseId });
+    await logEvent(charge.livemode && !updated.preview ? "refund" : "refund_test", { app: updated.appId, source: updated.utm?.source, campaign: updated.utm?.campaign, amount: charge.amount_refunded, extra: purchaseId });
   }
   return updated;
 }

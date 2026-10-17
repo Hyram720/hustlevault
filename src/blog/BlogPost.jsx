@@ -87,9 +87,9 @@ export default function BlogPost() {
         {/* CTA */}
         <aside style={{ marginTop: 40, background: C.surface, border: `1px solid ${C.borderH}`, borderRadius: 8, padding: "28px 26px", textAlign: "center" }}>
           <div style={{ height: 3, background: GG, borderRadius: 3, width: 60, margin: "0 auto 16px" }} />
-          <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 10, color: C.cream }}>Ready to stop reading and start building?</h2>
-          <p style={{ fontSize: 14, color: C.muted, marginBottom: 20, lineHeight: 1.6 }}>Every Hustle Vault blueprint gives you the exact step-by-step system — case studies, templates, and tools included.</p>
-          <Link to="/#products" style={{ display: "inline-block", background: GG, color: "#000", padding: "13px 30px", fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", fontFamily: "Georgia,serif", borderRadius: 2, textDecoration: "none" }}>Browse the Blueprints</Link>
+          <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 10, color: C.cream }}>Ready to stop reading and start doing?</h2>
+          <p style={{ fontSize: 14, color: C.muted, marginBottom: 20, lineHeight: 1.6 }}>Hustle Vault’s AI tools turn your idea into a plan, an offer and your first outreach messages in minutes — pay once, no subscription.</p>
+          <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}><a href="/#start" style={{ display: "inline-block", background: GG, color: "#000", padding: "13px 26px", fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", fontFamily: "Georgia,serif", borderRadius: 2, textDecoration: "none" }}>Start Your Hustle</a><a href="/#grow" style={{ display: "inline-block", border: `1px solid ${C.gold}`, color: C.gold, padding: "12px 26px", fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", fontFamily: "Georgia,serif", borderRadius: 2, textDecoration: "none" }}>Grow Your Hustle</a></div>
         </aside>
 
         {/* Related */}

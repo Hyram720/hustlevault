@@ -35,8 +35,12 @@ function requireAdmin(req, res, next) {
 // ── LOGIN ───────────────────────────────────────────────────
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
-  const validUser = process.env.ADMIN_USERNAME || "admin";
-  const validPass = process.env.ADMIN_PASSWORD || "hustlevault2026";
+  // Legacy Express admin (not deployed). No default credentials: refuse unless both are set.
+  const validUser = process.env.ADMIN_USERNAME;
+  const validPass = process.env.ADMIN_PASSWORD;
+  if (!validUser || !validPass || validPass.length < 16) {
+    return res.status(503).json({ error: "Admin login disabled" });
+  }
 
   if (username !== validUser || password !== validPass) {
     return res.status(401).json({ error: "Invalid credentials" });
@@ -167,9 +171,9 @@ router.delete("/products/:id", requireAdmin, (req, res) => {
 // ── SETTINGS ────────────────────────────────────────────────
 router.put("/settings/password", requireAdmin, (req, res) => {
   const { currentPassword, newPassword } = req.body;
-  const validPass = process.env.ADMIN_PASSWORD || "hustlevault2026";
+  const validPass = process.env.ADMIN_PASSWORD;
 
-  if (currentPassword !== validPass) {
+  if (!validPass || currentPassword !== validPass || !newPassword || newPassword.length < 16) {
     return res.status(401).json({ error: "Current password is incorrect" });
   }
 

@@ -29,3 +29,32 @@ export function rememberPurchase(id, appName) {
 export function myPurchases() {
   try { return JSON.parse(localStorage.getItem(MINE) || "[]"); } catch { return []; }
 }
+
+// First-party event tracking (no cookies, no third parties).
+export function track(type, app) {
+  try {
+    const u = getUtm();
+    const body = JSON.stringify({ type, app, utm: { source: u.source, campaign: u.campaign }, path: window.location.pathname });
+    if (navigator.sendBeacon) navigator.sendBeacon("/api/track", new Blob([body], { type: "application/json" }));
+    else fetch("/api/track", { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true });
+  } catch {}
+}
+export function trackVisitOnce() {
+  try { if (sessionStorage.getItem("hv_visit")) return; sessionStorage.setItem("hv_visit", "1"); } catch {}
+  track("visit");
+}
+
+// Preview token (Fred's private test links) survives navigation within the tab.
+export function previewToken(fromQuery) {
+  try {
+    if (fromQuery) sessionStorage.setItem("hv_preview", fromQuery);
+    return fromQuery || sessionStorage.getItem("hv_preview") || "";
+  } catch { return fromQuery || ""; }
+}
+export const withPreview = (path, token) => (token ? `${path}${path.includes("?") ? "&" : "?"}preview=${encodeURIComponent(token)}` : path);
+
+export function ventureCheckUrl(base, content = "start_path") {
+  const u = getUtm();
+  const q = new URLSearchParams({ utm_source: "hustlevault", utm_medium: "referral", utm_campaign: (u.campaign && u.campaign !== "-" ? u.campaign : "hustlevault_home").slice(0, 60), utm_content: content });
+  return `${base}${base.includes("?") ? "&" : "?"}${q}`;
+}

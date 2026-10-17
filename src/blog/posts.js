@@ -29,7 +29,7 @@ export const POSTS = [
         "Print on demand — upload designs once and earn royalties forever",
         "Domain flipping — register undervalued names and sell them to businesses",
       ] },
-      { p: "Print on demand and domain flipping deserve special mention: both are location-independent, scale without employees, and have almost no downside risk. They are two of the most popular blueprints inside the Hustle Vault for exactly that reason." },
+      { p: "Print on demand and domain flipping deserve special mention: both are location-independent, scale without employees, and have almost no downside risk. That's exactly why they're popular first businesses for beginners." },
       { h2: "Low-cost side hustles (under $500 to start)" },
       { p: "With a small amount of capital you unlock hustles with much higher ceilings. These reward hustlers who are willing to show up in person or make a few phone calls." },
       { ol: [
@@ -39,7 +39,7 @@ export const POSTS = [
         "Car flipping with a dealer license — access wholesale auctions",
         "Vacant land flipping — buy cheap land from motivated sellers and sell it online",
       ] },
-      { p: "Storage auctions in particular are a favorite for beginners because the barrier to entry is a single winning bid, and a good unit can return several times its cost. If that sounds interesting, our Unit Gold blueprint walks through the entire process step by step." },
+      { p: "Storage auctions in particular are a favorite for beginners because the barrier to entry is a single winning bid, and a good unit can return several times its cost. If that sounds interesting, check the idea against your budget and schedule with VentureCheck before your first auction." },
       { h2: "Higher-investment side hustles (real businesses)" },
       { p: "These take more to start but can replace a full-time income. They tend to involve government-backed or recurring revenue, which makes them far more stable than gig work." },
       { ul: [
@@ -50,7 +50,7 @@ export const POSTS = [
       { quote: "The best side hustle is the one you'll actually stick with for 90 days. Pick based on your budget and your temperament, not the hype." },
       { h2: "How to choose the right side hustle for you" },
       { p: "Start by answering three questions: How much can you invest right now? How much time can you commit each week? And do you prefer working online or in the real world? Match your answers to the categories above and you'll narrow 27 options down to two or three that genuinely fit your life." },
-      { p: "Whatever you choose, the difference between people who make money and people who just read about making money is a proven, step-by-step plan. That's exactly what the Hustle Vault blueprints provide — every strategy, every step, one vault. Browse all ten blueprints and start this week." },
+      { p: "Whatever you choose, the difference between people who make money and people who just read about making money is a proven, step-by-step plan. Not sure which idea fits you? Run it through VentureCheck in the Start Your Hustle section, then use the First Sale Blueprint to plan your first week." },
     ],
   },
   {
@@ -92,7 +92,7 @@ export const POSTS = [
       { h2: "Where to resell for the most profit" },
       { p: "Different items belong on different platforms. Electronics and collectibles do best on national marketplaces, furniture and bulky goods sell fastest locally, and true finds — antiques, rare tools, designer items — can justify a specialist buyer. A simple resale system turns a $200 unit into a repeatable process rather than a one-time gamble." },
       { h2: "Ready to go deeper?" },
-      { p: "This is the overview — the difference between dabbling and building real income is a repeatable system for finding auctions, valuing units, and selling the contents. Our Unit Gold: Storage Auction Blueprint covers all of it, including a profit calculator, real case studies, and a selling-platform cheat sheet. Explore it alongside our other business blueprints in the vault." },
+      { p: "This is the overview — the difference between dabbling and building real income is a repeatable system for finding auctions, valuing units, and selling the contents. Hustle Vault's Start Your Hustle tools can help you check the idea and plan your first week of auctions and listings." },
     ],
   },
   {
@@ -133,7 +133,7 @@ export const POSTS = [
       { h2: "Selling for maximum return" },
       { p: "List clean parcels on the major land and general marketplaces with clear photos, a simple map, and the key facts buyers want. Offer seller financing to widen your buyer pool and turn one-time flips into recurring income. Done well, land flipping compounds: each sale funds the next batch of purchases." },
       { h2: "Get the full system" },
-      { p: "This guide covers the shape of the business — the details are where the money is. Our Land Flip Formula blueprint includes a county tax-record system, proven seller-letter templates, a valuation framework, and real case studies. Find it with the rest of the Hustle Vault blueprints and start building your land pipeline." },
+      { p: "This guide covers the shape of the business — the details are where the work is. If you're weighing whether land flipping fits your budget and time, check the idea with the Start Your Hustle tools on Hustle Vault before you send your first letter." },
     ],
   },
 ];

@@ -30,7 +30,7 @@ export default function BlogLayout({ children }) {
             <span style={{ ...GT, fontSize: 14, fontWeight: 900, letterSpacing: 4, textTransform: "uppercase" }}>Hustle Vault</span>
           </Link>
           <div style={{ display: "flex", gap: 22, alignItems: "center" }}>
-            <Link to="/#products" style={{ color: C.muted, fontSize: 11, letterSpacing: 2, textTransform: "uppercase", textDecoration: "none", fontFamily: "Georgia,serif" }}>Blueprints</Link>
+            <a href="/#start" style={{ color: C.muted, fontSize: 11, letterSpacing: 2, textTransform: "uppercase", textDecoration: "none", fontFamily: "Georgia,serif" }}>AI Tools</a>
             <Link to="/blog" style={{ color: C.gold, fontSize: 11, letterSpacing: 2, textTransform: "uppercase", textDecoration: "none", fontFamily: "Georgia,serif" }}>Blog</Link>
             <Link to="/door-script" style={{ color: C.muted, fontSize: 11, letterSpacing: 2, textTransform: "uppercase", textDecoration: "none", fontFamily: "Georgia,serif" }}>Door Script</Link>
           </div>
@@ -41,7 +41,8 @@ export default function BlogLayout({ children }) {
 
       <footer style={{ padding: "48px 24px", textAlign: "center", background: C.surface, color: C.dim, fontSize: 10, letterSpacing: 2, borderTop: `1px solid ${C.border}` }}>
         <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap", marginBottom: 18 }}>
-          <Link to="/#products" style={{ color: C.muted, textDecoration: "none" }}>Blueprints</Link>
+          <a href="/#start" style={{ color: C.muted, textDecoration: "none" }}>Start Your Hustle</a>
+          <a href="/#grow" style={{ color: C.muted, textDecoration: "none" }}>Grow Your Hustle</a>
           <Link to="/blog" style={{ color: C.muted, textDecoration: "none" }}>Blog</Link>
           <Link to="/door-script" style={{ color: C.muted, textDecoration: "none" }}>Door Script</Link>
           <Link to="/" style={{ color: C.muted, textDecoration: "none" }}>Home</Link>

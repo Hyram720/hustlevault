@@ -43,7 +43,7 @@ export default function Blog() {
           Real Strategies for <span style={GT}>Building Income</span>
         </h1>
         <p style={{ fontSize: 16, color: C.muted, maxWidth: 620, margin: "0 auto", lineHeight: 1.6 }}>
-          Practical, no-fluff guides on side hustles, digital products, and the business models inside the vault.
+          Practical, no-fluff guides on side hustles and growing a small business — plus AI tools to help you act on them.
         </p>
       </header>
 

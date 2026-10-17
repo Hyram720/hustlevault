@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useParams, useSearchParams, Link } from "react-router-dom";
 import { Shell, C, GT, money } from "./ui";
-import { rememberPurchase, myPurchases } from "./utm";
+import { rememberPurchase, myPurchases, previewToken, withPreview } from "./utm";
+import { toSections, DISCLAIMER } from "../../shared/render.js";
 import { useSEO } from "../seo";
 
 function Copy({ text }) {
@@ -98,6 +99,32 @@ function CoachResult({ p, onUpdate }) {
   );
 }
 
+function FormResult({ p }) {
+  const sections = toSections(p.appId, p.result);
+  return (
+    <>
+      <div style={{ display: "flex", gap: 10, marginBottom: 16, flexWrap: "wrap" }}>
+        <a className="hv-btn" style={{ width: "auto", flex: 1, minWidth: 160 }} href={`/api/purchase/${p.id}/pdf`}>Download PDF</a>
+        <a className="hv-btn hv-ghost" style={{ width: "auto", flex: 1, minWidth: 160 }} href={`/api/purchase/${p.id}/txt`}>Download text file</a>
+      </div>
+      {sections.map((s, i) => (
+        <div key={i} className="hv-card" style={{ marginBottom: 14 }}>
+          <h2 style={{ fontSize: 19, marginBottom: 6 }}>{s.h}</h2>
+          {s.items.map((it, j) => (
+            <div key={j} style={{ padding: "10px 0", borderBottom: j < s.items.length - 1 ? `1px solid ${C.border}` : "none" }}>
+              {(it.label || s.copy) && <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, marginBottom: 4 }}>
+                <div style={{ fontSize: 13, color: C.gold, fontWeight: 700 }}>{it.label}</div>{s.copy && <Copy text={it.text} />}
+              </div>}
+              <div style={{ fontSize: 15.5, lineHeight: 1.6, whiteSpace: "pre-wrap" }}>{it.text}</div>
+            </div>
+          ))}
+        </div>
+      ))}
+      <div style={{ fontSize: 12, color: C.dim, lineHeight: 1.6 }}>{DISCLAIMER}</div>
+    </>
+  );
+}
+
 export default function MyPurchase() {
   const { id } = useParams();
   const [q] = useSearchParams();
@@ -148,17 +175,18 @@ export default function MyPurchase() {
       <div style={{ fontSize: 13, color: C.dim, marginTop: 4 }}>Purchase ID {p.id} · {money(p.amount)}</div>
     </div>
   );
+  const again = p.preview ? withPreview(`/apps/${p.appId}`, previewToken()) : `/apps/${p.appId}`;
   const note = (title, text, color = C.muted) => <div className="hv-card" style={{ marginBottom: 18 }}><div style={{ fontWeight: 800, fontSize: 18, marginBottom: 6, color }}>{title}</div><div style={{ color: C.muted, lineHeight: 1.6 }}>{text}</div></div>;
 
   let body;
   if (p.status === "pending" || p.status === "processing") body = note("Confirming your payment…", "This usually takes a few seconds. Keep this page open.");
   else if (p.status === "refunded") body = note("This purchase was refunded", "Your money has been returned, so the results are no longer available. Questions? Reply to your Stripe receipt email.");
-  else if (p.status === "failed") body = note("The payment didn't go through", <>Your bank declined or the payment failed — you weren't charged. <Link to={`/apps/${p.appId}`} style={{ color: C.gold }}>Try again</Link>.</>, C.red);
-  else if (p.status === "expired" || p.status === "checkout_error") body = note("Checkout wasn't completed", <>No payment was taken. <Link to={`/apps/${p.appId}`} style={{ color: C.gold }}>Start again</Link>.</>);
+  else if (p.status === "failed") body = note("The payment didn't go through", <>Your bank declined or the payment failed — you weren't charged. <Link to={again} style={{ color: C.gold }}>Try again</Link>.</>, C.red);
+  else if (p.status === "expired" || p.status === "checkout_error") body = note("Checkout wasn't completed", <>No payment was taken. <Link to={again} style={{ color: C.gold }}>Start again</Link>.</>);
   else if (!p.result) body = p.gen?.state === "failed" && (p.gen.attempts || 0) >= 4
     ? note("We hit a problem creating your results", "Your payment is safe. Please reply to your Stripe receipt email with your purchase ID and we'll fix it or refund you.", C.red)
-    : note("Creating your results…", "Payment confirmed. The AI is working on it — this takes under a minute.", C.green);
-  else body = p.appId === "objection-coach" ? <CoachResult p={p} onUpdate={setP} /> : null;
+    : note("Creating your results…", "Payment confirmed. The AI is working on it — this usually takes under a minute.", C.green);
+  else body = p.appId === "objection-coach" ? <CoachResult p={p} onUpdate={setP} /> : <FormResult p={p} />;
 
   return (
     <Shell>
@@ -167,7 +195,7 @@ export default function MyPurchase() {
       {["paid", "partially_refunded"].includes(p.status) && (
         <div style={{ fontSize: 13, color: C.dim, marginTop: 18, lineHeight: 1.6 }}>
           Bookmark this page to come back anytime: <span style={{ color: C.muted, wordBreak: "break-all" }}>{window.location.origin}/my/{p.id}</span>
-          <br />AI-generated coaching for education only. No income or sales results are guaranteed.
+          {p.appId === "objection-coach" && <><br />AI-generated coaching for education only. No income or sales results are guaranteed.</>}
         </div>
       )}
     </Shell>

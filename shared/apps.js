@@ -95,3 +95,41 @@ export const COACH_INDUSTRIES = {
 };
 
 export const COACH_MAX_TURNS = 6;
+
+// Input forms for the generic app page + server validation (same schema both sides).
+const BUDGETS = ["$0 — no money to spend", "Under $100", "$100 – $500", "$500 – $2,000", "More than $2,000"];
+const HOURS = ["Less than 5 hours a week", "5 – 10 hours a week", "10 – 20 hours a week", "20+ hours a week"];
+const EXPERIENCE = ["Total beginner", "Some experience", "Experienced"];
+
+export const APP_FORMS = {
+  "first-sale-blueprint": [
+    { name: "idea", label: "What do you want to sell or offer?", type: "textarea", max: 240, min: 4, placeholder: "e.g. Mobile car detailing for busy parents" },
+    { name: "budget", label: "How much can you spend to start?", type: "select", options: BUDGETS },
+    { name: "location", label: "Where are you? (city/area, or 'online only')", type: "text", max: 80, min: 2, placeholder: "e.g. Camden County, NJ" },
+    { name: "time", label: "How much time do you have?", type: "select", options: HOURS },
+    { name: "experience", label: "Your experience with this", type: "select", options: EXPERIENCE },
+    { name: "skills", label: "Anything you're already good at? (optional)", type: "textarea", max: 240, min: 0, placeholder: "e.g. Talking to people, organizing, social media" },
+  ],
+  "offer-builder": [
+    { name: "skills", label: "What are you good at?", type: "textarea", max: 300, min: 4, placeholder: "e.g. Bookkeeping, I'm organized and patient" },
+    { name: "audience", label: "Who would you like to help?", type: "text", max: 120, min: 3, placeholder: "e.g. Small restaurants and food trucks" },
+    { name: "experience", label: "Your experience level", type: "select", options: EXPERIENCE },
+    { name: "time", label: "How much time can you give clients?", type: "select", options: HOURS },
+    { name: "delivery", label: "How would you deliver it?", type: "select", options: ["In person", "Online / remote", "Either"] },
+  ],
+  "lead-follow-up": [
+    { name: "business", label: "What do you sell?", type: "text", max: 120, min: 3, placeholder: "e.g. Roof replacements" },
+    { name: "leadSource", label: "Where did the lead come from?", type: "select", options: ["Website form", "Phone call", "Door knock / in person", "Referral", "Social media", "Event or trade show", "Other"] },
+    { name: "leadStage", label: "Where are they now?", type: "select", options: ["New — haven't talked yet", "Talked once, went quiet", "Got a quote, didn't decide", "Said 'not right now'"] },
+    { name: "appointment", label: "What appointment do you want?", type: "text", max: 80, min: 3, placeholder: "e.g. 20-minute free roof inspection" },
+    { name: "tone", label: "Tone", type: "select", options: ["Friendly", "Professional", "Casual"] },
+    { name: "notes", label: "Anything else? (optional — no names or phone numbers)", type: "textarea", max: 240, min: 0, placeholder: "e.g. They mentioned a leak in the back bedroom" },
+  ],
+  "reactivation-kit": [
+    { name: "business", label: "What kind of business do you run?", type: "text", max: 120, min: 3, placeholder: "e.g. Hair salon" },
+    { name: "offer", label: "What's your reason for them to come back?", type: "textarea", max: 240, min: 3, placeholder: "e.g. 15% off a return visit this month, or a new service" },
+    { name: "since", label: "How long since they last bought?", type: "select", options: ["1 – 3 months", "3 – 6 months", "6 – 12 months", "Over a year"] },
+    { name: "tone", label: "Tone", type: "select", options: ["Warm and personal", "Professional", "Fun and upbeat"] },
+    { name: "channels", label: "Which campaigns do you want?", type: "select", options: ["Email and text", "Email only", "Text only"] },
+  ],
+};

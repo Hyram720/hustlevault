@@ -5,6 +5,8 @@ import { stripe } from "../lib/stripe.mjs";
 import { markPaid, generate, getPurchase } from "../lib/fulfill.mjs";
 import { practiceReply } from "../lib/coach.mjs";
 import { addUsage } from "../lib/ai.mjs";
+import { buildPdf } from "../lib/pdf.mjs";
+import { toPlainText } from "../../shared/render.js";
 
 const ACCESS = ["paid", "partially_refunded"];
 
@@ -105,6 +107,17 @@ export default handle(async (req, context) => {
     if (!ACCESS.includes(p.status)) return json(view(p));
     const updated = p.result ? p : (await generate(id)) || (await load(id));
     return json(view(updated));
+  }
+  if (req.method === "GET" && (action === "pdf" || action === "txt")) {
+    if (!(await rateLimit("download", who, 30, 600))) throw new HttpError(429, "Slow down a little.");
+    const p = await load(id);
+    if (!ACCESS.includes(p.status) || !p.result || p.appId === "objection-coach") throw new HttpError(404, "Download not available");
+    const name = p.appName.replace(/[^A-Za-z0-9]+/g, "-");
+    if (action === "txt") {
+      return new Response(toPlainText(p.appName, p.appId, p.result), { headers: { "Content-Type": "text/plain; charset=utf-8", "Content-Disposition": `attachment; filename="${name}.txt"`, "Cache-Control": "no-store" } });
+    }
+    const bytes = await buildPdf({ title: p.appName, appId: p.appId, result: p.result, purchaseId: p.id });
+    return new Response(bytes, { headers: { "Content-Type": "application/pdf", "Content-Disposition": `attachment; filename="${name}.pdf"`, "Cache-Control": "no-store" } });
   }
   if (req.method === "POST" && action === "practice") {
     if (!(await rateLimit("practice", who, 30, 600))) throw new HttpError(429, "Slow down a little.");

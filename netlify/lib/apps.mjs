@@ -5,7 +5,11 @@ import { safeEqual } from "./http.mjs";
 
 // Stripe product per app (created in the live Stripe account, metadata.app = hustlevault).
 export const STRIPE_PRODUCTS = {
-  "objection-coach": process.env.HV_PRODUCT_OBJECTION_COACH || "prod_VSGSUbGqCfm8vQ",
+  "objection-coach": "prod_VSGSUbGqCfm8vQ",
+  "first-sale-blueprint": "prod_VSGlgh02xKDGl1",
+  "offer-builder": "prod_VSGlVkU8cmpzoZ",
+  "lead-follow-up": "prod_VSGlhmlr5L5vIG",
+  "reactivation-kit": "prod_VSGlCCTcMEHYZL",
 };
 
 export async function getOverrides() {
@@ -30,5 +34,7 @@ export function hasPreview(token) {
   return safeEqual(crypto.createHash("sha256").update(token).digest("hex"), PREVIEW_SHA256);
 }
 
+// An app is sellable only if it has a Stripe product (= a built, server-side generator).
+export const isBuilt = (id) => !!STRIPE_PRODUCTS[id];
 export const canBuy = (app, previewToken) =>
-  !!app && !app.external && (app.status === "live" || hasPreview(previewToken));
+  !!app && !app.external && isBuilt(app.id) && (app.status === "live" || hasPreview(previewToken));
