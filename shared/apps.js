@@ -30,9 +30,9 @@ export const APPS = [
   },
   {
     id: "first-customer-finder", path: "start", name: "First Customer Finder", price: 500, status: "soon",
-    tagline: "Find real people on Reddit who are asking for what you sell.",
+    tagline: "Find real people on Bluesky and Hacker News who are asking for what you sell.",
     give: "Your business idea and (optionally) your city or area",
-    get: "Up to 10 recent public Reddit posts from people looking for your service — with the post, subreddit, date and link",
+    get: "Up to 10 recent public Bluesky and Hacker News posts from people looking for your service — with the post, where it was posted, date and link",
     fast: "About 1 minute",
   },
   {

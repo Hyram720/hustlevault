@@ -5,7 +5,7 @@ import { getApp, canBuy, hasPreview, STRIPE_PRODUCTS } from "../lib/apps.mjs";
 import { validateCoachInputs } from "../lib/coach.mjs";
 import { validateForm, hasGenerator } from "../lib/generators.mjs";
 import { isFlagged } from "../lib/ai.mjs";
-import { redditReachable } from "../lib/reddit.mjs";
+import { sourcesReachable } from "../lib/sources.mjs";
 import { verifiedStripe } from "../lib/stripe.mjs";
 
 const validatorFor = (id) => (id === "objection-coach" ? validateCoachInputs : hasGenerator(id) ? (raw) => validateForm(id, raw) : null);
@@ -35,9 +35,9 @@ export default handle(async (req, context) => {
   if (await isFlagged(Object.values(inputs).join("\n"))) {
     throw new HttpError(400, "We can't help with that request. Please change your answers and try again.");
   }
-  // First Customer Finder depends on Reddit search — don't take payment if we can't reach it right now.
-  if (app.id === "first-customer-finder" && !(await redditReachable())) {
-    throw new HttpError(503, "Reddit search is unavailable right now, so we didn't charge you. Please try again later.");
+  // First Customer Finder depends on Bluesky / Hacker News search — block only if BOTH are down.
+  if (app.id === "first-customer-finder" && !(await sourcesReachable())) {
+    throw new HttpError(503, "Post search is unavailable right now, so we didn't charge you. Please try again later.");
   }
 
   const id = newId();

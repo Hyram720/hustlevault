@@ -29,11 +29,11 @@ export function toSections(appId, o = {}) {
       ];
     case "first-customer-finder":
       return [
-        { h: L(o.results).length ? `Your top ${L(o.results).length} leads` : "No strong leads right now", items: L(o.results).length
-          ? L(o.results).map((r, i) => ({ label: `${i + 1}. r/${r.subreddit} · ${r.date} · match ${r.score}/10`, text: [r.title, r.excerpt && `“${r.excerpt}”`, r.why && `Why it fits: ${r.why}`].filter(Boolean).join("\n\n"), link: r.url }))
-          : [{ text: `We checked ${o.scanned || 0} recent public Reddit posts and didn't find anyone clearly asking for this in the last year. That's common for new or very specific ideas — try the searches below yourself every few days, widen your area, or describe your service the way a customer would.` }] },
-        { h: "How to reach out (the right way)", items: [{ text: "• Read each subreddit's rules first — many ban self-promotion.\n• Reply in the thread with genuinely helpful advice; mention what you do only if it fits.\n• Only send a private message if the poster invited offers.\n• Never copy-paste the same message to many people. Posts are public, but people aren't leads until they say yes." }] },
-        { h: "Searches we ran", items: [{ text: [...L(o.queries).map((q) => "• " + q), ...L(o.subreddits).map((s) => "• r/" + s)].join("\n") }] },
+        { h: L(o.results).length ? (L(o.results).length === 1 ? "Your top lead" : `Your top ${L(o.results).length} leads`) : "No strong leads right now", items: L(o.results).length
+          ? L(o.results).map((r, i) => ({ label: `${i + 1}. ${r.sourceLabel} · ${r.date} · match ${r.score}/10`, text: [r.title, r.excerpt && `“${r.excerpt}”`, r.why && `Why it fits: ${r.why}`].filter(Boolean).join("\n\n"), link: r.url }))
+          : [{ text: `We checked ${o.scanned || 0} recent public Bluesky and Hacker News posts and didn't find anyone clearly asking for this in the last year. That's common for local or very specific services — try the searches below yourself every few days, widen your area, or describe your service the way a customer would.` }] },
+        { h: "How to reach out (the right way)", items: [{ text: "• Reply publicly with genuinely helpful advice; mention what you do only if it fits.\n• Only send a direct message if the poster invited offers or replies by DM.\n• Never copy-paste the same message to many people or tag strangers in promos.\n• Posts are public, but people aren't leads until they say yes." }] },
+        { h: "Searches we ran", items: [{ text: L(o.queries).map((q) => "• " + q).join("\n") }] },
       ];
     case "lead-qualifier":
       return [

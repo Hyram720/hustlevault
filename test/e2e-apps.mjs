@@ -66,11 +66,12 @@ for (const [app, inputs] of Object.entries(INPUTS).filter(([a]) => !ONLY || ONLY
   }
   if (app === "first-customer-finder") {
     const R = p.result.results || [];
-    console.log("FINDER:", R.map((x) => `${x.score} ${x.subreddit} ${x.date} ${x.title}`).join(" | "), "| queries:", p.result.queries.join("; "), "| subs:", p.result.subreddits.join(","));
+    console.log("FINDER:", R.map((x) => `${x.score} ${x.sourceLabel} ${x.date} ${x.url}`).join(" | "), "| queries:", p.result.queries.join("; "));
     ok(R.length >= 2 && R.length <= 10, `finder: ${R.length} leads returned`);
-    ok(R.every((x) => x.score >= 6 && /^https:\/\/www\.reddit\.com\/r\//.test(x.url) && / ET$/.test(x.date) && x.subreddit), "finder: each lead has score>=6, Reddit link, ET date, subreddit");
-    ok(!R.some((x) => /For Hire|cheesesteak|NSFW|\[removed\]/i.test(x.title) || x.url.includes("/t6/")), "finder: offers, unrelated, NSFW, removed and >1yr-old posts filtered out");
-    ok(!/PWNED|admin mode/i.test(JSON.stringify(R.map((x) => x.why))), "finder: injection inside a Reddit post ignored");
+    ok(R.every((x) => x.score >= 6 && /^https:\/\/(bsky\.app\/profile\/[a-z0-9.-]+\/post\/[a-z0-9]+|news\.ycombinator\.com\/item\?id=\d+)$/.test(x.url) && / ET$/.test(x.date) && /^(Bluesky · @|Hacker News · )/.test(x.sourceLabel)), "finder: each lead has score>=6, Bluesky/HN link, ET date, source");
+    ok(R.some((x) => x.source === "bluesky") && R.some((x) => x.source === "hn"), "finder: leads from both Bluesky and Hacker News");
+    ok(!R.some((x) => /notarypro|food\.|nsfw\.|old\./.test(x.url)), "finder: ads, unrelated, labeled-adult and >1yr-old posts filtered out");
+    ok(!/PWNED|admin mode/i.test(JSON.stringify(R.map((x) => x.why))), "finder: injection inside a post ignored");
     const e = await post("/api/apps/checkout", { appId: app, preview: PREVIEW, inputs: { idea: "Underwater basket weaving lessons for cats", area: "Anyone (online / remote)", location: "" } });
     const ep = e.d?.purchaseId, ecs = (e.d?.url || "").match(/cs_(live|test)_[A-Za-z0-9]+/)?.[0]; sessions.push(ecs);
     await hook({ id: "evt_e2e_" + Math.random().toString(36).slice(2), object: "event", type: "checkout.session.completed", data: { object: { id: ecs, metadata: { hv_purchase_id: ep }, payment_status: "paid", amount_total: 500, livemode: false } } });
@@ -79,6 +80,10 @@ for (const [app, inputs] of Object.entries(INPUTS).filter(([a]) => !ONLY || ONLY
     const et = await req(`/api/purchase/${ep}/txt`);
     ok(et.s === 200 && /No strong leads right now/i.test(et.d.toString()), "finder: empty result explains next steps");
     (await import("node:fs")).writeFileSync("/tmp/finder-test.pdf", pdf.d);
+    let dr = await post("/api/apps/finder-dryrun", { inputs, preview: "wrong" });
+    ok(dr.s === 404, "finder dry-run requires preview token");
+    dr = await post("/api/apps/finder-dryrun", { inputs, preview: PREVIEW });
+    ok(dr.s === 200 && dr.d.result.results.length >= 1, `finder dry-run works with preview token (${dr.d?.result?.results?.length} leads)`);
   }
   if (app === "lead-follow-up") ok(p.result.messages.length === 5, "follow-up: 5 messages");
   await hook({ id: "evt_e2e_" + Math.random().toString(36).slice(2), object: "event", type: "charge.refunded", data: { object: { id: "ch_e2e_" + pid.slice(3, 10), amount: 900, amount_refunded: 900, refunded: true, livemode: false, metadata: { hv_purchase_id: pid } } } });
