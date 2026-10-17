@@ -1,7 +1,7 @@
 // Stripe webhook: signature-verified payment confirmation, fulfillment, failures and refunds.
 import { json } from "../lib/http.mjs";
 import { claimOnce, logEvent } from "../lib/store.mjs";
-import { stripe, VENTURECHECK_PAYMENT_LINK } from "../lib/stripe.mjs";
+import { stripe, verifiedStripe, VENTURECHECK_PAYMENT_LINK } from "../lib/stripe.mjs";
 import { markPaid, generate, setStatusIf, applyRefund } from "../lib/fulfill.mjs";
 import { PURCHASE_ID_RE } from "../lib/http.mjs";
 
@@ -18,15 +18,24 @@ async function purchaseIdForCharge(charge) {
 export default async (req, context) => {
   if (req.method !== "POST") return json({ error: "Method not allowed" }, 405);
   const secret = process.env.HV_STRIPE_WEBHOOK_SECRET;
-  if (!secret) return json({ error: "Webhook not configured" }, 503);
-  const sig = req.headers.get("stripe-signature");
   const raw = await req.text();
+  if (raw.length > 512 * 1024) return json({ error: "Too large" }, 413);
   let event;
-  try {
-    event = stripe().webhooks.constructEvent(raw, sig, secret);
-  } catch (err) {
-    console.warn("Webhook signature check failed");
-    return json({ error: "Invalid signature" }, 400);
+  if (/^whsec_/.test(secret || "")) {
+    try {
+      event = stripe().webhooks.constructEvent(raw, req.headers.get("stripe-signature"), secret);
+    } catch {
+      console.warn("Webhook signature check failed");
+      return json({ error: "Invalid signature" }, 400);
+    }
+  } else {
+    // No signing secret configured: never trust the posted body. Re-fetch the event from
+    // Stripe's API with our secret key and act only on Stripe's own copy.
+    let id;
+    try { id = JSON.parse(raw)?.id; } catch {}
+    if (typeof id !== "string" || !/^evt_[A-Za-z0-9]{10,}$/.test(id)) return json({ error: "Invalid event" }, 400);
+    try { event = await (await verifiedStripe()).events.retrieve(id); }
+    catch { return json({ error: "Unknown event" }, 400); }
   }
 
   try {

@@ -1,5 +1,6 @@
 import { APPS } from "../../shared/apps.js";
 import { meta } from "./store.mjs";
+import crypto from "node:crypto";
 import { safeEqual } from "./http.mjs";
 
 // Stripe product per app (created in the live Stripe account, metadata.app = hustlevault).
@@ -21,8 +22,12 @@ export async function getApp(id) {
 }
 
 // Unlisted preview access for real paid tests while an app is still "Coming soon".
+// Only the SHA-256 of the token lives in code; the token itself is kept off the repo.
+const PREVIEW_SHA256 = process.env.HV_PREVIEW_SHA256 || "baeb3418653bebd6fee60ea8b3c48ecad0159f17998663a89d134846d16dc06c";
 export function hasPreview(token) {
-  return !!process.env.HV_PREVIEW_TOKEN && safeEqual(token, process.env.HV_PREVIEW_TOKEN);
+  if (typeof token !== "string" || token.length < 24 || token.length > 100) return false;
+  if (process.env.HV_PREVIEW_TOKEN && safeEqual(token, process.env.HV_PREVIEW_TOKEN)) return true;
+  return safeEqual(crypto.createHash("sha256").update(token).digest("hex"), PREVIEW_SHA256);
 }
 
 export const canBuy = (app, previewToken) =>
