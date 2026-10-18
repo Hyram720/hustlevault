@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { useParams, useSearchParams, Link } from "react-router-dom";
 import { Shell, C, GT, money } from "./ui";
 import { rememberPurchase, myPurchases, previewToken, withPreview } from "./utm";
-import { toSections, DISCLAIMER } from "../../shared/render.js";
+import { toSections, toPlainText, DISCLAIMER } from "../../shared/render.js";
 import { useSEO } from "../seo";
 
 function Copy({ text }) {
@@ -11,6 +11,16 @@ function Copy({ text }) {
     <button onClick={() => { navigator.clipboard?.writeText(text).then(() => { setOk(true); setTimeout(() => setOk(false), 1500); }); }}
       style={{ background: "transparent", border: `1px solid ${C.borderH}`, color: ok ? C.green : C.muted, borderRadius: 4, fontSize: 12, padding: "4px 10px", cursor: "pointer", flexShrink: 0 }}>
       {ok ? "Copied" : "Copy"}
+    </button>
+  );
+}
+
+function CopyAll({ text }) {
+  const [ok, setOk] = useState(false);
+  return (
+    <button className="hv-btn hv-ghost" style={{ width: "auto", flex: 1, minWidth: 160 }} data-testid="copy-all"
+      onClick={() => { navigator.clipboard?.writeText(text).then(() => { setOk(true); setTimeout(() => setOk(false), 1500); }); }}>
+      {ok ? "Copied" : "Copy everything"}
     </button>
   );
 }
@@ -106,6 +116,7 @@ function FormResult({ p }) {
       <div style={{ display: "flex", gap: 10, marginBottom: 16, flexWrap: "wrap" }}>
         <a className="hv-btn" style={{ width: "auto", flex: 1, minWidth: 160 }} href={`/api/purchase/${p.id}/pdf`}>Download PDF</a>
         <a className="hv-btn hv-ghost" style={{ width: "auto", flex: 1, minWidth: 160 }} href={`/api/purchase/${p.id}/txt`}>Download text file</a>
+        {p.appId === "offer-builder" && <CopyAll text={toPlainText(p.appName, p.appId, p.result)} />}
       </div>
       {sections.map((s, i) => (
         <div key={i} className="hv-card" style={{ marginBottom: 14 }}>

@@ -8,7 +8,7 @@ import { useSEO } from "../seo";
 const PATH_LABEL = { start: "Start Your Hustle", grow: "Grow Your Hustle" };
 const NOTES = {
   "first-sale-blueprint": "You'll get it on screen and as a PDF download. A plan, not a promise — no income is guaranteed.",
-  "offer-builder": "Suggested pricing is a starting point — check what others charge near you.",
+  "offer-builder": "You'll get it on screen with copy buttons, plus PDF and text downloads. The price range is a suggestion, not a promise of income — check what others charge near you.",
   "lead-follow-up": "Drafts only — nothing is sent for you. Only contact people who agreed to hear from you.",
   "first-customer-finder": "Searches public Bluesky and Hacker News posts only (no Facebook, Reddit or private groups). Results depend on what people have posted recently — some ideas get few matches.",
   "lead-qualifier": "Remove phone numbers and email addresses before pasting. The suggested reply is a draft — nothing is sent for you.",

@@ -45,18 +45,34 @@ const SPECS = {
     ok: (o) => o.plan.length === 7 && o.outreach.length === 3 && o.offer.name,
   },
   "offer-builder": {
-    maxTokens: 1100,
-    task: "Turn this person's skills into one clearly defined service package they can sell, with pricing and a pitch.",
-    format: `{"name":"package name","who_its_for":"1 sentence","problem":"1 sentence","deliverables":["4-6 specific items"],"timeline":"how long delivery takes",
-"price":"specific starter price in USD","price_reasoning":"2 sentences","options":["1-2 optional add-ons"],
-"pitch_short":"one sentence","pitch_long":"60-110 word message or post","faq":[{"q":"","a":""} ... 3]}`,
-    norm: (d) => ({
-      name: str(d.name, 100), who_its_for: str(d.who_its_for, 300), problem: str(d.problem, 300), deliverables: L(d.deliverables, 7, 200),
-      timeline: str(d.timeline, 160), price: str(d.price, 80), price_reasoning: str(d.price_reasoning, 500), options: L(d.options, 3, 200),
-      pitch_short: str(d.pitch_short, 300), pitch_long: str(d.pitch_long, 1000),
-      faq: (Array.isArray(d.faq) ? d.faq : []).slice(0, 4).map((f) => ({ q: str(f?.q, 200), a: str(f?.a, 400) })),
-    }),
-    ok: (o) => o.name && o.deliverables.length >= 3 && o.pitch_short,
+    maxTokens: 1400,
+    task: `Turn this person's skills and experience into one clearly defined service offer they can sell to the people they want to help.
+Fit it to their experience level, delivery style, time and starting budget ("Not sure yet" means unknown). Keep the offer small enough for them to deliver well.
+The price is only a suggested starting range for this one service, based on its scope, their experience and typical market rates; explain the reasoning plainly.
+Never promise, estimate or imply income, earnings, profit, number of clients or results. Don't invent credentials, certifications or testimonials they didn't give.
+The pitch is a draft they post or send themselves: honest, friendly, no hype, no fake urgency.`,
+    format: `{"name":"short offer name","description":"one paragraph, 50-90 words, describing the service and the result it helps with","who_its_for":"1 sentence","problem":"1 sentence",
+"deliverables":["4-6 specific items included"],"timeline":"delivery timeline, e.g. 'Kickoff call on day 1, first draft in 3 days, finished in 1 week'",
+"price_low":number in USD,"price_high":number in USD,"price_unit":"e.g. per project / per month / per session","price_reasoning":"2-3 sentences",
+"options":["1-2 optional add-ons with suggested prices"],"pitch_short":"one sentence","pitch_long":"60-110 word post or message they can share",
+"faq":[{"q":"","a":""} ... 3]}`,
+    norm: (d) => {
+      const n = (v) => { const x = Math.round(Number(String(v ?? "").replace(/[^0-9.]/g, ""))); return Number.isFinite(x) && x > 0 && x < 1e6 ? x : 0; };
+      let lo = n(d.price_low), hi = n(d.price_high);
+      if (lo && hi && lo > hi) [lo, hi] = [hi, lo];
+      const unit = str(d.price_unit, 40);
+      const fmt = (x) => "$" + x.toLocaleString("en-US");
+      const range = lo && hi ? (lo === hi ? fmt(lo) : `${fmt(lo)} – ${fmt(hi)}`) : str(d.price, 60);
+      return {
+        name: str(d.name, 100), description: str(d.description, 900), who_its_for: str(d.who_its_for, 300), problem: str(d.problem, 300),
+        deliverables: L(d.deliverables, 7, 200), timeline: str(d.timeline, 240),
+        price_low: lo, price_high: hi, price_unit: unit, price: range ? `${range}${unit ? " " + unit : ""}` : "",
+        price_reasoning: str(d.price_reasoning, 600), options: L(d.options, 3, 200),
+        pitch_short: str(d.pitch_short, 300), pitch_long: str(d.pitch_long, 1000),
+        faq: (Array.isArray(d.faq) ? d.faq : []).slice(0, 4).map((f) => ({ q: str(f?.q, 200), a: str(f?.a, 400) })).filter((f) => f.q && f.a),
+      };
+    },
+    ok: (o) => o.name && o.description && o.deliverables.length >= 3 && o.price && o.pitch_short && o.pitch_long,
   },
   "lead-follow-up": {
     maxTokens: 1200,

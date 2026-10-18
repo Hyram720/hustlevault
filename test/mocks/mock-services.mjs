@@ -34,4 +34,28 @@ http.createServer(async (req, res) => {
   if (u.pathname === "/__emails") return send(res, 200, emails);
   send(res, 404, {});
 }).listen(12112);
-console.log("mocks up: stripe :12111, resend :12112");
+// Mock OpenAI-compatible API (chat + moderation) for local app e2e. One superset JSON fits every form app.
+const days = Array.from({ length: 7 }, (_, i) => ({ day: i + 1, focus: "Day focus " + (i + 1), tasks: ["Task one", "Task two", "Task three"] }));
+const AI_OUT = {
+  plan: days, offer: { name: "Starter Offer", description: "A small starter service.", includes: ["A", "B", "C"] },
+  pricing: { price: "$99", reasoning: "Simple starter price.", options: ["Add-on"] },
+  outreach: [1, 2, 3].map((i) => ({ channel: "Email", message: "Hi [Name], message " + i })), tips: ["Tip 1", "Tip 2", "Tip 3"],
+  name: "Food Truck Books Tune-Up", description: "A one-week bookkeeping clean-up for food trucks: we sort a month of receipts, set up a simple spreadsheet and show you how to keep it current in 15 minutes a week.",
+  who_its_for: "Food truck and small restaurant owners who are behind on their books.", problem: "Messy receipts and no clear view of costs.",
+  deliverables: ["Receipt sort for one month", "Simple expense spreadsheet", "30-minute walkthrough call", "One week of email questions"],
+  timeline: "Kickoff call on day 1, spreadsheet in 3 days, walkthrough by day 7", price_low: 150, price_high: 300, price_unit: "per project",
+  price_reasoning: "A one-off clean-up for a small business, priced for someone with some experience.", options: ["Monthly upkeep: $75/month"],
+  pitch_short: "Behind on your food truck's books? I'll clean up a month of receipts in a week.",
+  pitch_long: "Running a food truck leaves little time for bookkeeping. I offer a one-week tune-up: I sort a month of receipts, set up a simple spreadsheet and walk you through keeping it current. Online, friendly and no jargon. Message me if you'd like a hand.",
+  faq: [{ q: "Do I need software?", a: "No, a spreadsheet is enough." }, { q: "Is it online?", a: "Yes." }, { q: "How long?", a: "One week." }],
+  messages: [1, 2, 3, 4, 5].map((i) => ({ timing: "Day " + i, channel: i % 2 ? "sms" : "email", subject: i % 2 ? "" : "Following up", body: "Hi [Name], follow-up " + i })),
+  emails: [1, 2, 3].map((i) => ({ timing: "Day " + i, subject: "We miss you", body: "Hi [First name], email " + i })),
+  sms: [1, 2, 3].map((i) => ({ timing: "Day " + i, body: "Hi [First name], text " + i + ". Reply STOP to opt out" })),
+};
+http.createServer(async (req, res) => {
+  const u = new URL(req.url, "http://x"); await body(req);
+  if (u.pathname.endsWith("/moderations")) return send(res, 200, { results: [{ flagged: false }] });
+  if (u.pathname.endsWith("/chat/completions")) return send(res, 200, { choices: [{ message: { content: JSON.stringify(AI_OUT) } }], usage: { prompt_tokens: 500, completion_tokens: 400 } });
+  send(res, 404, {});
+}).listen(12113);
+console.log("mocks up: stripe :12111, resend :12112, openai :12113");

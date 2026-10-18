@@ -25,8 +25,8 @@ export const APPS = [
   {
     id: "offer-builder", path: "start", name: "AI Offer Builder", price: 900, status: "soon",
     tagline: "Turn what you're good at into a service people can buy.",
-    give: "Your skills and who you'd like to help",
-    get: "A ready-to-sell service package with pricing and a short pitch",
+    give: "Your skills, experience and who you'd like to help (time and budget optional)",
+    get: "A ready-to-sell service offer: name, description, what's included, a delivery timeline, a suggested price range and a pitch to post",
     fast: "About 2 minutes",
   },
   {
@@ -134,10 +134,12 @@ export const APP_FORMS = {
   ],
   "offer-builder": [
     { name: "skills", label: "What are you good at?", type: "textarea", max: 300, min: 4, placeholder: "e.g. Bookkeeping, I'm organized and patient" },
+    { name: "background", label: "Your experience (optional)", type: "textarea", max: 300, min: 0, placeholder: "e.g. 6 years doing the books for my family's restaurant" },
     { name: "audience", label: "Who would you like to help?", type: "text", max: 120, min: 3, placeholder: "e.g. Small restaurants and food trucks" },
     { name: "experience", label: "Your experience level", type: "select", options: EXPERIENCE },
-    { name: "time", label: "How much time can you give clients?", type: "select", options: HOURS },
     { name: "delivery", label: "How would you deliver it?", type: "select", options: ["In person", "Online / remote", "Either"] },
+    { name: "time", label: "How much time can you give clients? (optional)", type: "select", options: ["Not sure yet", ...HOURS] },
+    { name: "budget", label: "How much can you spend to get started? (optional)", type: "select", options: ["Not sure yet", ...BUDGETS] },
   ],
   "lead-follow-up": [
     { name: "business", label: "What do you sell?", type: "text", max: 120, min: 3, placeholder: "e.g. Roof replacements" },

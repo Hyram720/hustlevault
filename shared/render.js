@@ -15,12 +15,15 @@ export function toSections(appId, o = {}) {
       ];
     case "offer-builder":
       return [
-        { h: "Your service package", items: [{ label: o.name, text: [o.who_its_for && `Who it's for: ${o.who_its_for}`, o.problem && `Problem it solves: ${o.problem}`].filter(Boolean).join("\n") }] },
-        { h: "What's included", items: L(o.deliverables).map((t) => ({ text: "• " + t })).concat(o.timeline ? [{ label: "Timeline", text: o.timeline }] : []) },
-        { h: "Pricing", items: [{ label: o.price, text: o.price_reasoning }].concat(L(o.options).map((x) => ({ text: "• " + x }))) },
-        { h: "Your pitch", copy: true, items: [{ label: "Short (one line)", text: o.pitch_short }, { label: "Longer (message or post)", text: o.pitch_long }] },
+        { h: "Your offer", copy: true, items: [{ label: o.name, text: o.description || o.problem }] },
+        { h: "Who it's for", items: [{ text: [o.who_its_for, o.problem && o.description && `Problem it solves: ${o.problem}`].filter(Boolean).join("\n") }] },
+        { h: "What's included", copy: true, items: [{ text: L(o.deliverables).map((t) => "• " + t).join("\n") }] },
+        { h: "Delivery timeline", items: o.timeline ? [{ text: o.timeline }] : [] },
+        { h: "Suggested pricing", items: [{ label: o.price ? `Suggested range: ${o.price}` : "", text: [o.price_reasoning, ...L(o.options).map((x) => "• " + x)].filter(Boolean).join("\n") },
+          { text: "This is a suggested starting price, not a promise of income or sales. Check what others charge near you and adjust." }] },
+        { h: "Your pitch", copy: true, items: [{ label: "Short (one line)", text: o.pitch_short }, { label: "Post or message", text: o.pitch_long }].filter((x) => x.text) },
         { h: "Questions people will ask", items: L(o.faq).map((f) => ({ label: f.q, text: f.a })) },
-      ];
+      ].filter((s) => s.items.length && s.items.some((it) => it.text));
     case "lead-follow-up":
       return [
         { h: "Your 5-message follow-up sequence", copy: true, items: L(o.messages).map((m, i) => ({ label: `${i + 1}. ${m.timing} — ${String(m.channel || "").toUpperCase()}${m.subject ? ` — Subject: ${m.subject}` : ""}`, text: m.body })) },
