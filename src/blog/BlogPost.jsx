@@ -10,14 +10,14 @@ import { renderMarkdown } from "../../shared/markdown.js";
 const fmtDate = fmtDateET;
 export const MD_CSS = `.hv-md h2{font-size:24px;font-weight:800;margin:36px 0 14px;color:${C.cream};line-height:1.25}
 .hv-md h3{font-size:19px;font-weight:800;margin:28px 0 10px;color:${C.cream}}
-.hv-md p,.hv-md li{font-size:16px;line-height:1.8;color:#C8C0B0}.hv-md p{margin:0 0 18px}
+.hv-md p,.hv-md li{font-size:16px;line-height:1.8;color:${C.body}}.hv-md p{margin:0 0 18px}
 .hv-md ul,.hv-md ol{margin:0 0 18px;padding-left:22px}.hv-md li{margin-bottom:8px}
 .hv-md a{color:${C.gold}}.hv-md strong{color:${C.cream}}
 .hv-md blockquote{border-left:3px solid ${C.gold};margin:24px 0;padding:6px 20px;font-style:italic}
 .hv-md blockquote p{color:${C.cream};font-size:17px}
 .hv-md img{max-width:100%;height:auto;border-radius:6px;margin:8px 0}
-.hv-md code{background:#14141f;padding:2px 5px;border-radius:3px;font-size:14px}
-.hv-md pre{background:#0E0E18;border:1px solid ${C.border};padding:14px;border-radius:6px;overflow-x:auto;margin:0 0 18px}
+.hv-md code{background:${C.panel};padding:2px 5px;border-radius:3px;font-size:14px}
+.hv-md pre{background:${C.deep};border:1px solid ${C.border};padding:14px;border-radius:6px;overflow-x:auto;margin:0 0 18px}
 .hv-md pre code{background:none;padding:0}.hv-md hr{border:none;border-top:1px solid ${C.border};margin:28px 0}`;
 
 function useDynamicPost(slug, skip) {
@@ -78,7 +78,7 @@ export default function BlogPost() {
         <aside style={{ marginTop: 40, background: C.surface, border: `1px solid ${C.borderH}`, borderRadius: 8, padding: "28px 26px", textAlign: "center" }}>
           <div style={{ height: 3, background: GG, borderRadius: 3, width: 60, margin: "0 auto 16px" }} />
           <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 10, color: C.cream }}>Ready to stop reading and start doing?</h2>
-          <p style={{ fontSize: 14, color: C.muted, marginBottom: 20, lineHeight: 1.6 }}>Hustle Vault’s AI tools turn your idea into a plan, an offer and your first outreach messages in minutes — pay once, no subscription.</p>
+          <p style={{ fontSize: 14, color: C.muted, marginBottom: 20, lineHeight: 1.6 }}>Hustle Vault is building affordable, pay-per-use AI tools to start, run and grow a business. Check your idea with VentureCheck today — more tools are coming soon.</p>
           <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}><a href="/#start" style={{ display: "inline-block", background: GG, color: "#000", padding: "13px 26px", fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", fontFamily: "Georgia,serif", borderRadius: 2, textDecoration: "none" }}>Start Your Hustle</a><a href="/#grow" style={{ display: "inline-block", border: `1px solid ${C.gold}`, color: C.gold, padding: "12px 26px", fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", fontFamily: "Georgia,serif", borderRadius: 2, textDecoration: "none" }}>Grow Your Hustle</a></div>
         </aside>
 

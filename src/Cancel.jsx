@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
+import { THEME, GRADIENT, GRADIENT_TEXT } from "../shared/theme.js";
 
-const C = {
-  bg: "#05050A", surface: "#09090F",
-  border: "#18182A", borderH: "#282840", gold: "#C9A84C",
-  goldBri: "#F0C040", cream: "#F5F0E8", muted: "#9A8A6A", dim: "#4A4A5A",
-};
-const GG = `linear-gradient(135deg, #7A5A18 0%, ${C.gold} 30%, ${C.goldBri} 55%, ${C.gold} 80%, #7A5A18 100%)`;
-const GT = { background: GG, WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent", display:"inline-block" };
+const C = { ...THEME };
+const GG = GRADIENT;
+const GT = GRADIENT_TEXT;
 
 export default function Cancel() {
   return (

@@ -5,8 +5,20 @@
   padding: 0;
 }
 
+/* Theme tokens — mirror of shared/theme.js (navy + electric lime). */
+:root {
+  --hv-bg: #0A1630; --hv-deep: #081128; --hv-low: #0D1B3A; --hv-surface: #132447; --hv-panel: #182C55;
+  --hv-border: #1E3463; --hv-border-hi: #25407A;
+  --hv-accent: #C6FF00; --hv-text: #FFFFFF; --hv-soft: #C9D3E8; --hv-dim: #8C9AB8; --hv-on-accent: #000;
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background: #05050A;
+  background: var(--hv-bg);
 }
+
+/* Keyboard focus ring in the accent color (outline only — no layout change). */
+:focus-visible { outline: 2px solid var(--hv-accent); outline-offset: 2px; }
+::selection { background: rgba(198, 255, 0, 0.3); color: #FFFFFF; }

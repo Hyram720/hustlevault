@@ -52,7 +52,7 @@ async function page(req, m, body, data, { status = 200, extraHead = "" } = {}) {
     .replace(/<link\s+rel="canonical"[^>]*>\s*/gi, "")
     .replace(/<!-- (Primary SEO|Open Graph|Twitter Card) -->\s*/g, "")
     .replace("</head>", `    ${head(m, extraHead)}\n  </head>`)
-    .replace(/<div id="root"><\/div>/, `<div id="root"><div id="hv-ssr" style="max-width:860px;margin:0 auto;padding:24px;color:#F5F0E8;font-family:Inter,system-ui,sans-serif">${NAV}${body}${FOOT}</div></div>\n    <script>window.__HV_DATA__=${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`);
+    .replace(/<div id="root"><\/div>/, `<div id="root"><div id="hv-ssr" style="max-width:860px;margin:0 auto;padding:24px;color:#FFFFFF;font-family:Inter,system-ui,sans-serif">${NAV}${body}${FOOT}</div></div>\n    <script>window.__HV_DATA__=${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`);
   return new Response(html, { status, headers: { "Content-Type": "text/html; charset=utf-8", ...CDN(60), "Netlify-Vary": "query=page" } });
 }
 
@@ -88,7 +88,7 @@ async function blogIndex(req) {
   const slice = posts.slice((pg - 1) * PER_PAGE, pg * PER_PAGE);
   const list = slice.length ? slice.map((p) => `<article><h2><a href="/blog/${esc(p.slug)}">${esc(p.title)}</a></h2><p><time datetime="${esc(p.date)}">${esc(fmtDateET(p.date))}</time> · ${p.readMins} min read</p><p>${esc(p.excerpt)}</p></article>`).join("") : `<p>No posts yet — check back soon.</p>`;
   const nav = pages > 1 ? `<nav aria-label="Pagination">${pg > 1 ? `<a href="/blog${pg - 1 > 1 ? `?page=${pg - 1}` : ""}" rel="prev">Newer posts</a>` : ""} ${pg < pages ? `<a href="/blog?page=${pg + 1}" rel="next">Older posts</a>` : ""}</nav>` : "";
-  const body = `<main><p>The Hustle Vault Blog</p><h1>Real Strategies for Building Income</h1><p>Practical, no-fluff guides on side hustles and growing a small business — plus AI tools to help you act on them.</p>${list}${nav}</main>`;
+  const body = `<main><p>The Hustle Vault Blog</p><h1>Practical AI for Your Business</h1><p>Practical, no-fluff guides on using AI to start, run and grow a small business — from the team building Hustle Vault’s affordable, pay-per-use AI tools. <a href="/#start">See the tools</a> (most are coming soon) · <a href="/sponsors">Advertise with us</a></p>${list}${nav}</main>`;
   const data = { blog: posts.filter((p) => p.dynamic).map(({ body: _b, ...rest }) => rest) };
   return page(req, blogIndexMeta(slice, pg), body, data, { extraHead: `<link rel="alternate" type="application/rss+xml" title="The Hustle Vault Blog" href="${SITE}/blog/rss.xml" />` });
 }
@@ -107,7 +107,7 @@ async function blogPost(req, slug) {
 async function rss() {
   const posts = (await allPosts()).slice(0, 30);
   const items = posts.map((p) => `<item><title>${esc(p.title)}</title><link>${SITE}/blog/${esc(p.slug)}</link><guid isPermaLink="true">${SITE}/blog/${esc(p.slug)}</guid><pubDate>${new Date(/^\d{4}-\d{2}-\d{2}$/.test(p.date) ? p.date + "T12:00:00Z" : p.date).toUTCString()}</pubDate><description>${esc(p.excerpt)}</description></item>`).join("\n");
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The Hustle Vault Blog</title><link>${SITE}/blog</link><description>Practical guides on side hustles and growing a small business with AI.</description><language>en-us</language><atom:link href="${SITE}/blog/rss.xml" rel="self" type="application/rss+xml"/>\n${items}\n</channel></rss>`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The Hustle Vault Blog</title><link>${SITE}/blog</link><description>Practical guides on using AI to start, run and grow a small business.</description><language>en-us</language><atom:link href="${SITE}/blog/rss.xml" rel="self" type="application/rss+xml"/>\n${items}\n</channel></rss>`;
   return new Response(xml, { headers: { "Content-Type": "application/rss+xml; charset=utf-8", ...CDN(300) } });
 }
 

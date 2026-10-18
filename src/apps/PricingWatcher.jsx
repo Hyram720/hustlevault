@@ -121,7 +121,7 @@ function App({ onOut }) {
         <h1 style={{ ...GT, fontSize: 28, fontWeight: 900 }}>Pricing Watcher</h1>
         <div style={{ display: "flex", gap: 6 }}><Link to="/admin" style={{ ...small, textDecoration: "none" }}>Admin</Link><button style={small} onClick={load}>Refresh</button><button style={small} onClick={() => { sessionStorage.removeItem(KEY); onOut(); }}>Sign out</button></div>
       </div>
-      <div style={{ background: "#2A1F00", border: `1px solid ${C.gold}`, color: C.goldBri, padding: "8px 12px", borderRadius: 8, fontSize: 13, marginBottom: 14 }}>Private: only you can see this. The public page shows Coming soon.</div>
+      <div style={{ background: C.tint, border: `1px solid ${C.gold}`, color: C.goldBri, padding: "8px 12px", borderRadius: 8, fontSize: 13, marginBottom: 14 }}>Private: only you can see this. The public page shows Coming soon.</div>
       {err && <div style={{ color: C.red, marginBottom: 10 }}>{err}</div>}
       {msg && <div style={{ color: C.green, marginBottom: 10 }}>{msg}</div>}
 
@@ -169,7 +169,7 @@ export default function PricingWatcher() {
     <Shell>
       <div style={{ fontSize: 12, color: C.gold, letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 }}>Grow Your Hustle</div>
       <h1 style={{ ...GT, fontSize: "clamp(28px,6vw,40px)", fontWeight: 900, lineHeight: 1.1, marginBottom: 10 }}>{APP.name}</h1>
-      <p style={{ color: "#C8C0B0", fontSize: 17, lineHeight: 1.6, marginBottom: 18 }}>{APP.tagline}</p>
+      <p style={{ color: C.body, fontSize: 17, lineHeight: 1.6, marginBottom: 18 }}>{APP.tagline}</p>
       <div style={{ marginBottom: 18 }}>
         {[["You give", APP.give], ["You get", APP.get], ["How fast", APP.fast]].map(([k, v]) => (
           <div key={k} style={{ display: "flex", gap: 12, padding: "10px 0", borderBottom: `1px solid ${C.border}` }}>

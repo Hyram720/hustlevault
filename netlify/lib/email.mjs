@@ -32,11 +32,11 @@ export function welcomeEmail(s) {
     "",
     "— Hustle Vault",
   ].join("\n");
-  const a = (href, label) => `<a href="${esc(href)}" style="color:#9A6F12">${esc(label)}</a>`;
+  const a = (href, label) => `<a href="${esc(href)}" style="color:#25407A">${esc(label)}</a>`;
   const html = `<!doctype html><html><body style="margin:0;background:#f6f3ec;font-family:Arial,Helvetica,sans-serif;color:#1a1a1a">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 12px">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#fff;border:1px solid #e6dfcc;border-radius:8px">
-<tr><td style="background:#05050A;padding:18px 24px;border-radius:8px 8px 0 0;color:#C9A84C;font-weight:bold;letter-spacing:4px;font-size:14px">HUSTLE VAULT</td></tr>
+<tr><td style="background:#0A1630;padding:18px 24px;border-radius:8px 8px 0 0;color:#C6FF00;font-weight:bold;letter-spacing:4px;font-size:14px">HUSTLE VAULT</td></tr>
 <tr><td style="padding:24px;font-size:15px;line-height:1.6">
 <p>Hi ${esc(s.name)},</p>
 <p>Thanks for sponsoring Hustle Vault — your listing is now live on the sponsor wall and the scrolling ticker at ${a(SITE, "hustlevault.app")}.</p>

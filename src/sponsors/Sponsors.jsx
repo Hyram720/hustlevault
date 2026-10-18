@@ -71,7 +71,7 @@ function InquiryForm({ checkout }) {
         <label style={lab} htmlFor="sp-logo">Logo (optional)</label>
         <input id="sp-logo" type="file" accept={ACCEPT} onChange={pick} style={{ ...inp, padding: 10, fontSize: 14 }} />
         <div style={{ fontSize: 12, color: T.dim, marginTop: 6, lineHeight: 1.5 }}>{LOGO_SPEC}</div>
-        {preview && <div style={{ marginTop: 10, width: 300, maxWidth: "100%", aspectRatio: "3 / 1", background: "#0B0B14", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}><img src={preview} alt="Your logo preview" style={{ width: "100%", height: "100%", objectFit: "contain" }} /></div>}
+        {preview && <div style={{ marginTop: 10, width: 300, maxWidth: "100%", aspectRatio: "3 / 1", background: T.low, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}><img src={preview} alt="Your logo preview" style={{ width: "100%", height: "100%", objectFit: "contain" }} /></div>}
       </div>
       {field("logoUrl", "…or a link to your logo (optional)", { type: "url", placeholder: "https://", maxLength: 300, pattern: "https://.+" })}
       <div><label style={lab} htmlFor="sp-message">Message (optional)</label><textarea id="sp-message" rows={4} maxLength={2000} style={{ ...inp, resize: "vertical" }} value={f.message} onChange={set("message")} /></div>

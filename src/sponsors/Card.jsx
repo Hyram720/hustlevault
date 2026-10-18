@@ -1,13 +1,14 @@
 import { useRef } from "react";
 import { goUrl, useImpression } from "./data";
+import { THEME, GRADIENT, GRADIENT_TEXT } from "../../shared/theme.js";
 
-export const T = { bg: "#05050A", surface: "#09090F", panel: "#0E0E18", border: "#16162A", borderH: "#28284A", gold: "#C9A84C", goldBri: "#F0C040", cream: "#F5F0E8", muted: "#9A8A6A", dim: "#6A6A7A", red: "#E74C3C", green: "#2ECC71" };
-export const GG = `linear-gradient(135deg,#7A5A18 0%,${T.gold} 30%,${T.goldBri} 55%,${T.gold} 80%,#7A5A18 100%)`;
-export const GT = { background: GG, WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", display: "inline-block" };
+export const T = { ...THEME };
+export const GG = GRADIENT;
+export const GT = GRADIENT_TEXT;
 
 export function LogoBox({ s, w = 300, h = 100 }) {
   return (
-    <div style={{ width: "100%", maxWidth: w, aspectRatio: `${w} / ${h}`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto", background: "#0B0B14", borderRadius: 6 }}>
+    <div style={{ width: "100%", maxWidth: w, aspectRatio: `${w} / ${h}`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto", background: T.low, borderRadius: 6 }}>
       <picture style={{ display: "contents" }}>
         <source srcSet={s.logo.wall} type="image/webp" />
         <img src={s.logo.wallPng} alt={`${s.name} logo`} width={w} height={h} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "contain" }} />

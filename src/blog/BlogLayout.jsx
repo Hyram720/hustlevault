@@ -1,18 +1,14 @@
 import { Link } from "react-router-dom";
+import { THEME, GRADIENT, GRADIENT_TEXT } from "../../shared/theme.js";
 
-export const C = {
-  bg: "#05050A", surface: "#09090F", panel: "#0E0E18",
-  border: "#16162A", borderH: "#28284A",
-  gold: "#C9A84C", goldBri: "#F0C040", cream: "#F5F0E8",
-  muted: "#9A8A6A", dim: "#4A4A5A",
-};
-export const GG = `linear-gradient(135deg,#7A5A18 0%,${C.gold} 30%,${C.goldBri} 55%,${C.gold} 80%,#7A5A18 100%)`;
-export const GT = { background: GG, WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", display: "inline-block" };
+export const C = { ...THEME };
+export const GG = GRADIENT;
+export const GT = GRADIENT_TEXT;
 
 function VaultIcon({ size = 24, color = C.goldBri }) {
   return (
     <svg width={size} height={size} viewBox="0 0 80 80" fill="none" aria-hidden="true">
-      <defs><linearGradient id="bvg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#7A5A18" /><stop offset="50%" stopColor={color} /><stop offset="100%" stopColor="#7A5A18" /></linearGradient></defs>
+      <defs><linearGradient id="bvg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor={C.goldDim} /><stop offset="50%" stopColor={color} /><stop offset="100%" stopColor={C.goldDim} /></linearGradient></defs>
       <rect x="8" y="10" width="64" height="56" rx="4" fill={C.surface} stroke="url(#bvg)" strokeWidth="2" />
       <circle cx="40" cy="38" r="13" fill="none" stroke="url(#bvg)" strokeWidth="2" />
       <circle cx="40" cy="38" r="8" fill={C.bg} /><circle cx="40" cy="38" r="2.5" fill="url(#bvg)" />

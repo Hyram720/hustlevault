@@ -55,13 +55,13 @@ export default function ObjectionCoach() {
   return (
     <Shell>
       {preview && buyable && app.status !== "live" && (
-        <div style={{ background: "#2A1F00", border: `1px solid ${C.gold}`, color: C.goldBri, padding: "10px 14px", borderRadius: 8, fontSize: 13, marginBottom: 16 }}>
+        <div style={{ background: C.tint, border: `1px solid ${C.gold}`, color: C.goldBri, padding: "10px 14px", borderRadius: 8, fontSize: 13, marginBottom: 16 }}>
           Private test link — this app is hidden from the public (Coming soon). Payments here are real.
         </div>
       )}
       <div style={{ fontSize: 12, color: C.gold, letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 }}>Grow Your Hustle</div>
       <h1 style={{ ...GT, fontSize: "clamp(28px,6vw,40px)", fontWeight: 900, lineHeight: 1.1, marginBottom: 10 }}>{app.name}</h1>
-      <p style={{ color: "#C8C0B0", fontSize: 17, lineHeight: 1.6, marginBottom: 18 }}>{app.tagline}</p>
+      <p style={{ color: C.body, fontSize: 17, lineHeight: 1.6, marginBottom: 18 }}>{app.tagline}</p>
       <Facts app={app} />
 
       {!buyable ? (

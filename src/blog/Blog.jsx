@@ -33,10 +33,11 @@ export default function Blog() {
       <header style={{ maxWidth: 1000, margin: "0 auto", padding: "64px 24px 24px", textAlign: "center" }}>
         <p style={{ fontSize: 11, color: C.gold, letterSpacing: 3, textTransform: "uppercase", marginBottom: 14 }}>The Hustle Vault Blog</p>
         <h1 style={{ fontSize: "clamp(30px,5vw,48px)", fontWeight: 900, lineHeight: 1.05, marginBottom: 16 }}>
-          Real Strategies for <span style={GT}>Building Income</span>
+          Practical AI for <span style={GT}>Your Business</span>
         </h1>
         <p style={{ fontSize: 16, color: C.muted, maxWidth: 620, margin: "0 auto", lineHeight: 1.6 }}>
-          Practical, no-fluff guides on side hustles and growing a small business — plus AI tools to help you act on them.
+          Practical, no-fluff guides on using AI to start, run and grow a small business — from the team building Hustle Vault’s affordable, pay-per-use AI tools.{" "}
+          <a href="/#start" style={{ color: C.gold }}>See the tools</a> (most are coming soon) · <Link to="/sponsors" style={{ color: C.gold }}>Advertise with us</Link>
         </p>
       </header>
 

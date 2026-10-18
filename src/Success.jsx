@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { API } from "./config";
+import { THEME, GRADIENT, GRADIENT_TEXT, ACCENT_RGB } from "../shared/theme.js";
 
-const C = {
-  bg: "#05050A", surface: "#09090F", panel: "#0E0E18",
-  border: "#18182A", borderH: "#2A2A42", gold: "#C9A84C",
-  goldBri: "#F0C040", goldDim: "#7A5A18", cream: "#F5F0E8", 
-  muted: "#9A8A6A", dim: "#4A4A5A", red: "#E74C3C", green: "#2ECC71",
-};
-const GG = `linear-gradient(135deg, ${C.goldDim} 0%, ${C.gold} 30%, ${C.goldBri} 55%, ${C.gold} 80%, ${C.goldDim} 100%)`;
-const GT = { background: GG, WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", display: "inline-block" };
+const C = { ...THEME };
+const GG = GRADIENT;
+const GT = GRADIENT_TEXT;
 
 const UPSELLS = {
   "1":  { id: 6,   title: "PRINT ON DEMAND",      price: 27, orig: 89, color: "#8E44AD" },
@@ -32,7 +28,7 @@ function Btn({children, onClick, variant="primary", style={}, disabled=false, fu
   const [h,setH]=useState(false);
   const base={padding:"13px 22px",fontSize:11,fontWeight:700,letterSpacing:2.5,textTransform:"uppercase",fontFamily:"Georgia,serif",border:"none",cursor:disabled?"not-allowed":"pointer",transition:"all 0.18s",borderRadius:2,opacity:disabled?0.5:1,width:full?"100%":"auto"};
   const v={
-    primary:{background:GG,color:"#000",transform:h?"translateY(-1px)":"none",boxShadow:h?`0 10px 30px rgba(201,168,76,0.4)`:`0 4px 16px rgba(201,168,76,0.2)`},
+    primary:{background:GG,color:"#000",transform:h?"translateY(-1px)":"none",boxShadow:h?`0 10px 30px rgba(${ACCENT_RGB},0.4)`:`0 4px 16px rgba(${ACCENT_RGB},0.2)`},
     secondary:{background:"transparent",color:C.gold,border:`1px solid ${C.gold}`,transform:h?"translateY(-1px)":"none"},
     ghost:{background:h?C.panel:"transparent",color:C.muted,border:`1px solid ${C.border}`},
   };

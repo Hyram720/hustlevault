@@ -63,6 +63,10 @@ function AppEditor({ app, onSaved }) {
     <div className="hv-card" style={{ marginBottom: 12 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, flexWrap: "wrap", marginBottom: 10 }}>
         <div><b>{app.name}</b> <span style={{ color: C.dim, fontSize: 12 }}>· {app.path === "start" ? "Start" : "Grow"} · {app.id}</span></div>
+        {app.external ? (
+          // External apps (VentureCheck) are always live and public; their status is managed on their own site.
+          <span data-testid="external-status" style={{ padding: "6px 12px", borderRadius: 4, fontSize: 12, background: C.green, color: "#000", fontWeight: 700 }}>Live · public (runs on its own site)</span>
+        ) : (
         <div style={{ display: "flex", gap: 6 }}>
           {["live", "soon", "hidden"].map((s) => (
             <button key={s} onClick={() => setStatus(s)} disabled={app.status === s}
@@ -71,6 +75,7 @@ function AppEditor({ app, onSaved }) {
             </button>
           ))}
         </div>
+        )}
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 10 }}>
         {!app.external && <div><label className="hv-lab">Price (USD)</label><input className="hv-in" inputMode="decimal" value={f.price} onChange={(e) => setF({ ...f, price: e.target.value })} /></div>}
@@ -131,7 +136,7 @@ function Dashboard({ onOut }) {
           <h2 style={{ fontSize: 18, margin: "8px 0 10px" }}>By app <span style={{ fontSize: 12, color: C.dim }}>(sorted by popularity below)</span></h2>
           <div className="hv-card" style={{ padding: 8, marginBottom: 20 }}>
             <Table rows={s.popular.map((id) => s.byApp.find((a) => a.id === id))} cols={[
-              ["App", (r) => r.name], ["Status", (r) => r.status], ["Price", (r) => (r.price == null ? "—" : money(r.price))], ["Views", (r) => r.views], ["Checkouts", (r) => r.checkouts],
+              ["App", (r) => r.name], ["Status", (r) => ({ live: "Live", soon: "Coming soon", hidden: "Hidden" }[r.status] || r.status)], ["Price", (r) => (r.price == null ? "—" : money(r.price))], ["Views", (r) => r.views], ["Checkouts", (r) => r.checkouts],
               ["Sales", (r) => (r.id === "venturecheck" ? `${s.venturecheck.salesAllSources} (all sources)` : r.purchases)],
               ["Revenue", (r) => (r.id === "venturecheck" ? usd(s.venturecheck.revenueAllSources) : usd(r.revenue))], ["Refunds", (r) => r.refunds],
               ["View→sale", (r) => pct(r.viewToPurchase)], ["Checkout→sale", (r) => pct(r.checkoutToPurchase)], ["AI cost/sale", (r) => (r.aiCostPerSale ? "$" + r.aiCostPerSale.toFixed(4) : "—")],

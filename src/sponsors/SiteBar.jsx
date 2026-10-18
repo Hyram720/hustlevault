@@ -4,10 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { loadSponsors, goUrl, useImpression, newPageView } from "./data";
 import { COPY } from "../../shared/sponsors.js";
+import { THEME, BAR_BG } from "../../shared/theme.js";
 
 const HIDE = /^\/(admin|my|success|cancel|door-script|sponsors\/(stats|edit))(\/|$)/;
 const BAR_H = 44;
-const G = { gold: "#C9A84C", goldBri: "#F0C040", cream: "#F5F0E8", muted: "#9A8A6A", surface: "#09090F", border: "#28284A" };
+const G = { ...THEME };
 const dismissedKey = (k) => `hv_bar_closed_${k}`;
 const isDismissed = (k) => { try { return sessionStorage.getItem(dismissedKey(k)) === "1"; } catch { return false; } };
 
@@ -57,14 +58,14 @@ export default function SiteBar() {
   return (
     <div className="hv-bar" role="region" aria-label={kind === "ticker" ? "Sponsors" : "Advertise on Hustle Vault"} data-hv-bar={kind}>
       <style>{`
-        .hv-bar{position:fixed;left:0;right:0;bottom:0;height:${BAR_H}px;z-index:90;display:flex;align-items:center;background:linear-gradient(90deg,#1A0A00,#2A1400,#1A0A00);border-top:1px solid ${G.gold}40;font-family:Inter,system-ui,sans-serif;color:${G.cream};contain:layout paint}
+        .hv-bar{position:fixed;left:0;right:0;bottom:0;height:${BAR_H}px;z-index:90;display:flex;align-items:center;background:${BAR_BG};border-top:1px solid ${G.gold}66;font-family:Inter,system-ui,sans-serif;color:${G.cream};contain:layout paint}
         .hv-bar-lab{flex:0 0 auto;margin:0 8px 0 10px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#000;background:${G.gold};padding:3px 6px;border-radius:2px;font-weight:800}
         .hv-tv{flex:1;overflow:hidden;height:100%;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
         .hv-tt{display:flex;width:max-content;animation:hvtick ${secs}s linear infinite}
         .hv-bar:hover .hv-tt,.hv-bar:focus-within .hv-tt{animation-play-state:paused}
         @keyframes hvtick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
         .hv-ti{display:inline-flex;align-items:center;gap:8px;padding:0 26px;height:${BAR_H}px;white-space:nowrap;text-decoration:none;color:${G.cream};font-size:13px}
-        .hv-ti b{font-weight:800}.hv-ti span{color:${G.muted}}
+        .hv-ti b{font-weight:800;color:${G.cream}}.hv-ti span{color:${G.muted};font-weight:600}
         .hv-ti:focus-visible{outline:2px solid ${G.goldBri};outline-offset:-4px}
         .hv-bar-x{flex:0 0 auto;width:36px;height:36px;margin:0 4px;background:none;border:none;color:${G.muted};font-size:20px;line-height:1;cursor:pointer;border-radius:4px}
         .hv-bar-x:hover,.hv-bar-x:focus-visible{color:${G.cream};outline:1px solid ${G.border}}

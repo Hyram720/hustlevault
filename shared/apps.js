@@ -17,7 +17,7 @@ export const APPS = [
   },
   {
     id: "first-sale-blueprint", path: "start", name: "First Sale Blueprint", price: 900, status: "soon",
-    tagline: "A simple 7-day plan to go after your first paying customer.",
+    tagline: "A focused 7-day plan to land your first paying customer.",
     give: "Your idea, budget, location, free time and experience",
     get: "A 7-day action plan, a starter offer, pricing, and 3 outreach messages (PDF)",
     fast: "About 2 minutes",

@@ -4,32 +4,30 @@ import { APPS } from "../shared/apps.js";
 import { track, ventureCheckUrl } from "./apps/utm";
 import { useSEO } from "./seo";
 import { SponsoredStrip, AdvertiseCallout } from "./sponsors/HomeBits";
+import { THEME, GRADIENT, GRADIENT_TEXT, ACCENT_RGB, BAR_BG } from "../shared/theme.js";
 
 // ── BRAND ──────────────────────────────────────────────────────
-const C = {
-  bg:"#05050A", surface:"#09090F", panel:"#0E0E18", deep:"#060609",
-  border:"#16162A", borderH:"#28284A", borderG:"#C9A84C40",
-  gold:"#C9A84C", goldBri:"#F0C040", goldDim:"#7A5A18",
-  cream:"#F5F0E8", muted:"#9A8A6A", dim:"#4A4A5A",
-  green:"#2ECC71", red:"#E74C3C", blue:"#3498DB", purple:"#8E44AD",
-};
-const GG  = `linear-gradient(135deg,#7A5A18 0%,${C.gold} 30%,${C.goldBri} 55%,${C.gold} 80%,#7A5A18 100%)`;
-const GT  = { background:GG, WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent", display:"inline-block" };
+const C = { ...THEME };
+const GG  = GRADIENT;
+const GT  = GRADIENT_TEXT;
 
 // ── IMAGES (Higgsfield-generated, dark-gold vault aesthetic) ───
 const IMG = "https://d8j0ntlcm91z4.cloudfront.net/user_391qpEAynVndVvvLA4RZWiHERjU/";
 const HERO_IMG = IMG + "hf_20260810_204014_47196f1f-19bc-4591-8ed2-50a21cf519aa.png";
-const VAULT_VIDEO = IMG + "hf_20260811_165934_1c5a7a1f-5e2b-4b79-a7fd-42cca3f35a0a.mp4";
+// Intro: navy/lime color-graded copy of Fred's Higgsfield video (same frames, length and fps).
+// Original gold version kept at VAULT_VIDEO_ORIGINAL and in media-originals/ (see README there).
+const VAULT_VIDEO_ORIGINAL = IMG + "hf_20260811_165934_1c5a7a1f-5e2b-4b79-a7fd-42cca3f35a0a.mp4"; // eslint-disable-line no-unused-vars
+const VAULT_VIDEO = "/intro/vault-navy-lime.mp4";
 
 const ICON = { "venturecheck":"🧭", "first-sale-blueprint":"🗺️", "offer-builder":"🧰", "objection-coach":"🎯", "lead-follow-up":"📨", "reactivation-kit":"🔁", "lead-qualifier":"🚦", "first-customer-finder":"🔎" };
-const ACCENT = { start:"#2ECC71", grow:"#3498DB" };
+const ACCENT = { start:C.green, grow:C.blue };
 const money = c => "$" + (c % 100 === 0 ? c/100 : (c/100).toFixed(2));
 
 // ── COMPONENTS ─────────────────────────────────────────────────
 function VaultIcon({size=24,color=C.goldBri}) {
   return (
     <svg width={size} height={size} viewBox="0 0 80 80" fill="none">
-      <defs><linearGradient id="vg3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#7A5A18"/><stop offset="50%" stopColor={color}/><stop offset="100%" stopColor="#7A5A18"/></linearGradient></defs>
+      <defs><linearGradient id="vg3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor={C.goldDim}/><stop offset="50%" stopColor={color}/><stop offset="100%" stopColor={C.goldDim}/></linearGradient></defs>
       <rect x="8" y="10" width="64" height="56" rx="4" fill={C.surface} stroke="url(#vg3)" strokeWidth="2"/>
       <circle cx="40" cy="38" r="13" fill="none" stroke="url(#vg3)" strokeWidth="2"/>
       <circle cx="40" cy="38" r="8" fill={C.bg}/><circle cx="40" cy="38" r="2.5" fill="url(#vg3)"/>
@@ -43,7 +41,7 @@ function Btn({children,onClick,variant="primary",style={},disabled=false,full=fa
   const [h,setH]=useState(false);
   const base={padding:"13px 22px",fontSize:11,fontWeight:700,letterSpacing:2.5,textTransform:"uppercase",fontFamily:"Georgia,serif",border:"none",cursor:disabled?"not-allowed":"pointer",transition:"all 0.18s",borderRadius:2,opacity:disabled?0.5:1,width:full?"100%":"auto"};
   const v={
-    primary:{background:GG,color:"#000",transform:h?"translateY(-1px)":"none",boxShadow:h?`0 10px 30px rgba(201,168,76,0.4)`:`0 4px 16px rgba(201,168,76,0.2)`},
+    primary:{background:GG,color:"#000",transform:h?"translateY(-1px)":"none",boxShadow:h?`0 10px 30px rgba(${ACCENT_RGB},0.4)`:`0 4px 16px rgba(${ACCENT_RGB},0.2)`},
     secondary:{background:"transparent",color:C.gold,border:`1px solid ${C.gold}`,transform:h?"translateY(-1px)":"none"},
     ghost:{background:h?C.panel:"transparent",color:C.muted,border:`1px solid ${C.border}`},
   };
@@ -65,10 +63,10 @@ function AppCard({app}) {
       <div style={{padding:"20px 20px 6px"}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:10,marginBottom:10}}>
           <div style={{fontSize:30,lineHeight:1}}>{ICON[app.id]||"✨"}</div>
-          {soon ? <Badge color="#4A4A5A" dark>Coming soon</Badge> : app.external ? <Badge color={C.green}>Free score</Badge> : <Badge color={C.goldBri}>Available</Badge>}
+          {soon ? <Badge color={C.soon} dark>Coming soon</Badge> : app.external ? <Badge color={C.green}>Live · Free score</Badge> : <Badge color={C.goldBri}>Available</Badge>}
         </div>
         <div style={{...GT,fontSize:18,fontWeight:900,letterSpacing:1}}>{app.name}</div>
-        <p style={{fontSize:14,color:"#C0B8A8",lineHeight:1.6,margin:"6px 0 12px"}}>{app.tagline}</p>
+        <p style={{fontSize:14,color:C.body,lineHeight:1.6,margin:"6px 0 12px"}}>{app.tagline}</p>
         {row("You give",app.give)}{row("You get",app.get)}{row("Price",app.price==null?"Coming soon":app.external?`Free score · ${money(app.price)} full report`:`${money(app.price)} one time`)}{row("How fast",app.fast)}
       </div>
       <div style={{padding:"12px 20px 20px",marginTop:"auto"}}>
@@ -147,7 +145,7 @@ export default function HustleVault() {
       {showIntro && <IntroOverlay onDone={doneIntro}/>}
       <style>{`
         *{box-sizing:border-box;margin:0;padding:0;}
-        ::selection{background:rgba(201,168,76,0.3);color:#F5F0E8;}
+        ::selection{background:rgba(${ACCENT_RGB},0.3);color:${C.cream};}
         @keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
         .ticker-wrap{animation:ticker 30s linear infinite;width:max-content;display:flex;}
         .hv-navlinks{display:flex;align-items:center;gap:20px}
@@ -155,10 +153,10 @@ export default function HustleVault() {
       `}</style>
 
       {/* Ticker */}
-      <div style={{background:`linear-gradient(90deg,#1A0A00,#2A1400,#1A0A00)`,borderBottom:`1px solid ${C.gold}30`,padding:"10px 0",overflow:"hidden"}}>
+      <div style={{background:BAR_BG,borderBottom:`1px solid ${C.gold}55`,padding:"10px 0",overflow:"hidden"}}>
         <div className="ticker-wrap">
           {["Affordable AI tools for your business","Pay per use — no subscriptions","Results in minutes","Start your hustle","Grow your hustle","Beginner-friendly — no tech skills needed"].flatMap(x=>[x,x]).map((t,i)=>(
-            <span key={i} style={{fontSize:10,color:C.gold,letterSpacing:2,whiteSpace:"nowrap",padding:"0 40px"}}>◆ {t}</span>
+            <span key={i} style={{fontSize:12,fontWeight:700,color:C.gold,letterSpacing:2,whiteSpace:"nowrap",padding:"0 40px"}}>◆ {t}</span>
           ))}
         </div>
       </div>

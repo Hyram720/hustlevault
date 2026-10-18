@@ -26,8 +26,8 @@ export function policyMeta() {
 }
 
 export function blogIndexMeta(posts, page = 1) {
-  const title = page > 1 ? `The Hustle Vault Blog – Page ${page}` : "The Hustle Vault Blog – Side Hustles, Digital Products & Money Strategies";
-  const description = "Actionable guides on side hustles, digital products, and building income streams — storage auctions, land flipping, print on demand, and more from Hustle Vault.";
+  const title = page > 1 ? `The Hustle Vault Blog – Page ${page}` : "The Hustle Vault Blog – Practical AI Guides to Start & Grow a Business";
+  const description = "Practical, no-fluff guides on using AI to start, run and grow a small business — from Hustle Vault, home of affordable pay-per-use AI business tools.";
   return { title, description, path: page > 1 ? `/blog?page=${page}` : "/blog", type: "website",
     jsonLd: { "@context": "https://schema.org", "@type": "Blog", "@id": SITE + "/blog", name: "The Hustle Vault Blog", url: SITE + "/blog", description, publisher: ORG,
       blogPost: posts.map((p) => ({ "@type": "BlogPosting", headline: p.title, description: p.description, ...(p.cover ? { image: absUrl(p.cover) } : {}), datePublished: p.date, dateModified: p.dateModified || p.date, author: { "@type": "Organization", name: p.author }, url: `${SITE}/blog/${p.slug}` })) } };

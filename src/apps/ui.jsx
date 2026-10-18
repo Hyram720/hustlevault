@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom";
-export const C = {
-  bg: "#05050A", surface: "#09090F", panel: "#0E0E18", border: "#16162A", borderH: "#28284A",
-  gold: "#C9A84C", goldBri: "#F0C040", cream: "#F5F0E8", muted: "#9A8A6A", dim: "#6A6A7A",
-  green: "#2ECC71", red: "#E74C3C",
-};
-export const GG = `linear-gradient(135deg,#7A5A18 0%,${C.gold} 30%,${C.goldBri} 55%,${C.gold} 80%,#7A5A18 100%)`;
-export const GT = { background: GG, WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", display: "inline-block" };
+import { THEME, GRADIENT, GRADIENT_TEXT } from "../../shared/theme.js";
+export const C = { ...THEME };
+export const GG = GRADIENT;
+export const GT = GRADIENT_TEXT;
 export const money = (c) => "$" + (c % 100 === 0 ? c / 100 : (c / 100).toFixed(2));
 
 export function Shell({ children }) {
@@ -44,7 +41,7 @@ export function Facts({ app }) {
   );
   return (
     <div style={{ marginBottom: 18 }}>
-      {row("You give", app.give)}{row("You get", app.get)}{row("How much", app.price == null ? "Coming soon" : `${money(app.price)} one time — no subscription`)}{row("How fast", app.fast)}
+      {row("You give", app.give)}{row("You get", app.get)}{row("How much", app.price == null ? "Coming soon" : app.external ? `Free score · ${money(app.price)} full report` : `${money(app.price)} one time — no subscription`)}{row("How fast", app.fast)}
     </div>
   );
 }

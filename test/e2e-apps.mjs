@@ -122,7 +122,7 @@ ok((await req("/api/apps")).d.apps.find((a) => a.id === "offer-builder").buyable
 await post("/api/hv-admin/apps", { id: "venturecheck", status: "hidden" }, A, "PUT");
 ok(!(await req("/api/apps")).d.apps.find((a) => a.id === "venturecheck"), "hidden app removed from public catalog");
 await post("/api/hv-admin/apps", { id: "venturecheck", status: "live" }, A, "PUT");
-await post("/api/hv-admin/apps", { id: "first-sale-blueprint", price: 900, tagline: "A simple 7-day plan to go after your first paying customer." }, A, "PUT");
+await post("/api/hv-admin/apps", { id: "first-sale-blueprint", price: 900, tagline: "A focused 7-day plan to land your first paying customer." }, A, "PUT");
 r = await req("/api/hv-admin/export?type=purchases&days=7&test=1", { headers: A });
 ok(r.s === 200 && r.ct.includes("csv") && r.d.toString().split("\n").length >= 5, "CSV export");
 ok(ONLY && !ONLY.includes("lead-qualifier") || r.d.toString().includes("lead-qualifier"), "CSV export includes Lead Qualifier purchases");

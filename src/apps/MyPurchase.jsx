@@ -74,7 +74,7 @@ function CoachResult({ p, onUpdate }) {
               return (
                 <div key={i} style={{ alignSelf: you ? "flex-end" : "flex-start", maxWidth: "88%" }}>
                   <div style={{ fontSize: 11, color: C.dim, marginBottom: 3, textAlign: you ? "right" : "left" }}>{you ? "You" : "Customer"}</div>
-                  <div style={{ background: you ? "#1C1606" : C.panel, border: `1px solid ${you ? C.gold + "60" : C.border}`, borderRadius: 10, padding: "10px 13px", fontSize: 15, lineHeight: 1.5 }}>{t.text}</div>
+                  <div style={{ background: you ? C.tint : C.panel, border: `1px solid ${you ? C.gold + "60" : C.border}`, borderRadius: 10, padding: "10px 13px", fontSize: 15, lineHeight: 1.5 }}>{t.text}</div>
                   {sc && <div style={{ fontSize: 13, color: sc.score >= 7 ? C.green : sc.score >= 4 ? C.goldBri : C.red, marginTop: 4, textAlign: "right" }}>Score {sc.score}/10 — <span style={{ color: C.muted }}>{sc.feedback}</span></div>}
                 </div>
               );

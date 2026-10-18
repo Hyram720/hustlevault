@@ -22,7 +22,7 @@ export default handle(async (req, context) => {
     if (!(await rateLimit("watcher-unsub", ipHash(context, req), 20, 3600))) throw new HttpError(429, "Slow down a little.");
     const ok = await unsubscribe(new URL(req.url).searchParams.get("t") || "");
     const msg = ok ? "You won't get Pricing Watcher emails anymore. You can turn them back on in the app." : "This link is no longer valid (alerts may already be off).";
-    return new Response(`<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>Pricing Watcher</title><body style="font-family:system-ui;background:#05050A;color:#F5F0E8;display:grid;place-items:center;min-height:90vh"><p style="max-width:420px;text-align:center">${msg}</p></body>`,
+    return new Response(`<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>Pricing Watcher</title><body style="font-family:system-ui;background:#0A1630;color:#FFFFFF;display:grid;place-items:center;min-height:90vh"><p style="max-width:420px;text-align:center">${msg}</p></body>`,
       { status: ok ? 200 : 400, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
   }
 

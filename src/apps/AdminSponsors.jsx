@@ -19,9 +19,9 @@ export function AuthImg({ src, alt, style }) {
     fetch(src, { headers: { Authorization: `Bearer ${adminToken()}` } }).then((r) => (r.ok ? r.blob() : null)).then((b) => { if (b && on) { u = URL.createObjectURL(b); setUrl(u); } }).catch(() => {});
     return () => { on = false; if (u) URL.revokeObjectURL(u); };
   }, [src]);
-  return url ? <img src={url} alt={alt} style={style} /> : <span style={{ ...style, display: "inline-block", background: "#0B0B14" }} />;
+  return url ? <img src={url} alt={alt} style={style} /> : <span style={{ ...style, display: "inline-block", background: C.low }} />;
 }
-const LogoBox = ({ src, alt }) => <div style={{ width: 300, maxWidth: "100%", aspectRatio: "3 / 1", background: "#0B0B14", border: `1px solid ${C.border}`, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>{src ? <AuthImg src={src} alt={alt} style={{ width: "100%", height: "100%", objectFit: "contain" }} /> : <span style={{ color: C.dim, fontSize: 12 }}>No logo</span>}</div>;
+const LogoBox = ({ src, alt }) => <div style={{ width: 300, maxWidth: "100%", aspectRatio: "3 / 1", background: C.low, border: `1px solid ${C.border}`, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>{src ? <AuthImg src={src} alt={alt} style={{ width: "100%", height: "100%", objectFit: "contain" }} /> : <span style={{ color: C.dim, fontSize: 12 }}>No logo</span>}</div>;
 
 function copy(text, setMsg) { navigator.clipboard?.writeText(text).then(() => setMsg("Copied ✓"), () => setMsg(text)); }
 
@@ -136,7 +136,7 @@ function SponsorRow({ s, emailOn, reload, setList }) {
               {[["Stats link", s.links.stats, "stats"], ["Edit link", s.links.edit, "edit"]].map(([l, u, kind]) => (
                 <div key={kind} style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap", fontSize: 12 }}>
                   <span style={{ color: C.muted, width: 70 }}>{l}</span>
-                  <code style={{ fontSize: 11, color: C.cream, background: "#0B0B14", padding: "3px 6px", borderRadius: 3, maxWidth: 420, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{u}</code>
+                  <code style={{ fontSize: 11, color: C.cream, background: C.low, padding: "3px 6px", borderRadius: 3, maxWidth: 420, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{u}</code>
                   <button style={small} onClick={() => copy(u, setMsg)}>Copy</button>
                   <button style={small} onClick={() => confirm(`Make a new ${kind} link? The old one stops working.`) && act("sponsor-token", { id: s.id, kind }, "New link made ✓")}>Regenerate</button>
                 </div>

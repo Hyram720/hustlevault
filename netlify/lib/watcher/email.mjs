@@ -21,12 +21,12 @@ export function alertEmail(alert, { unsubscribeUrl } = {}) {
   const html = `<!doctype html><html><body style="margin:0;background:#f6f3ec;font-family:Arial,Helvetica,sans-serif;color:#1a1a1a">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 12px">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#fff;border:1px solid #e6dfcc;border-radius:8px">
-<tr><td style="background:#05050A;padding:18px 24px;border-radius:8px 8px 0 0;color:#C9A84C;font-weight:bold;letter-spacing:4px;font-size:14px">HUSTLE VAULT · PRICING WATCHER</td></tr>
+<tr><td style="background:#0A1630;padding:18px 24px;border-radius:8px 8px 0 0;color:#C6FF00;font-weight:bold;letter-spacing:4px;font-size:14px">HUSTLE VAULT · PRICING WATCHER</td></tr>
 <tr><td style="padding:24px;font-size:15px;line-height:1.6">
 <p><b>${esc(name)}</b> changed its pricing page.</p>
 <ul>${lines.map((l) => `<li>${esc(l)}</li>`).join("")}</ul>
-<p style="color:#555;font-size:13px">Page: <a href="${esc(alert.url)}" style="color:#9A6F12">${esc(alert.url)}</a><br>First seen ${esc(alert.firstSeenAt)} · confirmed ${esc(alert.confirmedAt)} (UTC)</p>
-<p><a href="${esc(app)}" style="color:#9A6F12">Open Pricing Watcher</a></p>
+<p style="color:#555;font-size:13px">Page: <a href="${esc(alert.url)}" style="color:#25407A">${esc(alert.url)}</a><br>First seen ${esc(alert.firstSeenAt)} · confirmed ${esc(alert.confirmedAt)} (UTC)</p>
+<p><a href="${esc(app)}" style="color:#25407A">Open Pricing Watcher</a></p>
 <p style="color:#888;font-size:12px">Checked automatically — please double-check the page before acting.${unsubscribeUrl ? ` <a href="${esc(unsubscribeUrl)}" style="color:#888">Stop these emails</a>` : ""}</p>
 </td></tr></table></td></tr></table></body></html>`;
   return { subject, text, html };

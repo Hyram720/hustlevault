@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import BlogLayout, { C, GT } from "./blog/BlogLayout";
+import { THEME, GRADIENT } from "../shared/theme.js";
 
 const KEY = "hv_knock_log_v1";
 const LEAD_TYPES = ["roofing-only", "bundled", "solar-only"];
@@ -16,7 +17,7 @@ const q = { color: C.cream, lineHeight: 1.7, margin: "6px 0", fontFamily: "Georg
 const note = { color: C.muted, fontStyle: "italic", lineHeight: 1.6, margin: "6px 0", fontSize: 14 };
 const inp = { width: "100%", padding: "10px 12px", background: C.bg, border: `1px solid ${C.border}`, borderRadius: 4, color: C.cream, fontSize: 14, boxSizing: "border-box" };
 const lbl = { display: "block", color: C.muted, fontSize: 10, letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 };
-const btn = { padding: "11px 22px", background: "linear-gradient(135deg,#7A5A18 0%,#C9A84C 30%,#F0C040 55%,#C9A84C 80%,#7A5A18 100%)", color: "#000", border: "none", borderRadius: 4, fontWeight: 800, letterSpacing: 2, fontSize: 11, textTransform: "uppercase", cursor: "pointer" };
+const btn = { padding: "11px 22px", background: GRADIENT, color: "#000", border: "none", borderRadius: 4, fontWeight: 800, letterSpacing: 2, fontSize: 11, textTransform: "uppercase", cursor: "pointer" };
 const th = { textAlign: "left", padding: "10px 8px", color: C.muted, fontSize: 10, letterSpacing: 2, textTransform: "uppercase", borderBottom: `1px solid ${C.borderH}` };
 const td = { padding: "10px 8px", borderBottom: `1px solid ${C.border}`, fontSize: 14, color: C.cream };
 
@@ -115,7 +116,7 @@ export default function DoorScript() {
                   <tr key={r.id}>
                     <td style={td}>{r.date}</td><td style={td}>{r.address}</td><td style={td}>{r.leadType}</td>
                     <td style={td}>{r.outcome}</td><td style={td}>{r.phone}</td>
-                    <td style={td}><button type="button" onClick={() => del(r.id)} style={{ background: "transparent", border: `1px solid ${C.borderH}`, color: "#E74C3C", borderRadius: 4, padding: "4px 10px", cursor: "pointer" }}>Delete</button></td>
+                    <td style={td}><button type="button" onClick={() => del(r.id)} style={{ background: "transparent", border: `1px solid ${C.borderH}`, color: THEME.red, borderRadius: 4, padding: "4px 10px", cursor: "pointer" }}>Delete</button></td>
                   </tr>
                 ))}
               </tbody>
