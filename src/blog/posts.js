@@ -50,7 +50,7 @@ export const POSTS = [
       { quote: "The best side hustle is the one you'll actually stick with for 90 days. Pick based on your budget and your temperament, not the hype." },
       { h2: "How to choose the right side hustle for you" },
       { p: "Start by answering three questions: How much can you invest right now? How much time can you commit each week? And do you prefer working online or in the real world? Match your answers to the categories above and you'll narrow 27 options down to two or three that genuinely fit your life." },
-      { p: "Whatever you choose, what helps most is a clear, step-by-step plan you'll actually follow. Not sure which idea fits you? Run it through VentureCheck in the Start Your Hustle section, then use the First Sale Blueprint to plan your first week." },
+      { p: "Whatever you choose, what helps most is a clear, step-by-step plan you'll actually follow. Not sure which idea fits you? Run it through VentureCheck in the Start Your Hustle section, then use the AI Offer Builder to package what you'll sell." },
     ],
   },
   {
@@ -92,7 +92,7 @@ export const POSTS = [
       { h2: "Where to resell" },
       { p: "Different items belong on different platforms. Electronics and collectibles do best on national marketplaces, furniture and bulky goods sell fastest locally, and true finds — antiques, rare tools, designer items — can justify a specialist buyer. A simple resale system makes each unit a repeatable process rather than a one-time gamble — though some units will still lose money." },
       { h2: "Ready to go deeper?" },
-      { p: "This is the overview — what helps most is a repeatable system for finding auctions, valuing units, and selling the contents. Hustle Vault's Start Your Hustle tools can help you check the idea and plan your first week of auctions and listings." },
+      { p: "This is the overview — what helps most is a repeatable system for finding auctions, valuing units, and selling the contents. VentureCheck on Hustle Vault can help you check whether the idea fits your budget and schedule before your first auction." },
     ],
   },
   {

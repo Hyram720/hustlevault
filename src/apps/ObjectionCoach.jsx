@@ -18,6 +18,7 @@ export default function ObjectionCoach() {
   const [app, setApp] = useState(FALLBACK);
   const [buyable, setBuyable] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [missing, setMissing] = useState(false);
   const [industry, setIndustry] = useState("real_estate");
   const [otherIndustry, setOtherIndustry] = useState("");
   const [choice, setChoice] = useState(COACH_INDUSTRIES.real_estate.objections[0]);
@@ -32,7 +33,7 @@ export default function ObjectionCoach() {
   useEffect(() => {
     fetch(`/api/apps${preview ? `?preview=${encodeURIComponent(preview)}` : ""}`)
       .then((r) => r.json())
-      .then((d) => { const a = d.apps?.find((x) => x.id === "objection-coach"); if (a) { setApp(a); setBuyable(!!a.buyable); } })
+      .then((d) => { const a = d.apps?.find((x) => x.id === "objection-coach"); if (a) { setApp(a); setBuyable(!!a.buyable); setMissing(false); } else if (Array.isArray(d.apps)) setMissing(true); })
       .catch(() => {})
       .finally(() => setLoaded(true));
   }, [preview]);
@@ -53,6 +54,7 @@ export default function ObjectionCoach() {
     } catch (e) { setErr(e.message); setBusy(false); }
   }
 
+  if (missing) return <Shell><div className="hv-card"><h1 style={{ fontSize: 22 }}>This tool isn't available</h1><p style={{ color: C.muted, marginTop: 10, lineHeight: 1.6 }}>It may have moved or been retired.</p><p style={{ marginTop: 10 }}><Link to="/#start" style={{ color: C.gold }}>See our AI tools</Link></p></div></Shell>;
   return (
     <Shell>
       {preview && buyable && app.status !== "live" && (
@@ -68,7 +70,7 @@ export default function ObjectionCoach() {
       {!buyable ? (
         <div className="hv-card" style={{ textAlign: "center" }}>
           <div style={{ fontSize: 13, color: C.gold, letterSpacing: 2, textTransform: "uppercase", marginBottom: 8 }}>{loaded ? "Coming soon" : "Loading…"}</div>
-          <p style={{ color: C.muted, lineHeight: 1.6 }}>We're finishing testing on this tool. It'll be available here shortly.</p>
+          {loaded && <p style={{ color: C.muted, lineHeight: 1.6 }}>We're finishing testing on this tool. It'll be available here shortly.</p>}
         </div>
       ) : (
         <div className="hv-card">

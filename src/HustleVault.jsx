@@ -110,7 +110,7 @@ function IntroOverlay({onDone}) {
 }
 
 // ── MAIN LANDING PAGE ──────────────────────────────────────────
-const FALLBACK_APPS = APPS.filter(a=>a.status!=="hidden").map(a=>({...a,buyable:false}));
+const FALLBACK_APPS = APPS.filter(a=>a.status==="live").map(a=>({...a,buyable:!!a.external}));
 
 export default function HustleVault() {
   const [showIntro, setShowIntro] = useState(true);
@@ -124,7 +124,7 @@ export default function HustleVault() {
 
   useSEO({
     title:"Hustle Vault – Affordable AI Tools to Start, Run & Grow Your Business",
-    description:"Pay-per-use AI tools for beginners and business owners. Check your idea, plan your first sale, handle sales objections and win back customers — no subscriptions, results in minutes.",
+    description:"Pay-per-use AI tools for beginners and business owners. Check your business idea and turn your skills into a ready-to-sell offer — no subscriptions, results in minutes.",
     path:"/",
     type:"website",
     jsonLd:{
@@ -167,7 +167,7 @@ export default function HustleVault() {
            <Link to="/" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none"}}><VaultIcon size={24}/><div style={{...GT,fontSize:14,fontWeight:900,letterSpacing:4,textTransform:"uppercase"}}>Hustle Vault</div></Link>
            <div className="hv-navlinks">
              <button onClick={()=>go("start")} style={navA}>Start</button>
-             <button onClick={()=>go("grow")} style={navA}>Grow</button>
+             {grow.length>0&&<button onClick={()=>go("grow")} style={navA}>Grow</button>}
              <Link to="/blog" className="hv-hide-m" style={navA}>Blog</Link>
              <Link to="/sponsors" className="hv-hide-m" style={navA}>Advertise</Link>
              <Link to="/door-script" className="hv-hide-m" style={navA}>Door Script</Link>
@@ -189,13 +189,13 @@ export default function HustleVault() {
            <p style={{fontSize:16,color:C.muted,lineHeight:1.6,maxWidth:600,margin:"0 auto 32px"}}>Pick a tool, answer a few simple questions, pay once, and get your results in minutes. No subscriptions. No tech skills needed.</p>
            <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
               <Btn onClick={()=>go("start")} style={{padding:"15px 30px"}}>Start Your Hustle</Btn>
-              <Btn onClick={()=>go("grow")} variant="secondary" style={{padding:"15px 30px"}}>Grow Your Hustle</Btn>
+              {grow.length>0&&<Btn onClick={()=>go("grow")} variant="secondary" style={{padding:"15px 30px"}}>Grow Your Hustle</Btn>}
            </div>
         </div>
       </section>
 
-      <PathSection id="start" eyebrow="New to business?" title="Start Your Hustle" who="For beginners who want to start making money with AI — find a good idea, turn your skills into an offer, and go after your first sale." apps={start}/>
-      <PathSection id="grow" eyebrow="Already in business?" title="Grow Your Hustle" who="For entrepreneurs and salespeople who want to close more deals, follow up faster, and bring past customers back." apps={grow}/>
+      <PathSection id="start" eyebrow="New to business?" title="Start Your Hustle" who="For beginners who want to start a business with AI — check whether your idea is worth your time, then turn your skills into an offer people can buy." apps={start}/>
+      {grow.length>0&&<PathSection id="grow" eyebrow="Already in business?" title="Grow Your Hustle" who="For entrepreneurs and salespeople who want to close more deals, follow up faster, and bring past customers back." apps={grow}/>}
 
       {/* How it works */}
       <section style={{padding:"56px 20px 80px",maxWidth:1000,margin:"0 auto"}}>
@@ -218,7 +218,7 @@ export default function HustleVault() {
       <footer style={{padding:"48px 24px",textAlign:"center",background:C.surface,color:C.dim,fontSize:10,letterSpacing:2}}>
          <div style={{display:"flex",gap:22,justifyContent:"center",flexWrap:"wrap",marginBottom:18}}>
             <a href="/#start" style={{color:C.muted,textDecoration:"none"}}>Start Your Hustle</a>
-            <a href="/#grow" style={{color:C.muted,textDecoration:"none"}}>Grow Your Hustle</a>
+            {grow.length>0&&<a href="/#grow" style={{color:C.muted,textDecoration:"none"}}>Grow Your Hustle</a>}
             <Link to="/blog" style={{color:C.muted,textDecoration:"none"}}>Blog</Link>
             <Link to="/sponsors" title="Put your logo in front of our visitors" style={{color:C.muted,textDecoration:"none"}}>Advertise</Link>
             <Link to="/sponsors/policy" style={{color:C.muted,textDecoration:"none"}}>Ad Policy</Link>

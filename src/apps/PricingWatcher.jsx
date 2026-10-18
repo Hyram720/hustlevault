@@ -1,4 +1,4 @@
-// Competitor Pricing Watcher: Fred's private tool. Public visitors see "Coming soon";
+// Competitor Pricing Watcher: Fred's private tool. Public visitors see a "Private tool" note;
 // the working app needs the existing Hustle Vault admin session (same sign-in as /admin).
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -178,8 +178,8 @@ export default function PricingWatcher() {
           </div>))}
       </div>
       <div className="hv-card" style={{ textAlign: "center" }}>
-        <div style={{ fontSize: 13, color: C.gold, letterSpacing: 2, textTransform: "uppercase", marginBottom: 8 }}>Coming soon</div>
-        <p style={{ color: C.muted, lineHeight: 1.6 }}>We're finishing testing on this tool. It'll be available here shortly.</p>
+        <div style={{ fontSize: 13, color: C.gold, letterSpacing: 2, textTransform: "uppercase", marginBottom: 8 }}>Private tool</div>
+        <p style={{ color: C.muted, lineHeight: 1.6 }}>This tool is private to the Hustle Vault team. <Link to="/#start" style={{ color: C.gold }}>See our AI tools</Link></p>
       </div>
       {showLogin ? <SignIn onOk={() => setAuthed(true)} /> : <div style={{ textAlign: "center", marginTop: 18 }}><button onClick={() => setShowLogin(true)} style={{ background: "none", border: "none", color: C.dim, fontSize: 12, cursor: "pointer" }}>Owner sign-in</button></div>}
     </Shell>
