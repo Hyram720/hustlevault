@@ -4,6 +4,7 @@ import { Shell, Facts, C, GT, money } from "./ui";
 import { APPS, APP_FORMS } from "../../shared/apps.js";
 import { getUtm, previewToken, track, ventureCheckUrl } from "./utm";
 import { useSEO } from "../seo";
+import { appMeta } from "../../shared/pagemeta.js";
 
 const PATH_LABEL = { start: "Start Your Hustle", grow: "Grow Your Hustle" };
 const NOTES = {
@@ -28,7 +29,7 @@ export default function AppPage() {
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState(q.get("canceled") ? "Checkout was canceled — you weren't charged. You can try again anytime." : "");
 
-  useSEO({ title: `${fallback?.name || "App"} – Hustle Vault`, description: fallback?.tagline || "", path: `/apps/${id}`, noindex: !!preview || app?.status !== "live" });
+  useSEO(appMeta(app, { preview: !!preview }));
   useEffect(() => { if (fallback) track("app_view", id); }, [id]);
   useEffect(() => {
     fetch(`/api/apps${preview ? `?preview=${encodeURIComponent(preview)}` : ""}`).then((r) => r.json())

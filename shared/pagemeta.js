@@ -48,3 +48,31 @@ export function blogPostMeta(post, slug) {
       ] },
     ] } };
 }
+
+// App pages (/apps/<id>): used by the server renderer (crawlers, link previews) and the React page.
+const APP_COPY = {
+  "offer-builder": {
+    title: "AI Offer Builder – Turn Your Skills Into a Service People Can Buy | Hustle Vault",
+    description: "Tell it what you're good at and who you want to help. Get a ready-to-sell service offer: name, description, what's included, a delivery timeline, a suggested price range and a pitch to post. $9 one time, no subscription.",
+  },
+};
+const priceLabel = (c) => (Number.isInteger(c) ? `$${(c / 100).toFixed(c % 100 ? 2 : 0)}` : "");
+export function appMeta(app, { preview = false } = {}) {
+  if (!app) return { title: "App not found | Hustle Vault", description: "That tool doesn't exist.", path: "/apps", noindex: true };
+  const path = `/apps/${app.id}`, custom = APP_COPY[app.id] || {};
+  const price = app.external ? "Free score, $4.99 full report." : app.price ? `${priceLabel(app.price)} one time, no subscription.` : "";
+  const title = custom.title || `${app.name} – ${app.tagline.replace(/\.$/, "")} | Hustle Vault`;
+  const description = custom.description || [app.tagline, app.get ? `You get: ${app.get}.` : "", price].filter(Boolean).join(" ").slice(0, 300);
+  const noindex = preview || app.status === "hidden" || app.id === "pricing-watcher";
+  return {
+    title, description, path, type: "website", image: `${SITE}/og/${app.id}.png`, noindex,
+    jsonLd: { "@context": "https://schema.org", "@graph": [
+      { "@type": "SoftwareApplication", name: app.name, description: app.tagline, applicationCategory: "BusinessApplication", operatingSystem: "Web", url: SITE + path, image: `${SITE}/og/${app.id}.png`,
+        publisher: ORG, ...(app.status === "live" && app.price && !app.external ? { offers: { "@type": "Offer", price: (app.price / 100).toFixed(2), priceCurrency: "USD", url: SITE + path } } : {}) },
+      { "@type": "BreadcrumbList", itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+        { "@type": "ListItem", position: 2, name: app.name, item: SITE + path },
+      ] },
+    ] },
+  };
+}

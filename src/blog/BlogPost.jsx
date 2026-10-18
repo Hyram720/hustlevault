@@ -34,6 +34,17 @@ function useDynamicPost(slug, skip) {
   return st?.slug === slug ? st.post : undefined;
 }
 
+function Block({ b }) {
+  const txt = { fontSize: 16, lineHeight: 1.8, color: C.body };
+  if (b.h2) return <h2 style={{ fontSize: 24, fontWeight: 800, margin: "36px 0 14px", color: C.cream, lineHeight: 1.25 }}>{b.h2}</h2>;
+  if (b.p) return <p style={{ ...txt, margin: "0 0 18px" }}>{b.p}</p>;
+  if (b.quote) return <blockquote style={{ borderLeft: `3px solid ${C.gold}`, margin: "24px 0", padding: "6px 20px", fontSize: 17, fontStyle: "italic", color: C.cream }}>{b.quote}</blockquote>;
+  const li = (x, i) => <li key={i} style={{ ...txt, lineHeight: 1.7, marginBottom: 8 }}>{x}</li>;
+  if (b.ul) return <ul style={{ margin: "0 0 18px", paddingLeft: 22 }}>{b.ul.map(li)}</ul>;
+  if (b.ol) return <ol style={{ margin: "0 0 18px", paddingLeft: 22 }}>{b.ol.map(li)}</ol>;
+  return null;
+}
+
 export default function BlogPost() {
   const { slug } = useParams();
   const staticPost = getPost(slug);

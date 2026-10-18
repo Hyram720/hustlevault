@@ -1,10 +1,11 @@
-// Server-rendered HTML for /sponsors, /sponsors/policy, /blog, /blog/<slug> (so crawlers see real
+// Server-rendered HTML for /sponsors, /sponsors/policy, /blog, /blog/<slug>, /apps/<id> (so crawlers see real
 // content and tags), plus /blog/rss.xml, /sitemap.xml and the public blog JSON API.
 import { esc, renderMarkdown } from "../../shared/markdown.js";
 import { POSTS as STATIC_POSTS } from "../../src/blog/posts.js";
 import { publishedPosts, visibleSponsors, publicSponsor, CDN } from "../lib/content.mjs";
 import { publicPost, mergePosts, fmtDateET, PER_PAGE, absUrl } from "../../shared/blog.js";
-import { sponsorsMeta, policyMeta, blogIndexMeta, blogPostMeta, SITE, DEFAULT_OG } from "../../shared/pagemeta.js";
+import { sponsorsMeta, policyMeta, blogIndexMeta, blogPostMeta, appMeta, SITE, DEFAULT_OG } from "../../shared/pagemeta.js";
+import { getCatalog } from "../lib/apps.mjs";
 import { COPY, SPONSOR_PRICE_LABEL, LOGO_SPEC, POLICY_UPDATED } from "../../shared/sponsors.js";
 import { POLICY, POLICY_INTRO } from "../../shared/policy.js";
 
@@ -45,7 +46,7 @@ function head(m, extra = "") {
 const NAV = `<nav aria-label="Main"><a href="/">Hustle Vault</a> · <a href="/#start">AI Tools</a> · <a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a></nav>`;
 const FOOT = `<footer><a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/sponsors/policy">Ad Policy</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></footer>`;
 
-async function page(req, m, body, data, { status = 200, extraHead = "" } = {}) {
+async function page(req, m, body, data, { status = 200, extraHead = "", vary = "query=page" } = {}) {
   let html = await template(req);
   html = html.replace(/<title>[\s\S]*?<\/title>\s*/i, "")
     .replace(/<meta\s+(name|property)="(description|robots|og:[^"]+|twitter:[^"]+)"[^>]*>\s*/gi, "")
@@ -53,7 +54,7 @@ async function page(req, m, body, data, { status = 200, extraHead = "" } = {}) {
     .replace(/<!-- (Primary SEO|Open Graph|Twitter Card) -->\s*/g, "")
     .replace("</head>", `    ${head(m, extraHead)}\n  </head>`)
     .replace(/<div id="root"><\/div>/, `<div id="root"><div id="hv-ssr" style="max-width:860px;margin:0 auto;padding:24px;color:#FFFFFF;font-family:Inter,system-ui,sans-serif">${NAV}${body}${FOOT}</div></div>\n    <script>window.__HV_DATA__=${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`);
-  return new Response(html, { status, headers: { "Content-Type": "text/html; charset=utf-8", ...CDN(60), "Netlify-Vary": "query=page" } });
+  return new Response(html, { status, headers: { "Content-Type": "text/html; charset=utf-8", ...CDN(60), "Netlify-Vary": vary } });
 }
 
 async function allPosts() {
@@ -104,6 +105,19 @@ async function blogPost(req, slug) {
   return page(req, m, body, { blogPost: post.dynamic ? post : { slug: post.slug, static: true } }, { extraHead: `<link rel="alternate" type="application/rss+xml" title="The Hustle Vault Blog" href="${SITE}/blog/rss.xml" />` });
 }
 
+async function appPage(req, id) {
+  const app = (await getCatalog()).find((a) => a.id === id && a.status !== "hidden") || null;
+  const preview = new URL(req.url).searchParams.has("preview");
+  const m = appMeta(app, { preview });
+  if (!app) return page(req, { ...m, path: `/apps/${id}` }, `<main><h1>App not found</h1><p><a href="/#start">See all tools</a></p></main>`, {}, { status: 404 });
+  const price = app.external ? "Free score · $4.99 full report" : app.price ? `$${(app.price / 100).toFixed(app.price % 100 ? 2 : 0)} one time — no subscription` : "Coming soon";
+  const status = app.status === "live" ? "Available now" : "Coming soon";
+  const body = `<main><p>${app.path === "grow" ? "Grow Your Hustle" : "Start Your Hustle"}</p><h1>${esc(app.name)}</h1><p>${esc(app.tagline)}</p>
+<dl><dt>You give</dt><dd>${esc(app.give || "")}</dd><dt>You get</dt><dd>${esc(app.get || "")}</dd><dt>How much</dt><dd>${esc(price)}</dd><dt>How fast</dt><dd>${esc(app.fast || "")}</dd></dl>
+<p>${esc(status)}</p><p>AI-generated suggestions for education only — no income or sales results are guaranteed.</p></main>`;
+  return page(req, m, body, {}, { vary: "query=preview" });
+}
+
 async function rss() {
   const posts = (await allPosts()).slice(0, 30);
   const items = posts.map((p) => `<item><title>${esc(p.title)}</title><link>${SITE}/blog/${esc(p.slug)}</link><guid isPermaLink="true">${SITE}/blog/${esc(p.slug)}</guid><pubDate>${new Date(/^\d{4}-\d{2}-\d{2}$/.test(p.date) ? p.date + "T12:00:00Z" : p.date).toUTCString()}</pubDate><description>${esc(p.excerpt)}</description></item>`).join("\n");
@@ -117,6 +131,8 @@ async function sitemap() {
   const latest = posts.reduce((a, p) => (day(p.dateModified || p.date) > a ? day(p.dateModified || p.date) : a), "2026-08-10");
   const urls = [
     ["/", "2026-10-17", "weekly", "1.0"], ["/blog", latest, "weekly", "0.8"], ["/sponsors", "2026-10-17", "monthly", "0.6"], ["/sponsors/policy", "2026-10-17", "yearly", "0.3"],
+    ["/apps/offer-builder", "2026-10-18", "monthly", "0.8"],
+    ...["/terms.html", "/privacy.html", "/refund-policy.html", "/earnings-disclaimer.html"].map((u) => [u, "2026-10-18", "yearly", "0.2"]),
     ...posts.map((p) => [`/blog/${p.slug}`, day(p.dateModified || p.date), "monthly", "0.7"]),
   ];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, m, c, p]) => `  <url>\n    <loc>${SITE}${esc(u)}</loc>\n    <lastmod>${m}</lastmod>\n    <changefreq>${c}</changefreq>\n    <priority>${p}</priority>\n  </url>`).join("\n")}\n</urlset>\n`;
@@ -135,6 +151,8 @@ export default async (req) => {
     if (path === "/sponsors") return sponsorsPage(req);
     if (path === "/sponsors/policy") return policyPage(req);
     if (path === "/blog") return blogIndex(req);
+    const a = path.match(/^\/apps\/([a-z0-9-]{1,60})$/);
+    if (path.startsWith("/apps/")) return appPage(req, a ? a[1] : "");
     const m = path.match(/^\/blog\/([a-z0-9-]{1,100})$/);
     if (m) return blogPost(req, m[1]);
     return blogPost(req, "not-found");
@@ -146,4 +164,4 @@ export default async (req) => {
   }
 };
 
-export const config = { path: ["/sponsors", "/sponsors/policy", "/blog", "/blog/*", "/sitemap.xml", "/api/blog", "/api/blog/*"] };
+export const config = { path: ["/sponsors", "/sponsors/policy", "/blog", "/blog/*", "/apps/*", "/sitemap.xml", "/api/blog", "/api/blog/*"] };

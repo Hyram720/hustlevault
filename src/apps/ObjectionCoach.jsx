@@ -4,6 +4,7 @@ import { Shell, Facts, C, GT, money } from "./ui";
 import { COACH_INDUSTRIES } from "../../shared/apps.js";
 import { getUtm, previewToken, track } from "./utm";
 import { useSEO } from "../seo";
+import { appMeta } from "../../shared/pagemeta.js";
 
 const FALLBACK = { id: "objection-coach", name: "Sales Objection Coach", price: 500, status: "soon",
   tagline: "Know exactly what to say when a customer pushes back.",
@@ -25,7 +26,7 @@ export default function ObjectionCoach() {
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState(q.get("canceled") ? "Checkout was canceled — you weren't charged. You can try again anytime." : "");
 
-  useSEO({ title: "Sales Objection Coach – Hustle Vault", description: FALLBACK.tagline, path: "/apps/objection-coach", noindex: !!preview || app.status !== "live" });
+  useSEO(appMeta(app, { preview: !!preview }));
 
   useEffect(() => { track("app_view", "objection-coach"); }, []);
   useEffect(() => {
