@@ -55,9 +55,13 @@ function AppEditor({ app, onSaved }) {
       const d = await api("apps", { method: "PUT", body: JSON.stringify(body) }); onSaved(d.apps); setMsg("Saved ✓");
     } catch (e) { setMsg(e.message); }
   };
-  const setStatus = (status) => {
-    if (status === "live" && !confirm(`Make ${app.name} buyable by the public? Only do this after a real paid test passed.`)) return;
-    save({ status });
+  // Inline confirm (no window.confirm: it's silently blocked in many in-app/mobile browsers, which made "Live" look stuck).
+  const [confirmLive, setConfirmLive] = useState(false);
+  const setStatus = async (status) => {
+    if (status === "live" && !confirmLive) { setConfirmLive(true); setMsg(""); return; }
+    setConfirmLive(false); setMsg("Saving…");
+    try { const d = await api("apps", { method: "PUT", body: JSON.stringify({ id: app.id, status }) }); onSaved(d.apps); setMsg(status === "live" ? "Live ✓ — now buyable by everyone" : "Saved ✓"); }
+    catch (e) { setMsg(e.message); }
   };
   return (
     <div className="hv-card" style={{ marginBottom: 12 }}>
@@ -77,6 +81,13 @@ function AppEditor({ app, onSaved }) {
         </div>
         )}
       </div>
+      {confirmLive && (
+        <div data-testid="confirm-live" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, margin: "0 0 10px", padding: 10, border: `1px solid ${C.gold}`, borderRadius: 6 }}>
+          <span style={{ fontSize: 13 }}>Make {app.name} buyable by the public? Only do this after a real paid test passed.</span>
+          <button onClick={() => setStatus("live")} style={{ padding: "6px 12px", borderRadius: 4, fontSize: 12, fontWeight: 700, background: C.green, color: "#000", border: "none", cursor: "pointer" }}>Yes, go Live</button>
+          <button onClick={() => setConfirmLive(false)} style={{ padding: "6px 12px", borderRadius: 4, fontSize: 12, background: "transparent", color: C.muted, border: `1px solid ${C.borderH}`, cursor: "pointer" }}>Cancel</button>
+        </div>
+      )}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 10 }}>
         {!app.external && <div><label className="hv-lab">Price (USD)</label><input className="hv-in" inputMode="decimal" value={f.price} onChange={(e) => setF({ ...f, price: e.target.value })} /></div>}
         {["tagline", "give", "get", "fast"].map((k) => (
