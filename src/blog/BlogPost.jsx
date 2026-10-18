@@ -89,7 +89,7 @@ export default function BlogPost() {
         <aside style={{ marginTop: 40, background: C.surface, border: `1px solid ${C.borderH}`, borderRadius: 8, padding: "28px 26px", textAlign: "center" }}>
           <div style={{ height: 3, background: GG, borderRadius: 3, width: 60, margin: "0 auto 16px" }} />
           <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 10, color: C.cream }}>Ready to stop reading and start doing?</h2>
-          <p style={{ fontSize: 14, color: C.muted, marginBottom: 20, lineHeight: 1.6 }}>Hustle Vault is building affordable, pay-per-use AI tools to start, run and grow a business. Check your idea with VentureCheck today — more tools are coming soon.</p>
+          <p style={{ fontSize: 14, color: C.muted, marginBottom: 20, lineHeight: 1.6 }}>Hustle Vault offers affordable, pay-per-use AI tools to start, run and grow a business. Turn your skills into a ready-to-sell offer with the AI Offer Builder, or check your idea with VentureCheck.</p>
           <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}><a href="/#start" style={{ display: "inline-block", background: GG, color: "#000", padding: "13px 26px", fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", fontFamily: "Georgia,serif", borderRadius: 2, textDecoration: "none" }}>Start Your Hustle</a><a href="/#grow" style={{ display: "inline-block", border: `1px solid ${C.gold}`, color: C.gold, padding: "12px 26px", fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", fontFamily: "Georgia,serif", borderRadius: 2, textDecoration: "none" }}>Grow Your Hustle</a></div>
         </aside>
 

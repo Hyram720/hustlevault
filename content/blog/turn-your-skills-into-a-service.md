@@ -113,7 +113,7 @@ Copy this list and check every line before you share your offer:
 
 ## Want a first draft in a couple of minutes?
 
-You can do everything above with a notebook, and you'll learn a lot by doing it yourself. If you'd like a head start, the [AI Offer Builder](/apps/offer-builder?utm_source=blog&utm_medium=article&utm_campaign=offer-builder) on Hustle Vault turns your answers about your skills, experience and who you want to help into a draft offer: a name, a one-paragraph description, what's included, a delivery timeline, a suggested price range with the reasoning, and a pitch you can post. It's $9 one time, with no subscription. If the page still says "Coming soon" when you visit, it's in final testing, so check back shortly.
+You can do everything above with a notebook, and you'll learn a lot by doing it yourself. If you'd like a head start, the [AI Offer Builder](/apps/offer-builder?utm_source=blog&utm_medium=article&utm_campaign=offer-builder) on Hustle Vault turns your answers about your skills, experience and who you want to help into a draft offer: a name, a one-paragraph description, what's included, a delivery timeline, a suggested price range with the reasoning, and a pitch you can post. It's $9 one time, with no subscription.
 
 Whichever way you build it, treat your first offer as a draft. Share it, listen, and adjust.
 

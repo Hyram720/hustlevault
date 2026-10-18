@@ -89,7 +89,7 @@ async function blogIndex(req) {
   const slice = posts.slice((pg - 1) * PER_PAGE, pg * PER_PAGE);
   const list = slice.length ? slice.map((p) => `<article><h2><a href="/blog/${esc(p.slug)}">${esc(p.title)}</a></h2><p><time datetime="${esc(p.date)}">${esc(fmtDateET(p.date))}</time> · ${p.readMins} min read</p><p>${esc(p.excerpt)}</p></article>`).join("") : `<p>No posts yet — check back soon.</p>`;
   const nav = pages > 1 ? `<nav aria-label="Pagination">${pg > 1 ? `<a href="/blog${pg - 1 > 1 ? `?page=${pg - 1}` : ""}" rel="prev">Newer posts</a>` : ""} ${pg < pages ? `<a href="/blog?page=${pg + 1}" rel="next">Older posts</a>` : ""}</nav>` : "";
-  const body = `<main><p>The Hustle Vault Blog</p><h1>Practical AI for Your Business</h1><p>Practical, no-fluff guides on using AI to start, run and grow a small business — from the team building Hustle Vault’s affordable, pay-per-use AI tools. <a href="/#start">See the tools</a> (most are coming soon) · <a href="/sponsors">Advertise with us</a></p>${list}${nav}</main>`;
+  const body = `<main><p>The Hustle Vault Blog</p><h1>Practical AI for Your Business</h1><p>Practical, no-fluff guides on using AI to start, run and grow a small business — from the team behind Hustle Vault’s affordable, pay-per-use AI tools. <a href="/#start">See the tools</a> · <a href="/sponsors">Advertise with us</a></p>${list}${nav}</main>`;
   const data = { blog: posts.filter((p) => p.dynamic).map(({ body: _b, ...rest }) => rest) };
   return page(req, blogIndexMeta(slice, pg), body, data, { extraHead: `<link rel="alternate" type="application/rss+xml" title="The Hustle Vault Blog" href="${SITE}/blog/rss.xml" />` });
 }

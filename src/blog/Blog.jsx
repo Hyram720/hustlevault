@@ -36,8 +36,8 @@ export default function Blog() {
           Practical AI for <span style={GT}>Your Business</span>
         </h1>
         <p style={{ fontSize: 16, color: C.muted, maxWidth: 620, margin: "0 auto", lineHeight: 1.6 }}>
-          Practical, no-fluff guides on using AI to start, run and grow a small business — from the team building Hustle Vault’s affordable, pay-per-use AI tools.{" "}
-          <a href="/#start" style={{ color: C.gold }}>See the tools</a> (most are coming soon) · <Link to="/sponsors" style={{ color: C.gold }}>Advertise with us</Link>
+          Practical, no-fluff guides on using AI to start, run and grow a small business — from the team behind Hustle Vault’s affordable, pay-per-use AI tools.{" "}
+          <a href="/#start" style={{ color: C.gold }}>See the tools</a> · <Link to="/sponsors" style={{ color: C.gold }}>Advertise with us</Link>
         </p>
       </header>
 
