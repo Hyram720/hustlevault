@@ -126,6 +126,8 @@ async function rss() {
 }
 
 async function sitemap() {
+  // Prefer www so <loc> matches the host visitors land on after the apex→www redirect.
+  const SITEMAP_SITE = "https://www.hustlevault.app";
   const posts = await allPosts();
   const day = (d) => String(d || "").slice(0, 10);
   const latest = posts.reduce((a, p) => (day(p.dateModified || p.date) > a ? day(p.dateModified || p.date) : a), "2026-08-10");
@@ -135,7 +137,7 @@ async function sitemap() {
     ...["/terms.html", "/privacy.html", "/refund-policy.html", "/earnings-disclaimer.html"].map((u) => [u, "2026-10-18", "yearly", "0.2"]),
     ...posts.map((p) => [`/blog/${p.slug}`, day(p.dateModified || p.date), "monthly", "0.7"]),
   ];
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, m, c, p]) => `  <url>\n    <loc>${SITE}${esc(u)}</loc>\n    <lastmod>${m}</lastmod>\n    <changefreq>${c}</changefreq>\n    <priority>${p}</priority>\n  </url>`).join("\n")}\n</urlset>\n`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, m, c, p]) => `  <url>\n    <loc>${SITEMAP_SITE}${esc(u)}</loc>\n    <lastmod>${m}</lastmod>\n    <changefreq>${c}</changefreq>\n    <priority>${p}</priority>\n  </url>`).join("\n")}\n</urlset>\n`;
   return new Response(xml, { headers: { "Content-Type": "application/xml; charset=utf-8", ...CDN(300) } });
 }
 
