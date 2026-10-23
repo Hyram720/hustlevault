@@ -1,13 +1,13 @@
-// Server-rendered HTML for /, /sponsors, /sponsors/policy, /blog, /blog/<slug>, /apps/<id> (so crawlers see real
+// Server-rendered HTML for /sponsors, /sponsors/policy, /blog, /blog/<slug>, /apps/<id> (so crawlers see real
 // content and tags), plus /blog/rss.xml, /sitemap.xml and the public blog JSON API.
+// The homepage is dist/home.html, rewritten only for the exact path /. It is not this function,
+// and it is not written into index.html (that file is the SPA shell for every other route).
 import { esc, renderMarkdown } from "../../shared/markdown.js";
 import { POSTS as STATIC_POSTS } from "../../src/blog/posts.js";
 import { publishedPosts, visibleSponsors, publicSponsor, CDN } from "../lib/content.mjs";
 import { publicPost, mergePosts, fmtDateET, PER_PAGE } from "../../shared/blog.js";
 import { sponsorsMeta, policyMeta, blogIndexMeta, blogPostMeta, appMeta, SITE } from "../../shared/pagemeta.js";
-import { homeMeta } from "../../shared/homeseo.js";
-import { renderHomeBody, resolveHomeApps } from "../../shared/homehtml.js";
-import { fillTemplate, HOME_SHELL_STYLE } from "../../shared/ssrhtml.js";
+import { fillTemplate } from "../../shared/ssrhtml.js";
 import { getCatalog } from "../lib/apps.mjs";
 import { COPY, SPONSOR_PRICE_LABEL, LOGO_SPEC, POLICY_UPDATED } from "../../shared/sponsors.js";
 import { POLICY, POLICY_INTRO } from "../../shared/policy.js";
@@ -26,17 +26,10 @@ async function template(req) {
 const NAV = `<nav aria-label="Main"><a href="/">Hustle Vault</a> · <a href="/#start">AI Tools</a> · <a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a></nav>`;
 const FOOT = `<footer><a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/sponsors/policy">Ad Policy</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></footer>`;
 
-async function page(req, m, body, data, { status = 200, extraHead = "", vary = "query=page", chrome = true, shellStyle } = {}) {
+async function page(req, m, body, data, { status = 200, extraHead = "", vary = "query=page" } = {}) {
   const templateHtml = await template(req);
-  const inner = chrome ? `${NAV}${body}${FOOT}` : body;
-  const html = fillTemplate(templateHtml, m, inner, data, { extraHead, shellStyle });
+  const html = fillTemplate(templateHtml, m, `${NAV}${body}${FOOT}`, data, { extraHead });
   return new Response(html, { status, headers: { "Content-Type": "text/html; charset=utf-8", ...CDN(60), "Netlify-Vary": vary } });
-}
-
-async function homePage(req) {
-  const catalog = await getCatalog();
-  const { live, soon } = resolveHomeApps(catalog);
-  return page(req, homeMeta(), renderHomeBody({ live, soon }), {}, { chrome: false, shellStyle: HOME_SHELL_STYLE });
 }
 
 async function allPosts() {
@@ -128,7 +121,6 @@ const jsonRes = (d, status = 200) => new Response(JSON.stringify(d), { status, h
 export default async (req) => {
   const path = new URL(req.url).pathname.replace(/\/+$/, "") || "/";
   try {
-    if (path === "/" || path === "") return homePage(req);
     if (path === "/sitemap.xml") return sitemap();
     if (path === "/blog/rss.xml") return rss();
     if (path === "/api/blog") return jsonRes({ posts: (await allPosts()).filter((p) => p.dynamic).map(({ body: _b, ...r }) => r) });
@@ -149,4 +141,4 @@ export default async (req) => {
   }
 };
 
-export const config = { path: ["/", "/sponsors", "/sponsors/policy", "/blog", "/blog/*", "/apps/*", "/sitemap.xml", "/api/blog", "/api/blog/*"] };
+export const config = { path: ["/sponsors", "/sponsors/policy", "/blog", "/blog/*", "/apps/*", "/sitemap.xml", "/api/blog", "/api/blog/*"] };

@@ -7,7 +7,7 @@ const PATHS = {
     id: "start",
     eyebrow: "New to business?",
     title: "Start Your Hustle",
-    who: "For beginners who want to start a business with AI — check whether your idea is worth your time, then turn your skills into an offer people can buy.",
+    who: "For beginners who want to start a business with AI. Check whether your idea is worth your time, then turn your skills into an offer people can buy.",
   },
   grow: {
     id: "grow",
@@ -62,7 +62,7 @@ export function resolveHomeApps(catalog) {
 
 function liveCard(app) {
   const href = app.external && /^https:\/\//.test(app.url || "") ? app.url : `/apps/${app.id}`;
-  const label = app.external ? "Check my idea →" : `Get started — ${money(app.price)}`;
+  const label = app.external ? "Check my idea →" : `Get started, ${money(app.price)}`;
   const badge = app.external ? "Live · Free score" : "Available";
   const ext = app.external ? ' target="_blank" rel="noopener"' : "";
   return `<article>
@@ -109,7 +109,7 @@ export function renderHomeBody({ live = [], soon = [] } = {}) {
   const soonOther = soon.filter((a) => a.path !== "start" && a.path !== "grow");
   const how = [
     ["1", "Pick a tool", "Choose the one that fits where you are right now."],
-    ["2", "Answer a few questions", "Simple questions about you and your business — no jargon."],
+    ["2", "Answer a few questions", "Simple questions about you and your business, no jargon."],
     ["3", "Pay once", "Secure checkout by Stripe. No account, no subscription."],
     ["4", "Get results in minutes", "Saved to a private link you can come back to anytime."],
   ].map(([n, t, d]) => `<li><strong>${esc(n)}. ${esc(t)}</strong> ${esc(d)}</li>`).join("");
@@ -130,7 +130,7 @@ ${soonOther.map(soonCard).join("\n")}
 
   return `${NAV}
 <main>
-<h1>For beginners who want to start a business with AI — check whether your idea is worth your time, then turn your skills into an offer people can buy.</h1>
+<h1>Check whether your idea is worth your time.</h1>
 <p>Affordable AI tools to start, run, and grow your business.</p>
 <p>Pick a tool, answer a few simple questions, pay once, and get your results in minutes. No subscriptions. No tech skills needed.</p>
 ${pathBlock("start", liveStart, liveCard)}
@@ -140,7 +140,7 @@ ${comingHtml}
 <section>
 <h2>How it works</h2>
 <ol>${how}</ol>
-<p>Our tools give you plans, scripts and ideas — not promises. Results depend on your effort and market; no income is guaranteed.</p>
+<p>Our tools give you plans, scripts and ideas, not promises. Results depend on your effort and market; no income is guaranteed.</p>
 </section>
 </main>
 ${FOOT}`;
