@@ -87,7 +87,9 @@ app.post("/api/create-checkout-session", requireStripe, async (req, res) => {
 
     if (!product) return res.status(400).json({ error: "Invalid product ID" });
 
-    const unitAmount = isUpsell ? (product.upsellPrice || product.price) : product.price;
+    // Legacy Express server (not deployed). Never trust a client-sent upsell flag: always full price.
+    void isUpsell;
+    const unitAmount = product.price;
 
     const lineItems = [{
       price_data: {
@@ -177,7 +179,6 @@ app.get("/api/verify-session/:sessionId", requireStripe, async (req, res) => {
       verified: true,
       productId: productIds[0],
       digitalContent,
-      customer: session.customer_details,
       amountTotal: session.amount_total,
       lineItems: session.line_items?.data?.map(item => ({
         name: item.description || item.price.product.name,

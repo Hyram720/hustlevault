@@ -46,7 +46,7 @@ function UpsellModal({ item, onClose }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
           productId: item.id,
-          isUpsell: true 
+          upsellOf: item.sourceSessionId
         })
       });
       const data = await res.json();
@@ -111,7 +111,7 @@ export default function Success() {
         const up = UPSELLS[data.productId];
         // If it was already an upsell session, don't show another upsell (prevent loop)
         if (false && up && !params.get("upsell")) { // ebook upsells retired — downloads still work
-           setUpsellItem(up);
+           setUpsellItem({ ...up, sourceSessionId: sessionId });
            // Delay modal slightly for effect
            setTimeout(() => setShowUpsell(true), 1500);
         }
@@ -166,7 +166,7 @@ export default function Success() {
               <div style={{ fontSize: 64, marginBottom: 24, animation: "pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)" }}>🥇</div>
               <div style={{ ...GT, fontSize: 32, fontWeight: 900, letterSpacing: 3, marginBottom: 12 }}>VAULT ACTIVATED</div>
               <p style={{ fontSize: 14, color: C.muted, lineHeight: 1.8 }}>
-                {(order.customer?.name || "Member").split(" ")[0]}, you've successfully secured your position. Your premium digital assets are unlocked below.
+                You've successfully secured your position. Your premium digital assets are unlocked below.
               </p>
             </div>
 
@@ -184,6 +184,7 @@ export default function Success() {
                 <div style={{ padding: "24px" }}>
                   <p style={{ fontSize: 13, color: C.muted, lineHeight: 1.7, marginBottom: 24, paddingLeft: 12, borderLeft: `2px solid ${C.gold}40` }}>
                     {order.digitalContent.accessNote}
+                    {order.digitalContent.linksExpireInMinutes ? ` Download links work for ${order.digitalContent.linksExpireInMinutes} minutes; reload this page for fresh ones.` : ""}
                   </p>
                   
                   <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 24 }}>
@@ -191,7 +192,6 @@ export default function Success() {
                       <a 
                         key={i} 
                         href={file.url || "#"} 
-                        target="_blank" 
                         rel="noopener noreferrer"
                         style={{ 
                           display: "flex", justifyContent: "space-between", alignItems: "center",

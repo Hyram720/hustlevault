@@ -6,7 +6,7 @@ export const PRODUCTS = {
     price: 5700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "UNIT GOLD — Storage Auction Blueprint",
-      files: [{ name: "Unit Gold Storage Auction Blueprint HustleVault.pdf", type: "pdf", size: "7.8 KB", url: "https://drive.google.com/uc?export=download&id=1b7io0leJ-7kjFe0YxetlEhgmQW_JfLbm" }],
+      files: [{ name: "Unit Gold Storage Auction Blueprint HustleVault.pdf", type: "pdf", size: "7.8 KB", key: "unit-gold-storage-auction-blueprint.pdf" }],
       accessNote: "You now have lifetime access to the Unit Gold Blueprint.",
       bonus: "BONUS: Join our private community for live auction tips.",
     },
@@ -16,7 +16,7 @@ export const PRODUCTS = {
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "DEALER LICENSE — Car Dealer License Guide",
-      files: [{ name: "Dealer_License_Guide_HustleVault.pdf", type: "pdf", size: "30 KB", url: "https://drive.google.com/uc?export=download&id=1E5EHYmSbGGt3m1Yb6ntlkXqycOlKDjKi" }],
+      files: [{ name: "Dealer_License_Guide_HustleVault.pdf", type: "pdf", size: "30 KB", key: "dealer-license-guide.pdf" }],
       accessNote: "You now have lifetime access to the Dealer License Guide.",
     },
   },
@@ -25,7 +25,7 @@ export const PRODUCTS = {
     price: 3700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "REPO BLUEPRINT — Vehicle Repossession Business",
-      files: [{ name: "Repo_Blueprint_HustleVault.pdf", type: "pdf", size: "32 KB", url: "https://drive.google.com/uc?export=download&id=1bPXSiyVSMh68alXL8hGQhKEWdBxyHluw" }],
+      files: [{ name: "Repo_Blueprint_HustleVault.pdf", type: "pdf", size: "32 KB", key: "repo-blueprint.pdf" }],
       accessNote: "You now have lifetime access to the Repo Blueprint.",
     },
   },
@@ -34,7 +34,7 @@ export const PRODUCTS = {
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "LAND FLIP FORMULA — Buy and Flip Vacant Land",
-      files: [{ name: "Land_Flip_Formula_HustleVault.pdf", type: "pdf", size: "31 KB", url: "https://drive.google.com/uc?export=download&id=1NEeNAHxeWbin477eJ-MjhYq42PBW-8Tc" }],
+      files: [{ name: "Land_Flip_Formula_HustleVault.pdf", type: "pdf", size: "31 KB", key: "land-flip-formula.pdf" }],
       accessNote: "You now have lifetime access to the Land Flip Formula.",
     },
   },
@@ -43,7 +43,7 @@ export const PRODUCTS = {
     price: 4700, bumpPrice: 1700, upsellPrice: 3700,
     digitalContent: {
       title: "NEMT BLUEPRINT — Medical Transport Business",
-      files: [{ name: "NEMT Startup Guide HustleVault.pdf", type: "pdf", size: "39 KB", url: "https://drive.google.com/uc?export=download&id=1DyE7xlL37sCnQLyq50xsfjSxTW4NyZPn" }],
+      files: [{ name: "NEMT Startup Guide HustleVault.pdf", type: "pdf", size: "39 KB", key: "nemt-startup-guide.pdf" }],
       accessNote: "You now have lifetime access to the NEMT Blueprint.",
     },
   },
@@ -52,7 +52,7 @@ export const PRODUCTS = {
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "PRINT ON DEMAND — Zero Inventory Online Store",
-      files: [{ name: "Print_On_Demand_HustleVault.pdf", type: "pdf", size: "84 KB", url: "https://drive.google.com/uc?export=download&id=1ZuX265K1nhADd90OPncm9CB-qmstAHbt" }],
+      files: [{ name: "Print_On_Demand_HustleVault.pdf", type: "pdf", size: "84 KB", key: "print-on-demand.pdf" }],
       accessNote: "You now have lifetime access to the Print On Demand Guide.",
     },
   },
@@ -61,7 +61,7 @@ export const PRODUCTS = {
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "DOMAIN FLIPPING — Buy Low, Sell Domains for Profit",
-      files: [{ name: "Domain_Flipping_HustleVault.pdf", type: "pdf", size: "64 KB", url: "https://drive.google.com/uc?export=download&id=1bsVYabgaE5tdUbU4BnPEy5aNpQW_DBjy" }],
+      files: [{ name: "Domain_Flipping_HustleVault.pdf", type: "pdf", size: "64 KB", key: "domain-flipping.pdf" }],
       accessNote: "You now have lifetime access to the Domain Flipping Guide.",
     },
   },
@@ -70,7 +70,7 @@ export const PRODUCTS = {
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "ASSISTED LIVING — Residential Care Home Business",
-      files: [{ name: "Assisted_Living_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", url: "https://drive.google.com/uc?export=download&id=1mZbthMdhyIKZKpmqZZt2VxYrLQ5uk0is" }],
+      files: [{ name: "Assisted_Living_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", key: "assisted-living-guide.pdf" }],
       accessNote: "You now have lifetime access to the Assisted Living Guide.",
     },
   },
@@ -79,7 +79,7 @@ export const PRODUCTS = {
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "VETERANS HOUSING — HUD-VASH Programs",
-      files: [{ name: "Veterans_Housing_Guide_HustleVault.pdf", type: "pdf", size: "34 KB", url: "https://drive.google.com/uc?export=download&id=1mT-GXWj0MpRYDIGxo_zeC35Lx52c4ZAt" }],
+      files: [{ name: "Veterans_Housing_Guide_HustleVault.pdf", type: "pdf", size: "34 KB", key: "veterans-housing-guide.pdf" }],
       accessNote: "You now have lifetime access to the Veterans Housing Guide.",
     },
   },
@@ -88,7 +88,7 @@ export const PRODUCTS = {
     price: 4700, bumpPrice: 1700, upsellPrice: 2700,
     digitalContent: {
       title: "VENDING MACHINE — Cash Flow While You Sleep",
-      files: [{ name: "Vending_Machine_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", url: "https://drive.google.com/uc?export=download&id=1OURjLXcfoANi5addxutEYpBH2TBa-a3u" }],
+      files: [{ name: "Vending_Machine_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", key: "vending-machine-guide.pdf" }],
       accessNote: "You now have lifetime access to the Vending Machine Guide.",
     },
   },
@@ -98,9 +98,9 @@ export const PRODUCTS = {
     digitalContent: {
       title: "QUICK CASH BUNDLE",
       files: [
-        { name: "Unit Gold Storage Auction Blueprint HustleVault.pdf", type: "pdf", size: "7.8 KB", url: "https://drive.google.com/uc?export=download&id=1b7io0leJ-7kjFe0YxetlEhgmQW_JfLbm" },
-        { name: "Repo_Blueprint_HustleVault.pdf", type: "pdf", size: "32 KB", url: "https://drive.google.com/uc?export=download&id=1bPXSiyVSMh68alXL8hGQhKEWdBxyHluw" },
-        { name: "Dealer_License_Guide_HustleVault.pdf", type: "pdf", size: "30 KB", url: "https://drive.google.com/uc?export=download&id=1E5EHYmSbGGt3m1Yb6ntlkXqycOlKDjKi" },
+        { name: "Unit Gold Storage Auction Blueprint HustleVault.pdf", type: "pdf", size: "7.8 KB", key: "unit-gold-storage-auction-blueprint.pdf" },
+        { name: "Repo_Blueprint_HustleVault.pdf", type: "pdf", size: "32 KB", key: "repo-blueprint.pdf" },
+        { name: "Dealer_License_Guide_HustleVault.pdf", type: "pdf", size: "30 KB", key: "dealer-license-guide.pdf" },
       ],
       accessNote: "You now have access to the Quick Cash Bundle.",
     },
@@ -111,12 +111,12 @@ export const PRODUCTS = {
     digitalContent: {
       title: "BUSINESS BUILDER BUNDLE",
       files: [
-        { name: "Land_Flip_Formula_HustleVault.pdf", type: "pdf", size: "31 KB", url: "https://drive.google.com/uc?export=download&id=1NEeNAHxeWbin477eJ-MjhYq42PBW-8Tc" },
-        { name: "NEMT Startup Guide HustleVault.pdf", type: "pdf", size: "39 KB", url: "https://drive.google.com/uc?export=download&id=1DyE7xlL37sCnQLyq50xsfjSxTW4NyZPn" },
-        { name: "Assisted_Living_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", url: "https://drive.google.com/uc?export=download&id=1mZbthMdhyIKZKpmqZZt2VxYrLQ5uk0is" },
-        { name: "Veterans_Housing_Guide_HustleVault.pdf", type: "pdf", size: "34 KB", url: "https://drive.google.com/uc?export=download&id=1mT-GXWj0MpRYDIGxo_zeC35Lx52c4ZAt" },
-        { name: "Vending_Machine_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", url: "https://drive.google.com/uc?export=download&id=1OURjLXcfoANi5addxutEYpBH2TBa-a3u" },
-        { name: "Dealer_License_Guide_HustleVault.pdf", type: "pdf", size: "30 KB", url: "https://drive.google.com/uc?export=download&id=1E5EHYmSbGGt3m1Yb6ntlkXqycOlKDjKi" },
+        { name: "Land_Flip_Formula_HustleVault.pdf", type: "pdf", size: "31 KB", key: "land-flip-formula.pdf" },
+        { name: "NEMT Startup Guide HustleVault.pdf", type: "pdf", size: "39 KB", key: "nemt-startup-guide.pdf" },
+        { name: "Assisted_Living_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", key: "assisted-living-guide.pdf" },
+        { name: "Veterans_Housing_Guide_HustleVault.pdf", type: "pdf", size: "34 KB", key: "veterans-housing-guide.pdf" },
+        { name: "Vending_Machine_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", key: "vending-machine-guide.pdf" },
+        { name: "Dealer_License_Guide_HustleVault.pdf", type: "pdf", size: "30 KB", key: "dealer-license-guide.pdf" },
       ],
       accessNote: "You now have access to the Business Builder Bundle.",
     },
@@ -127,9 +127,9 @@ export const PRODUCTS = {
     digitalContent: {
       title: "DIGITAL EMPIRE BUNDLE",
       files: [
-        { name: "Unit Gold Storage Auction Blueprint HustleVault.pdf", type: "pdf", size: "7.8 KB", url: "https://drive.google.com/uc?export=download&id=1b7io0leJ-7kjFe0YxetlEhgmQW_JfLbm" },
-        { name: "Print_On_Demand_HustleVault.pdf", type: "pdf", size: "84 KB", url: "https://drive.google.com/uc?export=download&id=1ZuX265K1nhADd90OPncm9CB-qmstAHbt" },
-        { name: "Domain_Flipping_HustleVault.pdf", type: "pdf", size: "64 KB", url: "https://drive.google.com/uc?export=download&id=1bsVYabgaE5tdUbU4BnPEy5aNpQW_DBjy" },
+        { name: "Unit Gold Storage Auction Blueprint HustleVault.pdf", type: "pdf", size: "7.8 KB", key: "unit-gold-storage-auction-blueprint.pdf" },
+        { name: "Print_On_Demand_HustleVault.pdf", type: "pdf", size: "84 KB", key: "print-on-demand.pdf" },
+        { name: "Domain_Flipping_HustleVault.pdf", type: "pdf", size: "64 KB", key: "domain-flipping.pdf" },
       ],
       accessNote: "You now have access to the Digital Empire Bundle.",
     },
@@ -140,10 +140,10 @@ export const PRODUCTS = {
     digitalContent: {
       title: "HOUSING EMPIRE BUNDLE",
       files: [
-        { name: "Land_Flip_Formula_HustleVault.pdf", type: "pdf", size: "31 KB", url: "https://drive.google.com/uc?export=download&id=1NEeNAHxeWbin477eJ-MjhYq42PBW-8Tc" },
-        { name: "Assisted_Living_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", url: "https://drive.google.com/uc?export=download&id=1mZbthMdhyIKZKpmqZZt2VxYrLQ5uk0is" },
-        { name: "Veterans_Housing_Guide_HustleVault.pdf", type: "pdf", size: "34 KB", url: "https://drive.google.com/uc?export=download&id=1mT-GXWj0MpRYDIGxo_zeC35Lx52c4ZAt" },
-        { name: "NEMT Startup Guide HustleVault.pdf", type: "pdf", size: "39 KB", url: "https://drive.google.com/uc?export=download&id=1DyE7xlL37sCnQLyq50xsfjSxTW4NyZPn" },
+        { name: "Land_Flip_Formula_HustleVault.pdf", type: "pdf", size: "31 KB", key: "land-flip-formula.pdf" },
+        { name: "Assisted_Living_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", key: "assisted-living-guide.pdf" },
+        { name: "Veterans_Housing_Guide_HustleVault.pdf", type: "pdf", size: "34 KB", key: "veterans-housing-guide.pdf" },
+        { name: "NEMT Startup Guide HustleVault.pdf", type: "pdf", size: "39 KB", key: "nemt-startup-guide.pdf" },
       ],
       accessNote: "You now have access to the Housing Empire Bundle.",
     },
@@ -154,16 +154,16 @@ export const PRODUCTS = {
     digitalContent: {
       title: "COMPLETE VAULT — ALL 10",
       files: [
-        { name: "Unit Gold Storage Auction Blueprint HustleVault.pdf", type: "pdf", size: "7.8 KB", url: "https://drive.google.com/uc?export=download&id=1b7io0leJ-7kjFe0YxetlEhgmQW_JfLbm" },
-        { name: "Dealer_License_Guide_HustleVault.pdf", type: "pdf", size: "30 KB", url: "https://drive.google.com/uc?export=download&id=1E5EHYmSbGGt3m1Yb6ntlkXqycOlKDjKi" },
-        { name: "Repo_Blueprint_HustleVault.pdf", type: "pdf", size: "32 KB", url: "https://drive.google.com/uc?export=download&id=1bPXSiyVSMh68alXL8hGQhKEWdBxyHluw" },
-        { name: "Land_Flip_Formula_HustleVault.pdf", type: "pdf", size: "31 KB", url: "https://drive.google.com/uc?export=download&id=1NEeNAHxeWbin477eJ-MjhYq42PBW-8Tc" },
-        { name: "NEMT Startup Guide HustleVault.pdf", type: "pdf", size: "39 KB", url: "https://drive.google.com/uc?export=download&id=1DyE7xlL37sCnQLyq50xsfjSxTW4NyZPn" },
-        { name: "Print_On_Demand_HustleVault.pdf", type: "pdf", size: "84 KB", url: "https://drive.google.com/uc?export=download&id=1ZuX265K1nhADd90OPncm9CB-qmstAHbt" },
-        { name: "Domain_Flipping_HustleVault.pdf", type: "pdf", size: "64 KB", url: "https://drive.google.com/uc?export=download&id=1bsVYabgaE5tdUbU4BnPEy5aNpQW_DBjy" },
-        { name: "Assisted_Living_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", url: "https://drive.google.com/uc?export=download&id=1mZbthMdhyIKZKpmqZZt2VxYrLQ5uk0is" },
-        { name: "Veterans_Housing_Guide_HustleVault.pdf", type: "pdf", size: "34 KB", url: "https://drive.google.com/uc?export=download&id=1mT-GXWj0MpRYDIGxo_zeC35Lx52c4ZAt" },
-        { name: "Vending_Machine_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", url: "https://drive.google.com/uc?export=download&id=1OURjLXcfoANi5addxutEYpBH2TBa-a3u" },
+        { name: "Unit Gold Storage Auction Blueprint HustleVault.pdf", type: "pdf", size: "7.8 KB", key: "unit-gold-storage-auction-blueprint.pdf" },
+        { name: "Dealer_License_Guide_HustleVault.pdf", type: "pdf", size: "30 KB", key: "dealer-license-guide.pdf" },
+        { name: "Repo_Blueprint_HustleVault.pdf", type: "pdf", size: "32 KB", key: "repo-blueprint.pdf" },
+        { name: "Land_Flip_Formula_HustleVault.pdf", type: "pdf", size: "31 KB", key: "land-flip-formula.pdf" },
+        { name: "NEMT Startup Guide HustleVault.pdf", type: "pdf", size: "39 KB", key: "nemt-startup-guide.pdf" },
+        { name: "Print_On_Demand_HustleVault.pdf", type: "pdf", size: "84 KB", key: "print-on-demand.pdf" },
+        { name: "Domain_Flipping_HustleVault.pdf", type: "pdf", size: "64 KB", key: "domain-flipping.pdf" },
+        { name: "Assisted_Living_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", key: "assisted-living-guide.pdf" },
+        { name: "Veterans_Housing_Guide_HustleVault.pdf", type: "pdf", size: "34 KB", key: "veterans-housing-guide.pdf" },
+        { name: "Vending_Machine_Guide_HustleVault.pdf", type: "pdf", size: "35 KB", key: "vending-machine-guide.pdf" },
       ],
       accessNote: "You now have lifetime access to the COMPLETE Hustle Vault.",
     },
