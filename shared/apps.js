@@ -11,7 +11,8 @@ export const APPS = [
     id: "venturecheck", path: "start", name: "VentureCheck", price: 499, status: "live", external: true,
     url: VENTURECHECK_URL,
     tagline: "Find out if your business idea is worth your time.",
-    give: "Your business idea and 7 quick answers about you",
+    // VentureCheck's quiz is 8 questions (const Q in that site's page source).
+    give: "Your business idea and 8 quick questions about you",
     get: "A free score, then a full report with your next steps",
     fast: "About 3 minutes",
   },

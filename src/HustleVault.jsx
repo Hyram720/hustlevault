@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { APPS } from "../shared/apps.js";
 import { track, ventureCheckUrl } from "./apps/utm";
 import { useSEO } from "./seo";
+import { homeMeta } from "../shared/homeseo.js";
 import { SponsoredStrip, AdvertiseCallout } from "./sponsors/HomeBits";
 import { THEME, GRADIENT, GRADIENT_TEXT, ACCENT_RGB, BAR_BG } from "../shared/theme.js";
 
@@ -95,7 +96,8 @@ function PathSection({id,eyebrow,title,who,apps}) {
   );
 }
 
-// ── VAULT INTRO OVERLAY ────────────────────────────────────────
+// Client-only overlay. The prerendered homepage (in #root before hydration) is what
+// non-JS crawlers read. React replaces #root on load, then this splash plays as it does today.
 function IntroOverlay({onDone}) {
   const [fading,setFading]=useState(false);
   const finish=()=>{setFading(true);setTimeout(onDone,800);};
@@ -122,19 +124,7 @@ export default function HustleVault() {
   useEffect(()=>{ fetch("/api/apps").then(r=>r.json()).then(d=>{ if(Array.isArray(d.apps)) setApps(d.apps); }).catch(()=>{}); },[]);
   const doneIntro=()=>setShowIntro(false);
 
-  useSEO({
-    title:"Hustle Vault – Affordable AI Tools to Start, Run & Grow Your Business",
-    description:"Pay-per-use AI tools for beginners and business owners. Check your business idea and turn your skills into a ready-to-sell offer — no subscriptions, results in minutes.",
-    path:"/",
-    type:"website",
-    jsonLd:{
-      "@context":"https://schema.org",
-      "@graph":[
-        {"@type":"Organization","@id":"https://hustlevault.app/#org","name":"Hustle Vault","url":"https://hustlevault.app","logo":"https://hustlevault.app/favicon.svg","description":"Affordable AI tools to start, run, and grow your business."},
-        {"@type":"WebSite","@id":"https://hustlevault.app/#website","url":"https://hustlevault.app","name":"Hustle Vault","publisher":{"@id":"https://hustlevault.app/#org"}}
-      ]
-    }
-  });
+  useSEO(homeMeta());
 
   const start = apps.filter(a=>a.path==="start"), grow = apps.filter(a=>a.path==="grow");
   const go = id => document.getElementById(id)?.scrollIntoView({behavior:"smooth"});

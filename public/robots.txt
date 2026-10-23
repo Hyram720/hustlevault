@@ -1,11 +1,15 @@
 User-agent: *
 Allow: /
+# Public catalog and cover images. The $ stops /api/apps from also allowing /api/apps/checkout and other subpaths.
+Allow: /api/apps$
+Allow: /api/media/
 Disallow: /admin
 Disallow: /door-script
 Disallow: /my
 Disallow: /go/
 Disallow: /sponsors/stats/
 Disallow: /sponsors/edit/
+Disallow: /api/apps/
 Disallow: /api/
 
 Sitemap: https://hustlevault.app/sitemap.xml
