@@ -1,10 +1,13 @@
 // Server-rendered HTML for /sponsors, /sponsors/policy, /blog, /blog/<slug>, /apps/<id> (so crawlers see real
 // content and tags), plus /blog/rss.xml, /sitemap.xml and the public blog JSON API.
+// The homepage is dist/home.html, rewritten only for the exact path /. It is not this function,
+// and it is not written into index.html (that file is the SPA shell for every other route).
 import { esc, renderMarkdown } from "../../shared/markdown.js";
 import { POSTS as STATIC_POSTS } from "../../src/blog/posts.js";
 import { publishedPosts, visibleSponsors, publicSponsor, CDN } from "../lib/content.mjs";
-import { publicPost, mergePosts, fmtDateET, PER_PAGE, absUrl } from "../../shared/blog.js";
-import { sponsorsMeta, policyMeta, blogIndexMeta, blogPostMeta, appMeta, SITE, DEFAULT_OG } from "../../shared/pagemeta.js";
+import { publicPost, mergePosts, fmtDateET, PER_PAGE } from "../../shared/blog.js";
+import { sponsorsMeta, policyMeta, blogIndexMeta, blogPostMeta, appMeta, SITE } from "../../shared/pagemeta.js";
+import { fillTemplate } from "../../shared/ssrhtml.js";
 import { getCatalog } from "../lib/apps.mjs";
 import { COPY, SPONSOR_PRICE_LABEL, LOGO_SPEC, POLICY_UPDATED } from "../../shared/sponsors.js";
 import { POLICY, POLICY_INTRO } from "../../shared/policy.js";
@@ -20,40 +23,12 @@ async function template(req) {
   return html;
 }
 
-const jsonLdTag = (o) => `<script type="application/ld+json" data-seo="1">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`;
-function head(m, extra = "") {
-  const url = SITE + m.path, img = m.image || DEFAULT_OG;
-  return [
-    `<title>${esc(m.title)}</title>`,
-    `<meta name="description" content="${esc(m.description)}" />`,
-    `<meta name="robots" content="${m.noindex ? "noindex, nofollow" : "index, follow"}" />`,
-    `<link rel="canonical" href="${esc(url)}" />`,
-    `<meta property="og:type" content="${esc(m.type || "website")}" />`,
-    `<meta property="og:url" content="${esc(url)}" />`,
-    `<meta property="og:title" content="${esc(m.title)}" />`,
-    `<meta property="og:description" content="${esc(m.description)}" />`,
-    `<meta property="og:site_name" content="Hustle Vault" />`,
-    `<meta property="og:image" content="${esc(img)}" />`,
-    `<meta name="twitter:card" content="summary_large_image" />`,
-    `<meta name="twitter:title" content="${esc(m.title)}" />`,
-    `<meta name="twitter:description" content="${esc(m.description)}" />`,
-    `<meta name="twitter:image" content="${esc(img)}" />`,
-    m.jsonLd ? jsonLdTag(m.jsonLd) : "",
-    extra,
-  ].filter(Boolean).join("\n    ");
-}
-
 const NAV = `<nav aria-label="Main"><a href="/">Hustle Vault</a> · <a href="/#start">AI Tools</a> · <a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a></nav>`;
 const FOOT = `<footer><a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/sponsors/policy">Ad Policy</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></footer>`;
 
 async function page(req, m, body, data, { status = 200, extraHead = "", vary = "query=page" } = {}) {
-  let html = await template(req);
-  html = html.replace(/<title>[\s\S]*?<\/title>\s*/i, "")
-    .replace(/<meta\s+(name|property)="(description|robots|og:[^"]+|twitter:[^"]+)"[^>]*>\s*/gi, "")
-    .replace(/<link\s+rel="canonical"[^>]*>\s*/gi, "")
-    .replace(/<!-- (Primary SEO|Open Graph|Twitter Card) -->\s*/g, "")
-    .replace("</head>", `    ${head(m, extraHead)}\n  </head>`)
-    .replace(/<div id="root"><\/div>/, `<div id="root"><div id="hv-ssr" style="max-width:860px;margin:0 auto;padding:24px;color:#FFFFFF;font-family:Inter,system-ui,sans-serif">${NAV}${body}${FOOT}</div></div>\n    <script>window.__HV_DATA__=${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`);
+  const templateHtml = await template(req);
+  const html = fillTemplate(templateHtml, m, `${NAV}${body}${FOOT}`, data, { extraHead });
   return new Response(html, { status, headers: { "Content-Type": "text/html; charset=utf-8", ...CDN(60), "Netlify-Vary": vary } });
 }
 
@@ -126,13 +101,13 @@ async function rss() {
 }
 
 async function sitemap() {
-  // Prefer www so <loc> matches the host visitors land on after the apex→www redirect.
-  const SITEMAP_SITE = "https://www.hustlevault.app";
+  // Apex only. www.hustlevault.app 301-redirects to https://hustlevault.app, and canonicals use the apex.
+  const SITEMAP_SITE = "https://hustlevault.app";
   const posts = await allPosts();
   const day = (d) => String(d || "").slice(0, 10);
   const latest = posts.reduce((a, p) => (day(p.dateModified || p.date) > a ? day(p.dateModified || p.date) : a), "2026-08-10");
   const urls = [
-    ["/", "2026-10-17", "weekly", "1.0"], ["/blog", latest, "weekly", "0.8"], ["/sponsors", "2026-10-17", "monthly", "0.6"], ["/sponsors/policy", "2026-10-17", "yearly", "0.3"],
+    ["/", "2026-10-23", "weekly", "1.0"], ["/blog", latest, "weekly", "0.8"], ["/sponsors", "2026-10-17", "monthly", "0.6"], ["/sponsors/policy", "2026-10-17", "yearly", "0.3"],
     ["/apps/offer-builder", "2026-10-18", "monthly", "0.8"],
     ...["/terms.html", "/privacy.html", "/refund-policy.html", "/earnings-disclaimer.html"].map((u) => [u, "2026-10-18", "yearly", "0.2"]),
     ...posts.map((p) => [`/blog/${p.slug}`, day(p.dateModified || p.date), "monthly", "0.7"]),

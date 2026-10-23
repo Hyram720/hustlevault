@@ -64,6 +64,13 @@
   status = 301
   force = true
 
+# Homepage only. index.html stays the empty SPA shell for every other route.
+[[redirects]]
+  from = "/"
+  to = "/home.html"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
