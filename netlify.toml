@@ -39,6 +39,39 @@
     X-Robots-Tag = "noindex, nofollow, noarchive"
     Cache-Control = "no-store"
 
+# Checkout results and admin. Do not Disallow /success or /cancel in robots.txt:
+# a Disallow stops Google from fetching the page, so it never sees this header.
+# /admin stays Disallowed in robots.txt; these headers are defense in depth.
+[[headers]]
+  for = "/success"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/success/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/cancel"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/cancel/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/admin"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
 # Vite outputs content-hashed filenames — safe to cache for 1 year
 [[headers]]
   for = "/assets/*"

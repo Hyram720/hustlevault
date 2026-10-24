@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useSEO } from "./seo";
 import { THEME, GRADIENT, GRADIENT_TEXT } from "../shared/theme.js";
 
 const C = { ...THEME };
@@ -6,6 +7,12 @@ const GG = GRADIENT;
 const GT = GRADIENT_TEXT;
 
 export default function Cancel() {
+  useSEO({
+    title: "Checkout canceled | Hustle Vault",
+    description: "Your payment was canceled and you were not charged.",
+    path: "/cancel",
+    noindex: true,
+  });
   return (
     <div style={{ background: C.bg, minHeight: "100vh", color: C.cream, fontFamily: "Georgia,serif", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
       <style>{`*{box-sizing:border-box;margin:0;padding:0;}`}</style>
