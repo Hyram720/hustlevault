@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { API } from "./config";
+import { useSEO } from "./seo";
 import { THEME, GRADIENT, GRADIENT_TEXT, ACCENT_RGB } from "../shared/theme.js";
 
 const C = { ...THEME };
@@ -90,6 +91,12 @@ function UpsellModal({ item, onClose }) {
 }
 
 export default function Success() {
+  useSEO({
+    title: "Order confirmation | Hustle Vault",
+    description: "Your Hustle Vault checkout result.",
+    path: "/success",
+    noindex: true,
+  });
   const [params] = useSearchParams();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
