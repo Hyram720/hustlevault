@@ -6,7 +6,7 @@ import { esc, renderMarkdown } from "../../shared/markdown.js";
 import { POSTS as STATIC_POSTS } from "../../src/blog/posts.js";
 import { publishedPosts, visibleSponsors, publicSponsor, CDN } from "../lib/content.mjs";
 import { publicPost, mergePosts, fmtDateET, PER_PAGE } from "../../shared/blog.js";
-import { sponsorsMeta, policyMeta, blogIndexMeta, blogPostMeta, appMeta, SITE } from "../../shared/pagemeta.js";
+import { sponsorsMeta, policyMeta, blogIndexMeta, blogPostMeta, appMeta, playbookMeta, SITE } from "../../shared/pagemeta.js";
 import { fillTemplate } from "../../shared/ssrhtml.js";
 import { getCatalog } from "../lib/apps.mjs";
 import { COPY, SPONSOR_PRICE_LABEL, LOGO_SPEC, POLICY_UPDATED } from "../../shared/sponsors.js";
@@ -80,6 +80,26 @@ async function blogPost(req, slug) {
   return page(req, m, body, { blogPost: post.dynamic ? post : { slug: post.slug, static: true } }, { extraHead: `<link rel="alternate" type="application/rss+xml" title="The Hustle Vault Blog" href="${SITE}/blog/rss.xml" />` });
 }
 
+
+async function playbookPage(req) {
+  const m = playbookMeta();
+  const body = `<main>
+    <p>Hustle Vault Business Playbook Series · 2026 Edition · 115 Pages (6" × 9")</p>
+    <h1>The Aged Corporation Playbook</h1>
+    <p><strong>How to Buy, Build, and Flip Shelf Corporations for $1,500 to $4,500+: 7-Chapter Execution Guide, 6 Wyoming C-Corp Case Studies &amp; 4 Closing Checklists</strong></p>
+    <img src="/ebooks/aged-corporation-playbook/cover-variant-a.jpg" alt="The Aged Corporation Playbook Front Cover Variant A" width="360" height="540" />
+    <p>Turn a $189 Wyoming State Filing and a $12 Digital Infrastructure Stack into a $1,995 to $4,500+ Turnkey Corporate Asset. Available as an instant digital download bundle on Hustle Vault ($12.99 USD) and 6" × 9" Paperback on Amazon KDP ($24.99 USD).</p>
+    <ul>
+      <li><strong>Part I - The 7 Core Strategy &amp; Execution Chapters:</strong> Track A ($12 Bank-Ready Digital Bundle) and Track B (90-Day 80-Paydex Credit-Seasoned Build).</li>
+      <li><strong>Part II - 6 Deep-Dive Wyoming C-Corp Case Studies:</strong> Full build-to-exit ledgers ($201 to $2,250 Track A flip, $614 to $3,850 Track B 80-Paydex sprint, 5-company batch cohort, W.S. 17-16-1422 administrative reinstatement, NJ/PA foreign qualification, and 20% broker wholesale exit channel).</li>
+      <li><strong>Part III - 4 Full-Page Operational Checklists &amp; Closing Templates:</strong> 50-State &amp; Domain Name-Screening Worksheet, 14-Point Bank-Ready Digital Bundle Checklist, 90-Day 80-Paydex Net-30 Vendor Tracker, and 7-Document Same-Day Closing &amp; Ownership Transfer Checklist.</li>
+    </ul>
+    <p><a href="/ebooks/aged-corporation-playbook/the-aged-corporation-playbook.pdf">Download 115-Page 6x9 PDF Playbook ($12.99 Digital Bundle)</a></p>
+    <p><em>Disclaimer: Provided for educational and operational business purposes only; not legal, tax, or securities advice.</em></p>
+  </main>`;
+  return page(req, m, body, {});
+}
+
 async function appPage(req, id) {
   const app = (await getCatalog()).find((a) => a.id === id && a.status !== "hidden") || null;
   const preview = new URL(req.url).searchParams.has("preview");
@@ -109,6 +129,7 @@ async function sitemap() {
   const urls = [
     ["/", "2026-10-23", "weekly", "1.0"], ["/blog", latest, "weekly", "0.8"], ["/sponsors", "2026-10-17", "monthly", "0.6"], ["/sponsors/policy", "2026-10-17", "yearly", "0.3"],
     ["/apps/offer-builder", "2026-10-18", "monthly", "0.8"],
+    ["/aged-corporation-playbook", "2026-10-25", "weekly", "0.9"],
     ...["/terms.html", "/privacy.html", "/refund-policy.html", "/earnings-disclaimer.html"].map((u) => [u, "2026-10-18", "yearly", "0.2"]),
     ...posts.map((p) => [`/blog/${p.slug}`, day(p.dateModified || p.date), "monthly", "0.7"]),
   ];
@@ -128,6 +149,7 @@ export default async (req) => {
     if (path === "/sponsors") return sponsorsPage(req);
     if (path === "/sponsors/policy") return policyPage(req);
     if (path === "/blog") return blogIndex(req);
+    if (path === "/aged-corporation-playbook" || path === "/playbooks/aged-corporation-playbook" || path === "/ebooks/aged-corporation-playbook") return playbookPage(req);
     const a = path.match(/^\/apps\/([a-z0-9-]{1,60})$/);
     if (path.startsWith("/apps/")) return appPage(req, a ? a[1] : "");
     const m = path.match(/^\/blog\/([a-z0-9-]{1,100})$/);
@@ -141,4 +163,4 @@ export default async (req) => {
   }
 };
 
-export const config = { path: ["/sponsors", "/sponsors/policy", "/blog", "/blog/*", "/apps/*", "/sitemap.xml", "/api/blog", "/api/blog/*"] };
+export const config = { path: ["/sponsors", "/sponsors/policy", "/blog", "/blog/*", "/apps/*", "/aged-corporation-playbook", "/playbooks/aged-corporation-playbook", "/ebooks/aged-corporation-playbook", "/sitemap.xml", "/api/blog", "/api/blog/*"] };

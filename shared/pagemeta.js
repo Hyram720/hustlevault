@@ -76,3 +76,28 @@ export function appMeta(app, { preview = false } = {}) {
     ] },
   };
 }
+
+export function playbookMeta() {
+  const title = "The Aged Corporation Playbook (2026 Edition) – Buy, Build & Flip Shelf Corporations | Hustle Vault";
+  const description = "How to Buy, Build, and Flip Shelf Corporations for $1,500 to $4,500+: 7-Chapter Execution Guide, 6 Wyoming C-Corp Case Studies & 4 Closing Checklists. 115-page 6x9 print & digital edition ($12.99 direct digital bundle / $24.99 paperback).";
+  const image = `${SITE}/og/aged-corporation-playbook.jpg`;
+  return {
+    title, description, path: "/aged-corporation-playbook", type: "book", image,
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      name: "The Aged Corporation Playbook",
+      alternativeHeadline: "How to Buy, Build, and Flip Shelf Corporations for $1,500 to $4,500+: 7-Chapter Execution Guide, 6 Wyoming C-Corp Case Studies & 4 Closing Checklists",
+      numberOfPages: 115,
+      bookEdition: "1st Edition (2026)",
+      author: ORG,
+      publisher: ORG,
+      image,
+      url: `${SITE}/aged-corporation-playbook`,
+      offers: [
+        { "@type": "Offer", name: "Hustle Vault Direct Digital Bundle (115-Page 6x9 PDF + 4 Checklists)", price: "12.99", priceCurrency: "USD", availability: "https://schema.org/InStock", url: `${SITE}/aged-corporation-playbook` },
+        { "@type": "Offer", name: "Amazon KDP 6x9 Paperback Edition", price: "24.99", priceCurrency: "USD", availability: "https://schema.org/InStock" }
+      ]
+    }
+  };
+}

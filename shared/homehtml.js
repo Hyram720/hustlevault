@@ -17,10 +17,10 @@ const PATHS = {
   },
 };
 
-const NAV = `<nav aria-label="Main"><a href="/">Hustle Vault</a> · <a href="/#start">Start</a> · <a href="/#grow">Grow</a> · <a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/door-script">Door Script</a> · <a href="/my">My purchases</a></nav>`;
+const NAV = `<nav aria-label="Main"><a href="/">Hustle Vault</a> · <a href="/#start">Start</a> · <a href="/#grow">Grow</a> · <a href="/aged-corporation-playbook">Playbook</a> · <a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/door-script">Door Script</a> · <a href="/my">My purchases</a></nav>`;
 
 const FOOT = `<footer>
-<a href="/#start">Start Your Hustle</a> · <a href="/#grow">Grow Your Hustle</a> · <a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/sponsors/policy">Ad Policy</a> · <a href="/door-script">Door Script</a> · <a href="/my">My purchases</a> · <a href="/terms.html">Terms</a> · <a href="/refund-policy.html">Refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/earnings-disclaimer.html">Earnings disclaimer</a>
+<a href="/#start">Start Your Hustle</a> · <a href="/#grow">Grow Your Hustle</a> · <a href="/aged-corporation-playbook">Playbook</a> · <a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/sponsors/policy">Ad Policy</a> · <a href="/door-script">Door Script</a> · <a href="/my">My purchases</a> · <a href="/terms.html">Terms</a> · <a href="/refund-policy.html">Refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/earnings-disclaimer.html">Earnings disclaimer</a>
 <p><a href="/sponsors#inquire">Advertise: put your logo in front of our visitors →</a></p>
 <p>HUSTLE VAULT · © 2026 · ALL RIGHTS RESERVED</p>
 </footer>`;
@@ -136,6 +136,14 @@ ${soonOther.map(soonCard).join("\n")}
 ${pathBlock("start", liveStart, liveCard)}
 ${liveOther.map(liveCard).join("\n")}
 ${growLive}
+<section id="playbook">
+<p>New 2026 Release · 115-Page 6"×9" Print &amp; Digital Edition</p>
+<h2><a href="/aged-corporation-playbook">The Aged Corporation Playbook</a></h2>
+<p><strong>How to Buy, Build, and Flip Shelf Corporations for $1,500 to $4,500+: 7-Chapter Execution Guide, 6 Wyoming C-Corp Case Studies &amp; 4 Closing Checklists</strong></p>
+<p>Turn a $189 Wyoming state filing and a $12 digital infrastructure stack into a turnkey corporate asset. Includes Track A ($12 Bank-Ready Digital Bundle), Track B (90-Day 80-Paydex Credit-Seasoned Build), 6 full-number Wyoming C-Corp case studies, and 4 ready-to-use closing checklists.</p>
+<p>Price: $12.99 Direct Digital Bundle (115-Page 6×9 PDF + 4 Operational Checklists) · $24.99 6×9 Paperback on Amazon</p>
+<p><a href="/aged-corporation-playbook">Get Digital Bundle — $12.99 →</a> · <a href="/ebooks/aged-corporation-playbook/the-aged-corporation-playbook.pdf">Download 115-Page PDF</a></p>
+</section>
 ${comingHtml}
 <section>
 <h2>How it works</h2>

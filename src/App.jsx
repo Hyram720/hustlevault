@@ -3,6 +3,7 @@ import HustleVault from './HustleVault'
 import Success from './Success'
 import Cancel from './Cancel'
 import DoorScript from './DoorScript'
+import AgedCorpPlaybook from './AgedCorpPlaybook'
 import ObjectionCoach from './apps/ObjectionCoach'
 import MyPurchase, { MyList } from './apps/MyPurchase'
 import AppPage from './apps/AppPage'
@@ -31,6 +32,9 @@ function App() {
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
         <Route path="/door-script" element={<DoorScript />} />
+        <Route path="/aged-corporation-playbook" element={<AgedCorpPlaybook />} />
+        <Route path="/playbooks/aged-corporation-playbook" element={<AgedCorpPlaybook />} />
+        <Route path="/ebooks/aged-corporation-playbook" element={<AgedCorpPlaybook />} />
         <Route path="/apps/objection-coach" element={<ObjectionCoach />} />
         <Route path="/apps/pricing-watcher" element={<PricingWatcher />} />
         <Route path="/my" element={<MyList />} />

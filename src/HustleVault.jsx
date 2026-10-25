@@ -158,6 +158,7 @@ export default function HustleVault() {
            <div className="hv-navlinks">
              <button onClick={()=>go("start")} style={navA}>Start</button>
              {grow.length>0&&<button onClick={()=>go("grow")} style={navA}>Grow</button>}
+             <Link to="/aged-corporation-playbook" style={navA}>Playbook</Link>
              <Link to="/blog" className="hv-hide-m" style={navA}>Blog</Link>
              <Link to="/sponsors" className="hv-hide-m" style={navA}>Advertise</Link>
              <Link to="/door-script" className="hv-hide-m" style={navA}>Door Script</Link>
@@ -187,6 +188,42 @@ export default function HustleVault() {
       <PathSection id="start" eyebrow="New to business?" title="Start Your Hustle" who="For beginners who want to start a business with AI — check whether your idea is worth your time, then turn your skills into an offer people can buy." apps={start}/>
       {grow.length>0&&<PathSection id="grow" eyebrow="Already in business?" title="Grow Your Hustle" who="For entrepreneurs and salespeople who want to close more deals, follow up faster, and bring past customers back." apps={grow}/>}
 
+      {/* Featured Business Playbook */}
+      <section id="playbook" style={{padding:"44px 20px",maxWidth:1200,margin:"0 auto"}}>
+        <div style={{background:C.surface,border:`1px solid ${C.gold}55`,borderRadius:10,padding:"32px 28px",display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(min(100%,280px),1fr))",gap:32,alignItems:"center",boxShadow:`0 24px 60px rgba(0,0,0,0.55)`}}>
+          <div style={{textAlign:"center"}}>
+            <Link to="/aged-corporation-playbook" style={{display:"inline-block"}}>
+              <img src="/ebooks/aged-corporation-playbook/cover-variant-a.jpg" alt="The Aged Corporation Playbook - 2026 Edition Cover" style={{width:"100%",maxWidth:240,borderRadius:6,border:`1px solid ${C.gold}60`,boxShadow:"0 16px 40px rgba(0,0,0,0.7)"}}/>
+            </Link>
+          </div>
+          <div>
+            <div style={{display:"flex",gap:10,flexWrap:"wrap",alignItems:"center",marginBottom:12}}>
+              <Badge color={C.goldBri}>New 2026 Release</Badge>
+              <span style={{fontSize:11,color:C.muted,letterSpacing:1.5,textTransform:"uppercase"}}>115-Page 6"×9" Print &amp; Digital Edition</span>
+            </div>
+            <h2 style={{fontSize:"clamp(24px,4vw,34px)",fontWeight:950,lineHeight:1.1,marginBottom:10}}>
+              <Link to="/aged-corporation-playbook" style={{...GT,textDecoration:"none"}}>The Aged Corporation Playbook</Link>
+            </h2>
+            <p style={{fontSize:15,color:C.cream,fontWeight:700,lineHeight:1.45,marginBottom:10}}>
+              How to Buy, Build, and Flip Shelf Corporations for $1,500 to $4,500+: 7-Chapter Execution Guide, 6 Wyoming C-Corp Case Studies &amp; 4 Closing Checklists
+            </p>
+            <p style={{fontSize:14,color:C.body,lineHeight:1.65,marginBottom:20}}>
+              Turn a $189 Wyoming state filing and a $12 digital infrastructure stack into a turnkey corporate asset. Includes Track A ($12 Bank-Ready Digital Bundle), Track B (90-Day 80-Paydex Credit-Seasoned Build), 6 full-number Wyoming C-Corp case studies, and 4 ready-to-use closing checklists.
+            </p>
+            <div style={{display:"flex",gap:12,flexWrap:"wrap",alignItems:"center"}}>
+              <Link to="/aged-corporation-playbook" style={{background:GG,color:"#000",padding:"13px 24px",fontSize:11,fontWeight:900,letterSpacing:2,textTransform:"uppercase",fontFamily:"Georgia,serif",borderRadius:3,textDecoration:"none"}}>
+                Get Digital Bundle — $12.99 →
+              </Link>
+              <a href="/ebooks/aged-corporation-playbook/the-aged-corporation-playbook.pdf" target="_blank" rel="noopener noreferrer" style={{border:`1px solid ${C.gold}`,color:C.gold,padding:"13px 20px",fontSize:11,fontWeight:800,letterSpacing:2,textTransform:"uppercase",fontFamily:"Georgia,serif",borderRadius:3,textDecoration:"none"}}>
+                Download 115-Page PDF ↓
+              </a>
+              <span style={{fontSize:12,color:C.muted}}>Also in 6"×9" Paperback ($24.99 on Amazon)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       {/* How it works */}
       <section style={{padding:"56px 20px 80px",maxWidth:1000,margin:"0 auto"}}>
         <h2 style={{fontSize:28,fontWeight:900,textAlign:"center",marginBottom:28}}><span style={GT}>How it works</span></h2>
@@ -209,6 +246,7 @@ export default function HustleVault() {
          <div style={{display:"flex",gap:22,justifyContent:"center",flexWrap:"wrap",marginBottom:18}}>
             <a href="/#start" style={{color:C.muted,textDecoration:"none"}}>Start Your Hustle</a>
             {grow.length>0&&<a href="/#grow" style={{color:C.muted,textDecoration:"none"}}>Grow Your Hustle</a>}
+            <Link to="/aged-corporation-playbook" style={{color:C.muted,textDecoration:"none"}}>The Aged Corporation Playbook</Link>
             <Link to="/blog" style={{color:C.muted,textDecoration:"none"}}>Blog</Link>
             <Link to="/sponsors" title="Put your logo in front of our visitors" style={{color:C.muted,textDecoration:"none"}}>Advertise</Link>
             <Link to="/sponsors/policy" style={{color:C.muted,textDecoration:"none"}}>Ad Policy</Link>
