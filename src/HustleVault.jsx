@@ -98,6 +98,20 @@ function Btn({children,onClick,variant="primary",style={},disabled=false,full=fa
   return <button onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)} onClick={onClick} disabled={disabled} style={{...base,...v[variant],...style}}>{children}</button>;
 }
 
+function CommunityLink() {
+  const [h,setH]=useState(false);
+  return (
+    <a
+      href="https://www.facebook.com/groups/29261378413494884"
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseEnter={()=>setH(true)}
+      onMouseLeave={()=>setH(false)}
+      style={{display:"inline-block",padding:"13px 22px",fontSize:11,fontWeight:700,letterSpacing:2.5,textTransform:"uppercase",fontFamily:"Georgia,serif",textDecoration:"none",borderRadius:2,background:GG,color:"#000",transform:h?"translateY(-1px)":"none",boxShadow:h?"0 10px 30px rgba(201,168,76,0.4)":"0 4px 16px rgba(201,168,76,0.2)",transition:"all 0.18s"}}
+    >Join on Facebook</a>
+  );
+}
+
 function Badge({children,color=C.gold,dark=false}) {
   return <span style={{background:color,color:dark?"#fff":"#000",fontSize:9,fontWeight:700,letterSpacing:2,padding:"3px 10px",textTransform:"uppercase",clipPath:"polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%)",fontFamily:"Georgia,serif"}}>{children}</span>;
 }
@@ -326,6 +340,14 @@ export default function HustleVault() {
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:24}}>
           {allItems.map(item=><ProductCard key={item.id} item={item} onBuy={setCheckout} onView={setPreview}/>)}
         </div>
+        <section aria-label="Hustle Vault Community" style={{maxWidth:680,margin:"64px auto 0",background:C.surface,border:`1px solid ${C.border}`,borderRadius:6,overflow:"hidden",textAlign:"center"}}>
+          <div style={{height:3,background:`linear-gradient(90deg,transparent,${C.gold},transparent)`}}/>
+          <div style={{padding:"36px 28px 40px"}}>
+            <h2 style={{fontSize:28,fontWeight:900,marginBottom:14}}>Join the Hustle Vault Community</h2>
+            <p style={{fontSize:16,color:C.muted,lineHeight:1.65,maxWidth:520,margin:"0 auto 24px"}}>Connect with entrepreneurs, creators and side hustlers who are making money with AI. Less talk, more execution.</p>
+            <CommunityLink/>
+          </div>
+        </section>
       </section>
       <footer style={{padding:"48px 24px",textAlign:"center",background:C.surface,color:C.dim,fontSize:10,letterSpacing:2}}>
          <div style={{display:"flex",gap:24,justifyContent:"center",flexWrap:"wrap",marginBottom:18}}>
