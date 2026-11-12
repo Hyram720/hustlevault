@@ -128,16 +128,13 @@
   status = 301
   force = true
 
-# Policy pages live at extensionless URLs (public/<name>/index.html).
-# The old *.html URLs 301 here. force is required so a leftover file cannot win.
+# Policy files stay terms.html (and the same for privacy, refund-policy,
+# earnings-disclaimer). Pretty URLs serves them at the extensionless path
+# with HTTP 200. force is required so the .html file itself 301s instead of
+# also returning 200. A directory index would 301 /terms to /terms/, which
+# disagrees with the canonical and with the URL the live site already returns.
 [[redirects]]
   from = "/terms.html"
-  to = "/terms"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/terms/index.html"
   to = "/terms"
   status = 301
   force = true
@@ -149,31 +146,13 @@
   force = true
 
 [[redirects]]
-  from = "/privacy/index.html"
-  to = "/privacy"
-  status = 301
-  force = true
-
-[[redirects]]
   from = "/refund-policy.html"
   to = "/refund-policy"
   status = 301
   force = true
 
 [[redirects]]
-  from = "/refund-policy/index.html"
-  to = "/refund-policy"
-  status = 301
-  force = true
-
-[[redirects]]
   from = "/earnings-disclaimer.html"
-  to = "/earnings-disclaimer"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/earnings-disclaimer/index.html"
   to = "/earnings-disclaimer"
   status = 301
   force = true

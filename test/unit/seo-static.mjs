@@ -27,7 +27,6 @@ for (const from of spa) {
 
 for (const [from, to] of [["/terms.html", "/terms"], ["/privacy.html", "/privacy"], ["/refund-policy.html", "/refund-policy"], ["/earnings-disclaimer.html", "/earnings-disclaimer"]]) {
   ok(blocks.some((b) => b.from === from && b.to === to && b.status === "301" && b.force), `${from} 301 to ${to}`);
-  ok(blocks.some((b) => b.from === `${to}/index.html` && b.to === to && b.status === "301" && b.force), `${to}/index.html 301 to ${to}`);
 }
 
 ok(toml.includes('for = "/llms.txt"') && toml.includes("text/plain"), "llms.txt content-type header");
@@ -61,10 +60,10 @@ const pages = readFileSync(new URL("../../netlify/functions/pages.mjs", import.m
 ok(pages.includes('"/terms"') && !pages.includes('"/terms.html"'), "sitemap source lists /terms, not /terms.html");
 
 for (const [file, href] of [
-  ["public/terms/index.html", "https://hustlevault.app/terms"],
-  ["public/privacy/index.html", "https://hustlevault.app/privacy"],
-  ["public/refund-policy/index.html", "https://hustlevault.app/refund-policy"],
-  ["public/earnings-disclaimer/index.html", "https://hustlevault.app/earnings-disclaimer"],
+  ["public/terms.html", "https://hustlevault.app/terms"],
+  ["public/privacy.html", "https://hustlevault.app/privacy"],
+  ["public/refund-policy.html", "https://hustlevault.app/refund-policy"],
+  ["public/earnings-disclaimer.html", "https://hustlevault.app/earnings-disclaimer"],
 ]) {
   const html = readFileSync(new URL("../../" + file, import.meta.url), "utf8");
   const canonicals = [...html.matchAll(/<link\s+rel="canonical"[^>]*>/gi)].map((m) => m[0]);
