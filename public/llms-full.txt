@@ -1,0 +1,87 @@
+# Hustle Vault
+
+> Hustle Vault (https://hustlevault.app) is a vault of business ideas and pay-per-use AI tools. The homepage headline is "Check whether your idea is worth your time." You pick a tool, answer a few questions, pay once, and get a result in minutes. There is no subscription. The tools give plans, scripts, and ideas. Results depend on your effort and the market. No income is guaranteed.
+
+This file repeats the short notes in https://hustlevault.app/llms.txt and adds the descriptions that are on the live pages. Prices and availability below were checked against the live site on 2026-11-12: the homepage, https://hustlevault.app/api/apps, the playbook page, and the sponsors page.
+
+www.hustlevault.app returns HTTP 301 to https://hustlevault.app.
+
+The terms of service name Frederick J. Smith, 2230 Route 70 West, Suite 1194, Cherry Hill, NJ 08002, as the operator. Homepage structured data lists the organization legal name as Sun Marketing Enterprises LLC.
+
+## How it works
+
+The homepage describes four steps:
+
+1. Pick a tool.
+2. Answer a few questions about you and your business.
+3. Pay once. Checkout is Stripe. No account and no subscription.
+4. Get results in minutes, saved to a private link you can open again.
+
+## Available now
+
+### VentureCheck
+
+- Page: linked from https://hustlevault.app/ and opens https://venturecheck-dun.vercel.app/
+- Live catalog status: live. External tool, not checked out on hustlevault.app.
+- Tagline: Find out if your business idea is worth your time.
+- You give: your business idea and 8 quick questions about you.
+- You get: a free score, then a full report with your next steps.
+- Price: free score, $4.99 full report.
+- Time: about 3 minutes.
+
+### AI Offer Builder
+
+- Page: https://hustlevault.app/apps/offer-builder
+- Live catalog status: live and buyable. Price in the catalog: 900 cents.
+- Tagline: Turn what you're good at into a service people can buy.
+- You give: your skills, experience, and who you'd like to help. Time and budget are optional.
+- You get: a ready-to-sell service offer: name, description, what's included, a delivery timeline, a suggested price range, and a pitch to post.
+- Price: $9 one time. No subscription.
+- Time: about 2 minutes.
+- The app page says AI-generated suggestions are for education only and that no income or sales results are guaranteed.
+
+## Book
+
+### The Aged Corporation Playbook
+
+- Page: https://hustlevault.app/aged-corporation-playbook
+- Edition on the page: 2026, 115 pages, 6 x 9.
+- Title and subtitle on the page: How to Buy, Build, and Flip Shelf Corporations for $1,500 to $4,500+: 7-Chapter Execution Guide, 6 Wyoming C-Corp Case Studies & 4 Closing Checklists.
+- Hustle Vault direct digital bundle: $12.99. The page describes it as the 115-page PDF plus 4 operational checklists.
+- Amazon KDP 6 x 9 paperback: $24.99.
+- Kindle eBook edition: $9.99, listed on the playbook pricing card in the site script.
+- The server-rendered page says the material is for educational and operational business purposes only and is not legal, tax, or securities advice.
+- Structured data on that page offers the $12.99 digital bundle and the $24.99 paperback.
+
+## Shown on the homepage as coming soon
+
+The public app catalog at /api/apps does not list these. The homepage still prints them under "Coming soon" with the prices below. They are not described here as available to buy.
+
+- First Sale Blueprint. $9 one time. About 2 minutes. A focused 7-day plan to land your first paying customer. The homepage says you get a 7-day action plan, a starter offer, pricing, and 3 outreach messages (PDF).
+- First Customer Finder. $5 one time. About 1 minute. Find recent public Bluesky and Hacker News posts from people asking for what you sell. The homepage says you get up to 10 posts, with the post, where it was posted, the date, and a link.
+- Sales Objection Coach. $5 one time. Under 1 minute. Know what to say when a customer pushes back. The homepage says you get a 5-step answer script plus one practice session where AI plays the customer and scores you.
+- Lead Follow-Up Builder. $9 one time. About 1 minute. The homepage says you get 5 text and email follow-ups with timing and an appointment ask, which you send yourself.
+- Customer Reactivation Kit. $19 one time. About 2 minutes. Win back past customers without sharing customer data. The homepage says you get ready-to-send email and text campaigns you can download.
+- Lead Qualifier. $5 one time. Under 1 minute. The homepage says you get a verdict of Push, Nurture, or Walk away, with reasons, buying signals, red flags, and a suggested next message.
+- Competitor Pricing Watcher. The homepage lists the price as "Coming soon" and does not show a dollar amount. It describes a daily check of competitor pricing pages and an alert when a price or plan changes. Setup is described as about 1 minute, then it runs every day.
+
+## Advertising
+
+- Page: https://hustlevault.app/sponsors
+- Ad policy: https://hustlevault.app/sponsors/policy
+- Sponsor slot: $100 per month. Includes a logo, business name, and offer on the sponsor wall and the sitewide ticker.
+- The $100 figure is the monthly sponsor price. It is not a book price.
+
+## Policies
+
+- Terms: https://hustlevault.app/terms
+- Privacy: https://hustlevault.app/privacy
+- Refund policy: https://hustlevault.app/refund-policy
+- Earnings disclaimer: https://hustlevault.app/earnings-disclaimer
+
+The .html versions of those four policy URLs redirect to the extensionless URLs above.
+
+## Other public sections
+
+- Blog: https://hustlevault.app/blog
+- Sitemap: https://hustlevault.app/sitemap.xml

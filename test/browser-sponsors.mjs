@@ -31,7 +31,7 @@ ok(Array.isArray(live), `start: ${live.length} live sponsors`);
 
 for (const vp of [["mobile", mobile], ["desktop", desktop]]) {
   await vp[1]();
-  for (const p of ["/", "/sponsors", "/sponsors/policy", "/blog", "/blog/best-side-hustles-2026", "/apps/first-sale-blueprint", "/terms.html"]) {
+  for (const p of ["/", "/sponsors", "/sponsors/policy", "/blog", "/blog/best-side-hustles-2026", "/apps/first-sale-blueprint", "/terms"]) {
     await go(p);
     ok((await overflow()) <= 0, `${vp[0]} ${p}: no horizontal scroll`);
   }
@@ -61,7 +61,7 @@ ok(await page.evaluate(() => [...document.querySelectorAll("nav a")].some((a) =>
 await page.screenshot({ path: `${SHOTS}/sponsors-shot-desktop.png`, fullPage: true });
 await mobile(); await go("/sponsors");
 await page.screenshot({ path: `${SHOTS}/sponsors-shot-mobile.png`, fullPage: true });
-for (const p of ["/", "/blog", "/sponsors/policy", "/apps/first-sale-blueprint", "/terms.html"]) {
+for (const p of ["/", "/blog", "/sponsors/policy", "/apps/first-sale-blueprint", "/terms"]) {
   await go(p);
   ok(await page.evaluate(() => [...document.querySelectorAll("a")].some((a) => /\/sponsors$/.test(a.getAttribute("href") || "") && /Advertise/i.test(a.textContent))), `${p}: Advertise link present`);
 }

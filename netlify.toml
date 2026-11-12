@@ -98,20 +98,115 @@
     Cache-Control = "no-store"
     Referrer-Policy = "no-referrer"
 
+# Static files in the publish directory are served before these rules
+# (llms.txt, llms-full.txt, sitemap_index.xml, 404.html, assets).
+# Do not add a catch-all "/*" -> /index.html 200. That rewrite returned
+# the SPA shell with HTTP 200 for unknown URLs and for /llms.txt.
+# Paths with no file, function, or rule below fall through to /404.html
+# with a real HTTP 404.
+
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/llms-full.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sitemap_index.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+
 [[redirects]]
   from = "/advertise"
   to = "/sponsors"
   status = 301
   force = true
 
-# Homepage only. index.html stays the empty SPA shell for every other route.
+# Policy files stay terms.html (and the same for privacy, refund-policy,
+# earnings-disclaimer). Pretty URLs serves them at the extensionless path
+# with HTTP 200. force is required so the .html file itself 301s instead of
+# also returning 200. A directory index would 301 /terms to /terms/, which
+# disagrees with the canonical and with the URL the live site already returns.
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/refund-policy.html"
+  to = "/refund-policy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/earnings-disclaimer.html"
+  to = "/earnings-disclaimer"
+  status = 301
+  force = true
+
+# Homepage only. index.html stays the empty SPA shell for the client routes below.
 [[redirects]]
   from = "/"
   to = "/home.html"
   status = 200
   force = true
 
+# Client-rendered routes. Server-rendered paths (/blog, /apps/*, /sponsors,
+# /aged-corporation-playbook, /sitemap.xml) are Netlify functions and are not listed here.
 [[redirects]]
-  from = "/*"
+  from = "/success"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/cancel"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/door-script"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/my"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/my/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/sponsors/stats/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/sponsors/edit/*"
   to = "/index.html"
   status = 200

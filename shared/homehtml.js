@@ -20,7 +20,7 @@ const PATHS = {
 const NAV = `<nav aria-label="Main"><a href="/">Hustle Vault</a> · <a href="/#start">Start</a> · <a href="/#grow">Grow</a> · <a href="/aged-corporation-playbook">Playbook</a> · <a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/door-script">Door Script</a> · <a href="/my">My purchases</a></nav>`;
 
 const FOOT = `<footer>
-<a href="/#start">Start Your Hustle</a> · <a href="/#grow">Grow Your Hustle</a> · <a href="/aged-corporation-playbook">Playbook</a> · <a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/sponsors/policy">Ad Policy</a> · <a href="/door-script">Door Script</a> · <a href="/my">My purchases</a> · <a href="/terms.html">Terms</a> · <a href="/refund-policy.html">Refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/earnings-disclaimer.html">Earnings disclaimer</a>
+<a href="/#start">Start Your Hustle</a> · <a href="/#grow">Grow Your Hustle</a> · <a href="/aged-corporation-playbook">Playbook</a> · <a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/sponsors/policy">Ad Policy</a> · <a href="/door-script">Door Script</a> · <a href="/my">My purchases</a> · <a href="/terms">Terms</a> · <a href="/refund-policy">Refunds</a> · <a href="/privacy">Privacy</a> · <a href="/earnings-disclaimer">Earnings disclaimer</a>
 <p><a href="/sponsors#inquire">Advertise: put your logo in front of our visitors →</a></p>
 <p>HUSTLE VAULT · © 2026 · ALL RIGHTS RESERVED</p>
 </footer>`;

@@ -15,6 +15,7 @@ import Sponsors from './sponsors/Sponsors'
 import Policy from './sponsors/Policy'
 import { SponsorStatsPage, SponsorEditPage } from './sponsors/Private'
 import SiteBar from './sponsors/SiteBar'
+import NotFound from './NotFound'
 
 function App() {
   return (
@@ -46,6 +47,8 @@ function App() {
 
         {/* Apps */}
         <Route path="/apps/:id" element={<AppPage />} />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <SiteBar />
     </BrowserRouter>

@@ -98,9 +98,13 @@ r = await req("/blog/this-does-not-exist-xyz");
 ok(r.s === 404, "unknown blog slug -> 404");
 r = await req("/blog/rss.xml");
 ok(r.s === 200 && /<rss/.test(r.d) && /best-side-hustles-2026/.test(r.d), "RSS feed at /blog/rss.xml");
-for (const p of ["/", "/terms.html"]) { r = await req(p); ok(r.s === 200, `${p} still 200`); }
-r = await req("/terms.html");
+for (const p of ["/", "/terms"]) { r = await req(p); ok(r.s === 200, `${p} still 200`); }
+r = await req("/terms");
+ok(/rel="canonical" href="https:\/\/hustlevault\.app\/terms"/.test(r.d), "/terms self-canonical");
 ok(/href="\/sponsors">Advertise/.test(r.d), "static pages footer has Advertise link");
+r = await req("/terms.html");
+ok(r.s === 301 && /\/terms$/.test(r.h.get("location") || ""), "/terms.html 301 -> /terms");
+ok(!/terms\.html|privacy\.html|refund-policy\.html|earnings-disclaimer\.html/.test((await req("/sitemap.xml")).d), "sitemap lists extensionless policy URLs only");
 
 // ── admin login ───────────────────────────────────────────────
 r = await post("/api/hv-admin/login", { password: PW });
