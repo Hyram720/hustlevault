@@ -24,7 +24,7 @@ async function template(req) {
 }
 
 const NAV = `<nav aria-label="Main"><a href="/">Hustle Vault</a> · <a href="/#start">AI Tools</a> · <a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a></nav>`;
-const FOOT = `<footer><a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/sponsors/policy">Ad Policy</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></footer>`;
+const FOOT = `<footer><a href="/blog">Blog</a> · <a href="/sponsors">Advertise</a> · <a href="/sponsors/policy">Ad Policy</a> · <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a></footer>`;
 
 async function page(req, m, body, data, { status = 200, extraHead = "", vary = "query=page" } = {}) {
   const templateHtml = await template(req);
@@ -130,7 +130,7 @@ async function sitemap() {
     ["/", "2026-10-23", "weekly", "1.0"], ["/blog", latest, "weekly", "0.8"], ["/sponsors", "2026-10-17", "monthly", "0.6"], ["/sponsors/policy", "2026-10-17", "yearly", "0.3"],
     ["/apps/offer-builder", "2026-10-18", "monthly", "0.8"],
     ["/aged-corporation-playbook", "2026-10-25", "weekly", "0.9"],
-    ...["/terms.html", "/privacy.html", "/refund-policy.html", "/earnings-disclaimer.html"].map((u) => [u, "2026-10-18", "yearly", "0.2"]),
+    ...["/terms", "/privacy", "/refund-policy", "/earnings-disclaimer"].map((u) => [u, "2026-10-18", "yearly", "0.2"]),
     ...posts.map((p) => [`/blog/${p.slug}`, day(p.dateModified || p.date), "monthly", "0.7"]),
   ];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, m, c, p]) => `  <url>\n    <loc>${SITEMAP_SITE}${esc(u)}</loc>\n    <lastmod>${m}</lastmod>\n    <changefreq>${c}</changefreq>\n    <priority>${p}</priority>\n  </url>`).join("\n")}\n</urlset>\n`;

@@ -252,10 +252,10 @@ export default function HustleVault() {
             <Link to="/sponsors/policy" style={{color:C.muted,textDecoration:"none"}}>Ad Policy</Link>
             <Link to="/door-script" style={{color:C.muted,textDecoration:"none"}}>Door Script</Link>
             <Link to="/my" style={{color:C.muted,textDecoration:"none"}}>My purchases</Link>
-            <a href="/terms.html" style={{color:C.muted,textDecoration:"none"}}>Terms</a>
-            <a href="/refund-policy.html" style={{color:C.muted,textDecoration:"none"}}>Refunds</a>
-            <a href="/privacy.html" style={{color:C.muted,textDecoration:"none"}}>Privacy</a>
-            <a href="/earnings-disclaimer.html" style={{color:C.muted,textDecoration:"none"}}>Earnings disclaimer</a>
+            <a href="/terms" style={{color:C.muted,textDecoration:"none"}}>Terms</a>
+            <a href="/refund-policy" style={{color:C.muted,textDecoration:"none"}}>Refunds</a>
+            <a href="/privacy" style={{color:C.muted,textDecoration:"none"}}>Privacy</a>
+            <a href="/earnings-disclaimer" style={{color:C.muted,textDecoration:"none"}}>Earnings disclaimer</a>
          </div>
          <div style={{marginBottom:10,letterSpacing:1}}><Link to="/sponsors#inquire" style={{color:C.muted,textDecoration:"none"}}>Advertise: put your logo in front of our visitors →</Link></div>
          <div style={{marginBottom:10}}>HUSTLE VAULT · © 2026 · ALL RIGHTS RESERVED</div>

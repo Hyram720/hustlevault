@@ -1,0 +1,46 @@
+# Hustle Vault
+
+> Hustle Vault (https://hustlevault.app) is a vault of business ideas and pay-per-use AI tools. The homepage headline is "Check whether your idea is worth your time." You pick a tool, answer a few questions, pay once, and get a result in minutes. There is no subscription. The tools give plans, scripts, and ideas. Results depend on your effort and the market. No income is guaranteed.
+
+www.hustlevault.app redirects to https://hustlevault.app. The terms of service name Frederick J. Smith, 2230 Route 70 West, Suite 1194, Cherry Hill, NJ 08002, as the operator. Homepage structured data lists the organization legal name as Sun Marketing Enterprises LLC.
+
+A longer version of this file is at https://hustlevault.app/llms-full.txt.
+
+## Available now
+
+- [VentureCheck](https://venturecheck-dun.vercel.app/): Find out if your business idea is worth your time. You give your idea and 8 quick questions. You get a free score, then a full report with next steps. Price on the homepage and in the live catalog: free score, $4.99 full report. About 3 minutes. Linked from the Hustle Vault homepage.
+- [AI Offer Builder](https://hustlevault.app/apps/offer-builder): Turn what you're good at into a service people can buy. Price: $9 one time. About 2 minutes. You get a ready-to-sell service offer: name, description, what's included, a delivery timeline, a suggested price range, and a pitch to post.
+
+## Book
+
+- [The Aged Corporation Playbook](https://hustlevault.app/aged-corporation-playbook): 2026 edition, 115-page 6 x 9 print and digital edition. The title on the page is "How to Buy, Build, and Flip Shelf Corporations for $1,500 to $4,500+: 7-Chapter Execution Guide, 6 Wyoming C-Corp Case Studies & 4 Closing Checklists."
+  - Hustle Vault direct digital bundle (115-page PDF + 4 checklists): $12.99
+  - Amazon KDP 6 x 9 paperback: $24.99
+  - Kindle eBook edition, listed on the playbook pricing card: $9.99
+  - The page says the material is for educational and operational business purposes and is not legal, tax, or securities advice.
+
+## Shown on the homepage as coming soon
+
+These are not available to buy. Prices below are the ones printed on the homepage.
+
+- First Sale Blueprint: $9 one time. A 7-day plan to land a first paying customer.
+- First Customer Finder: $5 one time. Recent public Bluesky and Hacker News posts from people asking for a service.
+- Sales Objection Coach: $5 one time. A 5-step answer script and one practice session.
+- Lead Follow-Up Builder: $9 one time. 5 text and email follow-ups.
+- Customer Reactivation Kit: $19 one time. Ready-to-send email and text campaigns. No customer list is uploaded.
+- Lead Qualifier: $5 one time. A verdict of Push, Nurture, or Walk away.
+- Competitor Pricing Watcher: the homepage lists the price as coming soon and does not show a dollar amount.
+
+## Advertising
+
+- [Sponsor slots](https://hustlevault.app/sponsors): $100 per month for a logo, business name, and offer on the sponsor wall and the sitewide ticker. This is an ad placement, not a book price.
+
+## Pages
+
+- [Home](https://hustlevault.app/)
+- [Blog](https://hustlevault.app/blog)
+- [Terms](https://hustlevault.app/terms)
+- [Privacy](https://hustlevault.app/privacy)
+- [Refund policy](https://hustlevault.app/refund-policy)
+- [Earnings disclaimer](https://hustlevault.app/earnings-disclaimer)
+- [Ad policy](https://hustlevault.app/sponsors/policy)
